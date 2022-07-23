@@ -80,3 +80,8 @@
 
 > yk branch에 router 및 로그인기능 작성
 
+
+
+# 0723 로그인, 회원가입 코드 작성
+
+> yk branch 에 api 는 복사해오고, 로그인, 회원가입 store 작성
