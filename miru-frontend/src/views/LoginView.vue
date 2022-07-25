@@ -1,6 +1,6 @@
 <template>
 <div>
-  <b-form @submit="login" @reset="onReset" class="background">
+  <b-form @submit="login(credentials)" @reset="onReset" class="background">
     <b-form-group 
         id="input-group-1"
         label="아이디:"
@@ -9,7 +9,7 @@
       >
         <b-form-input
           id="input-1"
-          v-model="credentials.username"
+          v-model="credentials.id"
           type="username"
           placeholder="Enter username"
           required
@@ -52,17 +52,15 @@ export default {
   data () {
     return {
       credentials : {
-        username: '',
+        id: '',
         password: ''
       },
-      url : 'https://image.tmdb.org/t/p/w500/',
-      path : ''
     }
   },
   methods: {
     ...mapActions(['login']),
     onReset () {
-      this.credentials.username = ''
+      this.credentials.id = ''
       this.credentials.password = ''
     }
   },
