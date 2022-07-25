@@ -1,8 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
-
+import MainView from '@/views/MainView'
 
 const routes = [
- 
+  {
+    path: '/',
+    name: 'main',
+    component: MainView
+  }
 
 ]
 
