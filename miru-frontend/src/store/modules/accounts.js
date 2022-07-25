@@ -9,8 +9,8 @@ export const accounts = {
     currentUser: {},
     profile : {},
     authError: null,
-    searchMovies : []
   },
+
   getters:{
     isLoggedIn : state => !!state.token,
     authHeader  (state) {
@@ -19,10 +19,8 @@ export const accounts = {
     profile: state => state.profile,
     currentUser : state => state.currentUser,
     authError: state => state.authError,
-    searchMovies: state => state.searchMovies
-
-    
   },
+
   mutations:{
     SET_TOKEN (state, token) {
       state.token = token
@@ -30,19 +28,15 @@ export const accounts = {
     SET_CURRENT_USER : (state, user) => state.currentUser = user,
     SET_PROFILE : (state, profile) => state.profile = profile,
     SET_AUTH_ERROR: (state, error) => state.authError = error,
-    FETCH_SEARCHMOVIES: (state, movies) => state.searchMovies = movies
-    
   },
+
   actions:{
     saveToken ({ commit }, token) {
       commit('SET_TOKEN', token)
-      
       localStorage.setItem('token', token)   // 새로고침 후에도 유지
-      
     },
     
     removeToken ({ commit }) {
-      
       commit('SET_TOKEN', '')
       localStorage.setItem('token', '')
     },
