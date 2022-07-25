@@ -12,7 +12,7 @@ export default {
     logout: () => HOST  + 'logout/',
     signup: () => HOST  + 'user/',
     // Token 으로 현재 user 판단
-    currentUserInfo: () => HOST+ 'user/',
+    currentUserInfo: (id) => HOST+ `user/info/${id}`,
     // username으로 프로필 제공
     profile: username => HOST + 'profile/' + username + '/',
   },

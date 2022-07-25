@@ -10,7 +10,7 @@
         <b-form-input
           id="input-1"
           v-model="credentials.id"
-          type="username"
+          type="text"
           placeholder="Enter username"
           required
         ></b-form-input>

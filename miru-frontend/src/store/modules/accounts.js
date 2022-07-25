@@ -14,7 +14,7 @@ export const accounts = {
   getters:{
     isLoggedIn : state => !!state.token,
     authHeader  (state) {
-      return {Authorization: `Token ${state.token}`}
+      return {"token": state.token}
     },
     profile: state => state.profile,
     currentUser : state => state.currentUser,
@@ -48,9 +48,10 @@ export const accounts = {
         data: credentials
       })
       .then(res => {        
-        dispatch('saveToken', res.data.key)
-        dispatch('fetchCurrentUser')
-        router.push({name:'home'})
+        console.log(res)
+        dispatch('saveToken', res.data.token)
+        dispatch('fetchCurrentUser', credentials.id)
+        router.push({name:'HomeView'})
       })
       .catch(err => {
         console.error(err.response.data)
@@ -58,16 +59,16 @@ export const accounts = {
       })         
     },
 
-    signup ({ dispatch, commit }, formData) {
+    signup ({ dispatch, commit }, credentials) {
       axios({
         url : drf.accounts.signup(),
         method : 'post',
-        data : formData,
+        data : credentials,
       })
       .then(res => {
-        dispatch('saveToken', res.data.key)
-        dispatch('fetchCurrentUser')
-        router.push({name:'home'})    
+        dispatch('saveToken', res.data)
+        dispatch('fetchCurrentUser', credentials.id) 
+        router.push({name:'HomeView'})   
       })
       .catch(err => {
         console.error(err.response.data)
@@ -89,10 +90,10 @@ export const accounts = {
       })
     },
 
-    fetchCurrentUser ({ commit, getters, dispatch}) { // user 식별 위해
+    fetchCurrentUser ({ commit, getters, dispatch}, id) { // user 식별 위해
       if (getters.isLoggedIn) {
         axios({
-          url: drf.accounts.currentUserInfo(),
+          url: drf.accounts.currentUserInfo(id),
           method: 'get',
           headers: getters.authHeader
         })
@@ -104,6 +105,7 @@ export const accounts = {
           })
           .then( res => {
             commit('SET_CURRENT_USER', res.data)
+            console.log(res)
           }) 
         })
         .catch( err => {
