@@ -1,7 +1,16 @@
 <template>
   <div class="main container-fluid p-0">
-    <div class="item">
+    <div class="item position-relative">
       <img class="w-100" src="@/assets/images/background.png" alt="">
+      <a type="button" class="" data-bs-toggle="modal" data-bs-target="#artModal" style="width:15%; position: absolute; top: 10.5%; left: 51.8%;">
+        <img class="w-100" src="@/assets/images/art.png" alt="">
+      </a>
+      <a type="button" class="" data-bs-toggle="modal" data-bs-target="#seasonModal" style="width:34%; position: absolute; top: 42.5%; left: 49%;">
+        <img class="w-100" src="@/assets/images/season.png" alt="">
+      </a>
+      <a type="button" class="" data-bs-toggle="modal" data-bs-target="#weatherModal" style="width:10%; position: absolute; top: 44.8%; left: 33.2%;">
+        <img class="w-100" src="@/assets/images/weather.png" alt="">
+      </a>
     </div>
     <div class="item container d-flex align-items-center" style="height: 100vh;">
       <div class="d-flex align-items-center">
@@ -36,6 +45,45 @@
         </div>
       </div>
     </div>
+  </div>
+  <div class="modal fade" id="artModal" tabindex="-1" aria-labelledby="artLabel" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="artnLabel">명화 변환 기능</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <video src="@/assets/videos/flowers.mp4" type="video/mp4" controls></video>
+      </div>
+    </div>
+  </div>
+  </div>
+  <div class="modal fade" id="seasonModal" tabindex="-1" aria-labelledby="seasonLabel" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="seasonLabel">사계절 적용기능</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <img src="@/assets/images/season.png" alt="">
+      </div>
+    </div>
+  </div>
+  </div>
+  <div class="modal fade" id="weatherModal" tabindex="-1" aria-labelledby="weatherLabel" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="weatherLabel">날씨에 따른 사진 추천 기능</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <img src="@/assets/images/weather.png" alt="">
+      </div>
+    </div>
+  </div>
   </div>
 </template>
 
