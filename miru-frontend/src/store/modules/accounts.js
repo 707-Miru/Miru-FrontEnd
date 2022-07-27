@@ -7,7 +7,6 @@ export const accounts = {
   state:{
     token : localStorage.getItem('token') || '',
     currentUser: {},
-    profile : {},
     authError: null,
   },
 
@@ -16,7 +15,6 @@ export const accounts = {
     authHeader  (state) {
       return {"token": state.token}
     },
-    profile: state => state.profile,
     currentUser : state => state.currentUser,
     authError: state => state.authError,
   },
@@ -26,7 +24,6 @@ export const accounts = {
       state.token = token
     },
     SET_CURRENT_USER : (state, user) => state.currentUser = user,
-    SET_PROFILE : (state, profile) => state.profile = profile,
     SET_AUTH_ERROR: (state, error) => state.authError = error,
   },
 
@@ -90,7 +87,7 @@ export const accounts = {
       })
     },
 
-    fetchCurrentUser ({ commit, getters, dispatch}, id) { // user 식별 위해
+    fetchCurrentUser ({ getters, dispatch}, id) { // user 식별 위해
       if (getters.isLoggedIn) {
         axios({
           url: drf.accounts.currentUserInfo(id),
@@ -98,15 +95,7 @@ export const accounts = {
           headers: getters.authHeader
         })
         .then(res => {
-          axios({
-            url: drf.accounts.profile(res.data.username),
-            method: 'get',
-            headers: getters.authHeader
-          })
-          .then( res => {
-            commit('SET_CURRENT_USER', res.data)
-            console.log(res)
-          }) 
+          console.log(res)
         })
         .catch( err => {
           if (err.response.status === 401) {
@@ -117,41 +106,24 @@ export const accounts = {
       }
     },
 
-    fetchProfile ({  commit, getters }, { username }) {
+    changePassWord () {
       axios({
-        url: drf.accounts.profile(username),
-        method: 'get',
-        headers: getters.authHeader
-      })
-      .then( res => {
-        commit('SET_PROFILE', res.data)
-        // dispatch('fetchLikeGenres', res.data.like_genres)
-      })
-    },
-
-    fetchGenres () {
-      axios({
-        url:drf.movies.genres(),
-        method:'get',
         
       })
-      .then( res => {
-        console.log(res.data)
-      })
-    },
-
-    searchKeyword ({ getters,commit } ,keyword) {
-      
-      axios({
-        url:drf.movies.search(keyword),
-        method:"get",
-        headers:getters.authHeader
-      })
-      .then( res => {
-        commit('FETCH_SEARCHMOVIES', res.data)
-        router.push({name:'search', params:{keyword:keyword}})
-      })
     }
+
+    // searchKeyword ({ getters,commit } ,keyword) {
+      
+    //   axios({
+    //     url:drf.movies.search(keyword),
+    //     method:"get",
+    //     headers:getters.authHeader
+    //   })
+    //   .then( res => {
+    //     commit('FETCH_SEARCHMOVIES', res.data)
+    //     router.push({name:'search', params:{keyword:keyword}})
+    //   })
+    // }
   }
 
 }
