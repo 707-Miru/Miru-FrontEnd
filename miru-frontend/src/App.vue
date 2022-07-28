@@ -1,10 +1,32 @@
 <template>
   <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+    <router-link to="/login">Login</router-link> |
+    <router-link to="/signup">Signup</router-link>
   </nav>
   <router-view/>
 </template>
+
+<script>
+import { mapActions } from 'vuex'
+import store from './store'
+
+
+export default {
+  name : 'App',
+
+  methods: {
+    ...mapActions(['fetchCurrentUser'])
+  },
+  created () {
+    if (store.getters.currentUserId) {
+      console.log(store.getters.currentUserId)
+      this.fetchCurrentUser(store.getters.currentUserId)
+   }
+  }
+}
+</script>
+
+
 
 <style>
 #app {
@@ -27,4 +49,6 @@ nav a {
 nav a.router-link-exact-active {
   color: #42b983;
 }
+
+
 </style>
