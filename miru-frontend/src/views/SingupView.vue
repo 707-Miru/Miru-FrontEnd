@@ -7,13 +7,17 @@
           label-for="input-1"
           description="We'll never share your email with anyone else."
         >
-          <b-form-input
+        <div class="check">
+          <b-form-input 
             id="input-1"
             v-model="credentials.id"
             type="text"
             placeholder="Enter username"
             required
           ></b-form-input>
+          <b-button pill id="check" class="idcheck"  @click="checkId(credentials.id)">체크</b-button>
+          <font-awesome-icon icon="fa-solid fa-check" class="fa-5x success" v-if="check"/>
+        </div>
       </b-form-group>
 
       <b-form-group 
@@ -66,10 +70,9 @@
 </template>
 
 <script>
-
-// import axios from 'axios'
-// import drf from '@/api/drf'
+import axios from 'axios'
 import { mapGetters } from 'vuex'
+import drf from '@/api/drf'
 
 export default {
   name:'SignupView',
@@ -85,6 +88,7 @@ export default {
         recommendFlag: 1
       },
       formData : formData,
+      check: 0
     }
   },
   computed:{
@@ -99,14 +103,38 @@ export default {
     },
 
     signup () {
-      this.$store.dispatch("signup", this.credentials)
+      if (this.check === 0) {
+        alert('중복검사')
+      } else if (this.check === 2) {
+        this.$store.dispatch("signup", this.credentials)
+      }
       
+    },
+
+    checkId (id) {
+      if (id === '') {
+        alert('아이디를 입력하세요')
+      } else {
+        axios({
+          url:drf.accounts.checkId(id),
+          method:'get',
+        })
+        .then(res => {
+          console.log(res)
+          if (res.data === 1) {
+            this.check = 0
+            alert("중복된 아이디가 있습니다.")
+          } else if (res.data === 0) {
+            this.check = 2
+          }
+        })
+      }
     },
   },
 }
 </script>
 
-<style>
+<style scoped>
 .background {
   margin: auto;
   background-image: url("@/assets/frame.png");
@@ -117,6 +145,25 @@ export default {
   align-items: center;
   justify-content: center;
 }
+.check {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  font-size: 5px;
+}
+
+
+
+.idcheck {
+  height: 40px;
+  font-size: 5px;
+  width: 60px;
+  height: 30px;
+}
+
+/* input {
+  height: 40px;
+} */
 
 #input-group-1 {
   top: 300px;
@@ -133,5 +180,9 @@ export default {
 
 #input-group-4 {
   width: 60%;
+}
+
+button {
+  margin: 5px;
 }
 </style>

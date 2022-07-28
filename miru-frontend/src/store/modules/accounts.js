@@ -7,16 +7,16 @@ export const accounts = {
   state:{
     token : localStorage.getItem('token') || '',
     currentUser: {},
-    profile : {},
+    currentUserId : localStorage.getItem('currentUser') || '',
     authError: null,
   },
 
   getters:{
+    currentUserId : state => state.currentUserId,
     isLoggedIn : state => !!state.token,
     authHeader  (state) {
       return {"token": state.token}
     },
-    profile: state => state.profile,
     currentUser : state => state.currentUser,
     authError: state => state.authError,
   },
@@ -26,7 +26,6 @@ export const accounts = {
       state.token = token
     },
     SET_CURRENT_USER : (state, user) => state.currentUser = user,
-    SET_PROFILE : (state, profile) => state.profile = profile,
     SET_AUTH_ERROR: (state, error) => state.authError = error,
   },
 
@@ -39,6 +38,11 @@ export const accounts = {
     removeToken ({ commit }) {
       commit('SET_TOKEN', '')
       localStorage.setItem('token', '')
+    },
+
+    removeCurrentUser ({ commit }) {
+      commit('SET_CURRENT_USER', {})
+      localStorage.setItem('currentUser', '')
     },
 
     login ({ dispatch, commit }, credentials) {
@@ -54,7 +58,7 @@ export const accounts = {
         router.push({name:'HomeView'})
       })
       .catch(err => {
-        console.error(err.response.data)
+        // console.error(err)
         commit('SET_AUTH_ERROR', err.response.data)
       })         
     },
@@ -98,16 +102,10 @@ export const accounts = {
           headers: getters.authHeader
         })
         .then(res => {
-          axios({
-            url: drf.accounts.profile(res.data.username),
-            method: 'get',
-            headers: getters.authHeader
-          })
-          .then( res => {
-            commit('SET_CURRENT_USER', res.data)
-            console.log(res)
-          }) 
+          commit('SET_CURRENT_USER', res.data.userInfo)
+          localStorage.setItem('currentUser', res.data.userInfo.id)
         })
+        //만료된 토큰일 경우 로그아웃 처리 추가해야함.
         .catch( err => {
           if (err.response.status === 401) {
             dispatch('removeToken')
@@ -117,41 +115,31 @@ export const accounts = {
       }
     },
 
-    fetchProfile ({  commit, getters }, { username }) {
+    changePassWord ( obj) {
+      const id = obj.currentUser.id
       axios({
-        url: drf.accounts.profile(username),
-        method: 'get',
-        headers: getters.authHeader
+        url: drf.accounts.changePw(id),
+        method: 'put',
+        data: obj.credentials
       })
-      .then( res => {
-        commit('SET_PROFILE', res.data)
-        // dispatch('fetchLikeGenres', res.data.like_genres)
-      })
-    },
-
-    fetchGenres () {
-      axios({
-        url:drf.movies.genres(),
-        method:'get',
-        
-      })
-      .then( res => {
-        console.log(res.data)
-      })
-    },
-
-    searchKeyword ({ getters,commit } ,keyword) {
-      
-      axios({
-        url:drf.movies.search(keyword),
-        method:"get",
-        headers:getters.authHeader
-      })
-      .then( res => {
-        commit('FETCH_SEARCHMOVIES', res.data)
-        router.push({name:'search', params:{keyword:keyword}})
+      .then(res => {
+        console.log(res)
+        // dispatch('logout')
       })
     }
+
+    // searchKeyword ({ getters,commit } ,keyword) {
+      
+    //   axios({
+    //     url:drf.movies.search(keyword),
+    //     method:"get",
+    //     headers:getters.authHeader
+    //   })
+    //   .then( res => {
+    //     commit('FETCH_SEARCHMOVIES', res.data)
+    //     router.push({name:'search', params:{keyword:keyword}})
+    //   })
+    // }
   }
 
 }
