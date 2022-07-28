@@ -1,4 +1,4 @@
-<script>
+<template>
   <div id="app">
     <nav-bar class="nav"></nav-bar>
     <router-view/>
