@@ -33,10 +33,11 @@ export default {
         method:'get',
       })
       .then(res => {
-        if (res === 1) {
-          this.$ref.email.innerText = res
-        } else if (res === 0) {
-          this.check = res
+        if (res.data === 1) {
+          console.log('!')
+          // this.$ref.email.innerText = res
+        } else if (res.data === 0) {
+          this.check = res.data
         }
       })
     },

@@ -6,6 +6,28 @@
   <router-view/>
 </template>
 
+<script>
+import { mapActions } from 'vuex'
+import store from './store'
+
+
+export default {
+  name : 'App',
+
+  methods: {
+    ...mapActions(['fetchCurrentUser'])
+  },
+  created () {
+    if (store.getters.currentUserId) {
+      console.log(store.getters.currentUserId)
+      this.fetchCurrentUser(store.getters.currentUserId)
+   }
+  }
+}
+</script>
+
+
+
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

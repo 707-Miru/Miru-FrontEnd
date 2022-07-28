@@ -1,7 +1,7 @@
 <template>
   <div>
     <h3>비밀번호 재설정</h3>
-    <b-form @submit="changePassWord(credentials)">
+    <b-form @submit="changePassWord({currentUser, credentials})">
     <b-form-group 
         id="input-group-1"
         label="비밀번호:"
@@ -36,7 +36,8 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+
+import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'ResetPassWordView',
   
@@ -48,11 +49,15 @@ export default {
       }
     }
   },
+  
+  computed : {
+    ...mapGetters(['currentUser'])
+  },
 
   methods: {
     ...mapActions(['changePassWord'])
-  }
-
+  },
+  
 }
 </script>
 

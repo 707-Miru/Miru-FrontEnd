@@ -7,10 +7,12 @@ export const accounts = {
   state:{
     token : localStorage.getItem('token') || '',
     currentUser: {},
+    currentUserId : localStorage.getItem('currentUser') || '',
     authError: null,
   },
 
   getters:{
+    currentUserId : state => state.currentUserId,
     isLoggedIn : state => !!state.token,
     authHeader  (state) {
       return {"token": state.token}
@@ -38,6 +40,11 @@ export const accounts = {
       localStorage.setItem('token', '')
     },
 
+    removeCurrentUser ({ commit }) {
+      commit('SET_CURRENT_USER', {})
+      localStorage.setItem('currentUser', '')
+    },
+
     login ({ dispatch, commit }, credentials) {
       axios({
         url: drf.accounts.login(),
@@ -51,7 +58,7 @@ export const accounts = {
         router.push({name:'HomeView'})
       })
       .catch(err => {
-        console.error(err.response.data)
+        // console.error(err)
         commit('SET_AUTH_ERROR', err.response.data)
       })         
     },
@@ -87,7 +94,7 @@ export const accounts = {
       })
     },
 
-    fetchCurrentUser ({ getters, dispatch}, id) { // user 식별 위해
+    fetchCurrentUser ({ commit, getters, dispatch}, id) { // user 식별 위해
       if (getters.isLoggedIn) {
         axios({
           url: drf.accounts.currentUserInfo(id),
@@ -95,8 +102,10 @@ export const accounts = {
           headers: getters.authHeader
         })
         .then(res => {
-          console.log(res)
+          commit('SET_CURRENT_USER', res.data.userInfo)
+          localStorage.setItem('currentUser', res.data.userInfo.id)
         })
+        //만료된 토큰일 경우 로그아웃 처리 추가해야함.
         .catch( err => {
           if (err.response.status === 401) {
             dispatch('removeToken')
@@ -106,9 +115,16 @@ export const accounts = {
       }
     },
 
-    changePassWord () {
+    changePassWord ( obj) {
+      const id = obj.currentUser.id
       axios({
-        
+        url: drf.accounts.changePw(id),
+        method: 'put',
+        data: obj.credentials
+      })
+      .then(res => {
+        console.log(res)
+        // dispatch('logout')
       })
     }
 

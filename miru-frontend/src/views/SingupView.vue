@@ -8,15 +8,15 @@
           description="We'll never share your email with anyone else."
         >
         <div class="check">
-          <b-form-input
+          <b-form-input 
             id="input-1"
             v-model="credentials.id"
             type="text"
             placeholder="Enter username"
             required
           ></b-form-input>
-          <b-button pill id="check" class="idcheck" v-if="check" @click="checkId(credentials.id)">체크</b-button>
-          <font-awesome-icon icon="fa-solid fa-check" v-else/>
+          <b-button pill id="check" class="idcheck"  @click="checkId(credentials.id)">체크</b-button>
+          <font-awesome-icon icon="fa-solid fa-check" class="fa-5x success" v-if="check"/>
         </div>
       </b-form-group>
 
@@ -88,7 +88,7 @@ export default {
         recommendFlag: 1
       },
       formData : formData,
-      check: 1
+      check: 0
     }
   },
   computed:{
@@ -103,21 +103,32 @@ export default {
     },
 
     signup () {
-      this.$store.dispatch("signup", this.credentials)
+      if (this.check === 0) {
+        alert('중복검사')
+      } else if (this.check === 2) {
+        this.$store.dispatch("signup", this.credentials)
+      }
+      
     },
 
     checkId (id) {
-      axios({
-        url:drf.accounts.checkId(id),
-        method:'get',
-      })
-      .then(res => {
-        if (res === 1) {
-          alert("중복된 아이디가 있습니다.")
-        } else if (res === 0) {
-          this.check = res
-        }
-      })
+      if (id === '') {
+        alert('아이디를 입력하세요')
+      } else {
+        axios({
+          url:drf.accounts.checkId(id),
+          method:'get',
+        })
+        .then(res => {
+          console.log(res)
+          if (res.data === 1) {
+            this.check = 0
+            alert("중복된 아이디가 있습니다.")
+          } else if (res.data === 0) {
+            this.check = 2
+          }
+        })
+      }
     },
   },
 }
@@ -140,6 +151,8 @@ export default {
   height: 40px;
   font-size: 5px;
 }
+
+
 
 .idcheck {
   height: 40px;
