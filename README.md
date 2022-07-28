@@ -39,6 +39,8 @@ app.use(BootstrapVue3)
 app.mount('#app')
 ```
 
+<<<<<<< HEAD
+=======
 ## Git
 
 0000(날짜) SH Add Fix Set Delete filename (method, class) + alpha
@@ -68,3 +70,4 @@ app.mount('#app')
 
 - 프로젝트에서 사용할 Vue 프로젝트를 생성했습니다.
 - 프론트엔드 팀원들과 Vue코드 네이밍 컨벤션을 진행했습니다.
+>>>>>>> 5416cd1ddef101de3ffb03b4181684a85b7418f5
