@@ -12,10 +12,13 @@
         <img class="w-100" src="@/assets/images/weather.png" alt="">
       </a>
     </div>
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-circle-fill" viewBox="0 0 16 16">
+    <svg xmlns="http://www.w3.org/2000/svg" id="bottomArrow" width="32" height="32" fill="currentColor" class="bi bi-arrow-down-circle-fill fixed-bottom mx-auto mb-3" viewBox="0 0 16 16">
       <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"/>
     </svg>
-    <div class="item container d-flex align-items-center" style="height: 100vh;">
+    <svg xmlns="http://www.w3.org/2000/svg" id="topArrow" width="32" height="32" fill="currentColor" class="bi bi-arrow-up-circle-fill fixed-top mx-auto mt-3" viewBox="0 0 16 16">
+      <path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/>
+    </svg>
+    <div class="item container d-flex align-items-center" style="height: 100vh;" id="artPage">
       <div class="d-flex align-items-center">
         <div class="mx-5">
           <img src="@/assets/images/art.png" alt="">
@@ -26,7 +29,7 @@
         </div>
       </div>
     </div>
-    <div class="item container d-flex align-items-center justify-content-center" style="height: 100vh;">
+    <div class="item container d-flex align-items-center justify-content-center" style="height: 100vh;" id="seasonPage">
       <div class="">
         <div class="mb-5">
           <img src="@/assets/images/season.png" alt="">
@@ -37,7 +40,7 @@
         </div>
       </div>
     </div>
-    <div class="item container d-flex align-items-center justify-content-center" style="height: 100vh;">
+    <div class="item container d-flex align-items-center justify-content-center" style="height: 100vh;" id="weatherPage">
       <div class="d-flex flex-row-reverse align-items-center">
         <div class="mx-5">
           <img src="@/assets/images/weather.png" alt="">
@@ -51,14 +54,12 @@
   </div>
   <div class="modal fade" id="artModal" tabindex="-1" aria-labelledby="artLabel" aria-hidden="true">
   <div class="modal-dialog modal-fullscreen">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="artnLabel">명화 변환 기능</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <video src="@/assets/videos/flowers.mp4" type="video/mp4" controls></video>
-      </div>
+    <div class="modal-content container-fluid m-0 p-0">
+      <button type="button" class="btn-close position-absolute top-0 end-0 me-3 mt-3" data-bs-dismiss="modal" aria-label="Close"></button>
+      <video src="@/assets/videos/flowers.mp4" type="video/mp4" id="artVideo" class="h-100"></video>
+      <button type="button" class="btn btn-primary position-absolute bottom-0 end-0 me-3 mb-3" data-bs-dismiss="modal" id="artButton">
+        설명으로 가기
+      </button>
     </div>
   </div>
   </div>
@@ -91,10 +92,91 @@
 </template>
 
 <script>
+import { onMounted } from '@vue/runtime-core'
+
 export default {
   name: 'MainView',
   components: {
-  }
+  },
+  setup() {
+    function myBottomScroll(y) {
+      const artPage = document.querySelector('#artPage')
+      const seasonPage = document.querySelector('#seasonPage')
+      const weatherPage = document.querySelector('#weatherPage')
+      const artTop = Math.ceil(window.pageYOffset + artPage.getBoundingClientRect().top)
+      const seasonTop = Math.ceil(window.pageYOffset + seasonPage.getBoundingClientRect().top)
+      const weatherTop = Math.ceil(window.pageYOffset + weatherPage.getBoundingClientRect().top)
+      let yTo = 0
+      if (y < artTop) {
+        yTo = artTop
+      } else if (y < seasonTop) {
+        yTo = seasonTop
+      } else {
+        yTo = weatherTop
+      }
+      return yTo
+    }
+    function myTopScroll(y) {
+      const artPage = document.querySelector('#artPage')
+      const seasonPage = document.querySelector('#seasonPage')
+      const weatherPage = document.querySelector('#weatherPage')
+      const artTop = Math.ceil(window.pageYOffset + artPage.getBoundingClientRect().top)
+      const seasonTop = Math.ceil(window.pageYOffset + seasonPage.getBoundingClientRect().top)
+      const weatherTop = Math.ceil(window.pageYOffset + weatherPage.getBoundingClientRect().top)
+      let yTo = 0
+      if (y >= weatherTop) {
+        yTo = seasonTop
+      } else if (y >= seasonTop) {
+        yTo = artTop
+      } else {
+        yTo = 0
+      }
+      return yTo
+    }
+    onMounted(() => {
+      const topArrow = document.querySelector('#topArrow')
+      const bottomArrow = document.querySelector('#bottomArrow')
+      const artModalEl = document.querySelector('#artModal')
+      const art = document.querySelector('#artVideo')
+      const artButton = document.querySelector('#artButton')
+      const artPage = document.querySelector('#artPage')
+      const weatherPage = document.querySelector('#weatherPage')
+      const artTop = Math.ceil(window.pageYOffset + artPage.getBoundingClientRect().top)
+      const weatherTop = Math.ceil(window.pageYOffset + weatherPage.getBoundingClientRect().top)
+      window.addEventListener('scroll', () => {
+        if (Math.ceil(window.pageYOffset) < artTop) {
+          topArrow.style.display = 'none'
+          bottomArrow.style.display = 'inline'
+        } else if (Math.ceil(window.pageYOffset) < weatherTop) {
+          topArrow.style.display = 'inline'
+          bottomArrow.style.display = 'inline'
+        } else {
+          topArrow.style.display = 'inline'
+          bottomArrow.style.display = 'none'
+        }
+      })
+      bottomArrow.addEventListener('click',() => {
+        window.scrollTo({ left: 0, top: myBottomScroll(Math.ceil(window.pageYOffset)), behavior: "smooth" })
+      })
+      topArrow.addEventListener('click',() => {
+        window.scrollTo({ left: 0, top: myTopScroll(Math.ceil(window.pageYOffset)), behavior: "smooth" })
+      })
+      artModalEl.addEventListener('shown.bs.modal',() => {
+        art.play()
+      })
+      artModalEl.addEventListener('hidden.bs.modal',() => {
+        art.currentTime = 0
+        art.pause()
+        artButton.style.display = 'none'
+      })
+      art.addEventListener('ended',() => {
+        artButton.style.display = 'inline'
+      })
+      artButton.addEventListener('click',() => {
+        window.scrollTo({ left: 0, top: Math.ceil(window.pageYOffset + artPage.getBoundingClientRect().top), behavior: "smooth" })
+      })
+    })
+  },
 }
 </script>
 
@@ -105,5 +187,21 @@ export default {
 }
 .item {
   scroll-snap-align: center;
+}
+button {
+  z-index: 1;
+}
+#artButton {
+  display: none;
+  z-index: 1;
+}
+#bottomArrow :hover {
+  cursor: pointer;
+}
+#topArrow {
+  display: none;
+}
+#topArrow :hover {
+  cursor: pointer;
 }
 </style>
