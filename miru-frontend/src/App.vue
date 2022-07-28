@@ -1,18 +1,20 @@
-<template>
-  <nav>
-    <router-link to="/login">Login</router-link> |
-    <router-link to="/signup">Signup</router-link>
-  </nav>
-  <router-view/>
+<script>
+  <div id="app">
+    <nav-bar class="nav"></nav-bar>
+    <router-view/>
+  </div>
 </template>
 
 <script>
 import { mapActions } from 'vuex'
 import store from './store'
+import NavBar from '@/components/NavBar.vue'
 
 
 export default {
   name : 'App',
+
+  components: { NavBar },
 
   methods: {
     ...mapActions(['fetchCurrentUser'])
@@ -25,7 +27,6 @@ export default {
   }
 }
 </script>
-
 
 
 <style>
