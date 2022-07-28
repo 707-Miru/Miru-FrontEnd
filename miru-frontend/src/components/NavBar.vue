@@ -24,17 +24,17 @@
             <div class="nav-margin collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">
+                        <a class="nav-link active" aria-current="page" href="/">
                             <img src="@/assets/home_icon.svg" alt="" width="18" height="18" class="d-inline-block nav-margin">Home
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="/login">
                             <img src="@/assets/key_icon.svg" alt="" width="18" height="18" class="d-inline-block nav-margin">Login
                         </a>         <!--Login 시 Login 없애고 logout 기능 구현해야됨.-->
                         </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="/signup">
                             <img src="@/assets/signUp_icon.svg" alt="" width="18" height="18" class="d-inline-block nav-margin">Sign Up
                         </a>       <!--#Login 시 Sign up 없애고 나만의 앨범 기능 구현해야됨.-->
                     </li>
