@@ -10,7 +10,7 @@ import store from '../store'
 const routes = [
   {
     path: '/',
-    name: 'main',
+    name: 'MainView',
     component: MainView
   },
   {
@@ -54,7 +54,7 @@ router.beforeEach((to, from, next) => {
     alert('Require Login. Redirecting..')
     next({ name: 'LoginView' })
   } else if (!isAuthRequired && isLoggedIn) {
-    next({ name: 'HomeView' })
+    next({ name: 'MainView' })
   } else {
     next()
   }

@@ -55,7 +55,7 @@ export const accounts = {
         console.log(res)
         dispatch('saveToken', res.data.token)
         dispatch('fetchCurrentUser', credentials.id)
-        router.push({name:'HomeView'})
+        router.push({name:'MainView'})
       })
       .catch(err => {
         // console.error(err)
@@ -72,7 +72,7 @@ export const accounts = {
       .then(res => {
         dispatch('saveToken', res.data)
         dispatch('fetchCurrentUser', credentials.id) 
-        router.push({name:'HomeView'})   
+        router.push({name:'MainView'})   
       })
       .catch(err => {
         console.error(err.response.data)
