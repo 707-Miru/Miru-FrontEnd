@@ -5,7 +5,7 @@
             <a class="navbar-text nav-margin" href="#">
                 <img src="@/assets/photoBoard_icon.svg" alt="" width="18" height="18" class="d-inline-block nav-margin">
                 Photo Board
-            </a>
+            </a>    
         </div>
         
         <div>
