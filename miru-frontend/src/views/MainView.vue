@@ -18,6 +18,9 @@
     <svg xmlns="http://www.w3.org/2000/svg" id="topArrow" width="32" height="32" fill="currentColor" class="bi bi-arrow-up-circle-fill fixed-top mx-auto mt-3" viewBox="0 0 16 16">
       <path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/>
     </svg>
+    <div class="fixed-bottom me-3 d-flex justify-content-end">
+      <button class="btn btn-secondary mb-3" id="toTopButton">맨위로</button>
+    </div>
     <div class="item container d-flex align-items-center" style="height: 100vh;" id="artPage">
       <div class="d-flex align-items-center">
         <div class="mx-5">
@@ -119,14 +122,12 @@ export default {
     function myTopScroll(y) {
       const artPage = document.querySelector('#artPage')
       const seasonPage = document.querySelector('#seasonPage')
-      const weatherPage = document.querySelector('#weatherPage')
       const artTop = Math.ceil(window.pageYOffset + artPage.getBoundingClientRect().top)
       const seasonTop = Math.ceil(window.pageYOffset + seasonPage.getBoundingClientRect().top)
-      const weatherTop = Math.ceil(window.pageYOffset + weatherPage.getBoundingClientRect().top)
       let yTo = 0
-      if (y >= weatherTop) {
+      if (y > seasonTop) {
         yTo = seasonTop
-      } else if (y >= seasonTop) {
+      } else if (y > artTop+50) {
         yTo = artTop
       } else {
         yTo = 0
@@ -143,17 +144,24 @@ export default {
       const weatherPage = document.querySelector('#weatherPage')
       const artTop = Math.ceil(window.pageYOffset + artPage.getBoundingClientRect().top)
       const weatherTop = Math.ceil(window.pageYOffset + weatherPage.getBoundingClientRect().top)
+      const toTopButton = document.querySelector('#toTopButton')
       window.addEventListener('scroll', () => {
         if (Math.ceil(window.pageYOffset) < artTop) {
           topArrow.style.display = 'none'
           bottomArrow.style.display = 'inline'
-        } else if (Math.ceil(window.pageYOffset) < weatherTop) {
+          toTopButton.style.display = 'none'
+        } else if (Math.ceil(window.pageYOffset) < weatherTop-50) {
           topArrow.style.display = 'inline'
           bottomArrow.style.display = 'inline'
+          toTopButton.style.display = 'none'
         } else {
           topArrow.style.display = 'inline'
           bottomArrow.style.display = 'none'
+          toTopButton.style.display = 'inline'
         }
+      })
+      toTopButton.addEventListener('click',() => {
+        window.scrollTo({ left: 0, top: 0, behavior: "smooth" })
       })
       bottomArrow.addEventListener('click',() => {
         window.scrollTo({ left: 0, top: myBottomScroll(Math.ceil(window.pageYOffset)), behavior: "smooth" })
