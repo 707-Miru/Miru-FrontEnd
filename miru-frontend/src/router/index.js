@@ -5,6 +5,7 @@ import SignupView from '@/views/SingupView.vue'
 import FindPassWordView from '@/views/FindPassWordView.vue'
 import ResetPassWordView from '@/views/ResetPassWordView.vue'
 import store from '../store'
+import PictureView from '@/views/PictureView.vue'
 
 
 const routes = [
@@ -32,7 +33,12 @@ const routes = [
     path : "/resetpw",
     name : "ResetPassWordView",
     component : ResetPassWordView,
-  }
+  },
+  {
+    path: '/picture',
+    name: 'PictureView',
+    component: PictureView
+  },
 ]
 
 const router = createRouter({
@@ -40,27 +46,24 @@ const router = createRouter({
   routes
 })
 
-router.beforeEach((to, from, next) => {
-  // 이전 페이지에서 발생한 에러메시지 삭제
-  store.commit('SET_AUTH_ERROR', null)
+// router.beforeEach((to, from, next) => {
+//   // 이전 페이지에서 발생한 에러메시지 삭제
+//   store.commit('SET_AUTH_ERROR', null)
 
-  const { isLoggedIn } = store.getters
+//   const { isLoggedIn } = store.getters
 
-  const noAuthPages = ['LoginView', 'SignupView', 'FindPassWordView', 'MainView']
+//   const noAuthPages = ['LoginView', 'SignupView', 'FindPassWordView', 'MainView']
 
-  const isAuthRequired = !noAuthPages.includes(to.name)
+//   const isAuthRequired = !noAuthPages.includes(to.name)
 
-  if (isAuthRequired && !isLoggedIn) {
-    alert('Require Login. Redirecting..')
-    next({ name: 'LoginView' })
-  } else if (!isAuthRequired && isLoggedIn) {
-    next({ name: 'MainView' })
-  } else {
-    next()
-  }
-
-
-
-})
+//   if (isAuthRequired && !isLoggedIn) {
+//     alert('Require Login. Redirecting..')
+//     next({ name: 'LoginView' })
+//   } else if (!isAuthRequired && isLoggedIn) {
+//     next({ name: 'MainView' })
+//   } else {
+//     next()
+//   }
+// })
 
 export default router
