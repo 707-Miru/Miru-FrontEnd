@@ -21,28 +21,50 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             
-            <div class="nav-margin collapse navbar-collapse" id="navbarText">
+            <div  class="nav-margin collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/">
                             <img src="@/assets/home_icon.svg" alt="" width="18" height="18" class="d-inline-block nav-margin">Home
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li v-if="!isLoggedIn" class="nav-item">
                         <a class="nav-link" href="/login">
                             <img src="@/assets/key_icon.svg" alt="" width="18" height="18" class="d-inline-block nav-margin">Login
                         </a>         <!--Login 시 Login 없애고 logout 기능 구현해야됨.-->
                         </li>
-                    <li class="nav-item">
+                    <li v-if="!isLoggedIn" class="nav-item">
                         <a class="nav-link" href="/signup">
                             <img src="@/assets/signUp_icon.svg" alt="" width="18" height="18" class="d-inline-block nav-margin">Sign Up
                         </a>       <!--#Login 시 Sign up 없애고 나만의 앨범 기능 구현해야됨.-->
                     </li>
+
+                    <li v-if="!!isLoggedIn" class="nav-item">
+                        <a class="nav-link" href="/logout">
+                            <img src="@/assets/logout.svg" alt="" width="18" height="18" class="d-inline-block nav-margin">Logout
+                        </a>
+                    </li>
+
                 </ul>
             </div>
         </div>
     </nav>
 </template>
+
+
+<script>
+  import { mapGetters } from 'vuex'
+
+  export default {
+    name: 'NavBar',
+    computed: {
+      ...mapGetters(['isLoggedIn', 'currentUser']),
+    //   username() {
+    //     return this.currentUser.username ? this.currentUser.username : 'guest'
+    //   },
+    },
+  }
+</script>
 
 
 <style>
