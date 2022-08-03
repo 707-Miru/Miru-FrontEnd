@@ -3,6 +3,7 @@
     <div v-for="picture in totalPictures" :key="picture.id">
       <img :src="picture.url" :alt="picture.id">
     </div>
+    <div></div>
   </div>
 </template>
 
