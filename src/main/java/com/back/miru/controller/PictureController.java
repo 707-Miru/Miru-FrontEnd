@@ -1,8 +1,5 @@
 package com.back.miru.controller;
 
-import com.back.miru.model.dto.FavoritePicture;
-import com.back.miru.model.dto.FavoriteUser;
-import com.back.miru.model.service.FavoriteService;
 import com.back.miru.model.service.JwtService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
