@@ -2,7 +2,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-between shadow-sm">
 
         <div>
-            <a class="navbar-text nav-margin" href="#">
+            <a class="navbar-text nav-margin" href="/picture">
                 <img src="@/assets/photoBoard_icon.svg" alt="" width="18" height="18" class="d-inline-block nav-margin">
                 Photo Board
             </a>    
