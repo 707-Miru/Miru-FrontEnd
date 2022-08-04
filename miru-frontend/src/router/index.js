@@ -4,6 +4,10 @@ import LoginView from '@/views/LoginView.vue'
 import SignupView from '@/views/SingupView.vue'
 import FindPassWordView from '@/views/FindPassWordView.vue'
 import ResetPassWordView from '@/views/ResetPassWordView.vue'
+
+import PictureView from '@/views/PictureView.vue'
+import MyAlbumView from '@/views/MyAlbumView.vue'
+import PhotoDetailView from '@/views/PhotoDetailView.vue'
 import store from '../store'
 
 
@@ -32,6 +36,22 @@ const routes = [
     path : "/resetpw",
     name : "ResetPassWordView",
     component : ResetPassWordView,
+  },
+  {
+    path: '/picture',
+    name: 'PictureView',
+    component: PictureView
+  },
+  {
+    path : "/myalbum",
+    name : "MyAlbumView",
+    component : MyAlbumView,
+  },
+  {
+    path : "/detail",      
+    // /????/detail
+    name : "PhotoDetailView",
+    component : PhotoDetailView,
   }
 ]
 
@@ -58,9 +78,6 @@ router.beforeEach((to, from, next) => {
   } else {
     next()
   }
-
-
-
 })
 
 export default router
