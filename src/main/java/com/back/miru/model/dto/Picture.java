@@ -1,18 +1,20 @@
 package com.back.miru.model.dto;
 
-public class FavoritePicture {
+public class Picture {
     private int pictureIdx;
     private String filepath;
     private String tag;
     private int publicFlag;
+    private int isPicture;
     private String id;
     private String updateTime;
 
-    public FavoritePicture(int pictureIdx, String filepath, String tag, int publicFlag, String id, String updateTime) {
+    public Picture(int pictureIdx, String filepath, String tag, int publicFlag, int isPicture, String id, String updateTime) {
         this.pictureIdx = pictureIdx;
         this.filepath = filepath;
         this.tag = tag;
         this.publicFlag = publicFlag;
+        this.isPicture = isPicture;
         this.id = id;
         this.updateTime = updateTime;
     }
@@ -49,6 +51,14 @@ public class FavoritePicture {
         this.publicFlag = publicFlag;
     }
 
+    public int getIsPicture() {
+        return isPicture;
+    }
+
+    public void setIsPicture(int isPicture) {
+        this.isPicture = isPicture;
+    }
+
     public String getId() {
         return id;
     }
@@ -64,4 +74,5 @@ public class FavoritePicture {
     public void setUpdateTime(String updateTime) {
         this.updateTime = updateTime;
     }
+
 }

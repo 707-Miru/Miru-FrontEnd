@@ -20,7 +20,7 @@ import java.util.Map;
 @CrossOrigin(origins = {"*"}, maxAge = 6000)
 @RequestMapping("/favorite")
 public class FavoriteController {
-    public static final Logger logger = LoggerFactory.getLogger(FavoriteContorller.class);
+    public static final Logger logger = LoggerFactory.getLogger(FavoriteController.class);
     private static final String SUCCESS = "success";
     private static final String FAIL = "fail";
 
