@@ -2,6 +2,7 @@ package com.back.miru.model.service;
 
 import com.back.miru.model.dto.FavoritePicture;
 import com.back.miru.model.dto.FavoriteUser;
+import com.back.miru.model.dto.PageNavigation;
 
 import java.util.List;
 import java.util.Map;
@@ -18,4 +19,6 @@ public interface FavoriteService {
     void deleteFavoritePicture(Map<String, String> map) throws Exception;
 
     List<FavoritePicture> infoFavoritePicture(String id) throws Exception;
+
+    PageNavigation makePageNavigation(String id, String pg) throws Exception;
 }

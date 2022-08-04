@@ -10,16 +10,16 @@ import java.util.Map;
 
 @Mapper
 public interface FavoriteDAO {
-	void registFavoriteUser(Map<String, String> map) throws SQLException;
+	void registFavoriteUser(Map<String, String> map) throws Exception;
 
-	void deleteFavoriteUser(Map<String, String> map) throws SQLException;
+	void deleteFavoriteUser(Map<String, String> map) throws Exception;
 
-	List<FavoriteUser> infoFavoriteUser(String id) throws SQLException;
+	List<FavoriteUser> infoFavoriteUser(String id) throws Exception;
 
-	void registFavoritePicture(Map<String, String> map) throws SQLException;
+	void registFavoritePicture(Map<String, String> map) throws Exception;
 
-	void deleteFavoritePicture(Map<String, String> map) throws SQLException;
+	void deleteFavoritePicture(Map<String, String> map) throws Exception;
 
-	List<FavoritePicture> infoFavoritePicture(String id) throws SQLException;
+	List<FavoritePicture> infoFavoritePicture(String id) throws SException;
 
 }
