@@ -37,9 +37,9 @@ export default {
     ...mapActions(['fetchPicture'])
   },
 
-  setup () {
-    this.fetchPicture()
-  }
+  // setup () {
+  //   this.fetchPicture()
+  // }
 }
 </script>
 

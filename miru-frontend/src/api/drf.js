@@ -17,7 +17,8 @@ export default {
     sendEmail: (id) => HOST + `user/${id}`,
     changePw : (id) => HOST + `user/${id}`
   },
-  movies: {
 
+  picture: {
+    picture: () => HOST + 'picture/'
   },
 }

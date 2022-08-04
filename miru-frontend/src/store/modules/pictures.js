@@ -2,7 +2,9 @@
 // import drf from '@/api/drf'
 // import axios from 'axios'
 
+import drf from "@/api/drf"
 import axios from "axios"
+
 
 
 export const pictures = {
@@ -10,6 +12,7 @@ export const pictures = {
     pictures: [],
     picture: {},
     page: 0,
+    keyword: ''
   },
 
   getters: {
@@ -21,13 +24,19 @@ export const pictures = {
   mutations: {
     FETCH_PICTURE: (state, pictures) => state.pictures.push(...pictures),
 
-    INCREASE_PAGE: (state, page) => state.page = page + 30
+    INCREASE_PAGE: (state, page) => state.page = page + 20
 
   },
 
   actions: {
     fetchPicture ({ commit, getters }) {
       axios({
+        url: drf.picture.picture(),
+        method: 'get',
+        data: {
+          'page': getters.page,
+          'sortKeyword': getters.keyword,
+         }
 
       })
       .then( res => {

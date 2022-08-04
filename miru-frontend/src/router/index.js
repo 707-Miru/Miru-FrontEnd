@@ -4,7 +4,7 @@ import LoginView from '@/views/LoginView.vue'
 import SignupView from '@/views/SingupView.vue'
 import FindPassWordView from '@/views/FindPassWordView.vue'
 import ResetPassWordView from '@/views/ResetPassWordView.vue'
-import store from '../store'
+// import store from '../store'
 import PictureView from '@/views/PictureView.vue'
 
 
