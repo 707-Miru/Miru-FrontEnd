@@ -53,14 +53,13 @@ router.beforeEach((to, from, next) => {
   if (isAuthRequired && !isLoggedIn) {
     alert('Require Login. Redirecting..')
     next({ name: 'LoginView' })
-  } else if (!isAuthRequired && isLoggedIn) {
-    next({ name: 'MainView' })
   } else {
     next()
   }
 
-
-
+  if (!isAuthRequired && isLoggedIn) {
+    next({ name: 'MainView' })
+  } 
 })
 
 export default router
