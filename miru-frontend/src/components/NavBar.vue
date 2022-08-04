@@ -33,7 +33,7 @@
                     <li v-if="!isLoggedIn" class="nav-item">
                         <a class="nav-link" href="/login" style="color:#C9BBCF">
                             <img src="@/assets/login.svg" alt="" width="18" height="18"  class="d-inline-block nav-margin">로그인
-                        </a>         <!--Login 시 Login 없애고 logout 기능 구현해야됨.-->
+                        </a>
                         </li>
                     <li v-if="!isLoggedIn" class="nav-item">
                         <a class="nav-link" href="/signup" style="color:#C9BBCF">
