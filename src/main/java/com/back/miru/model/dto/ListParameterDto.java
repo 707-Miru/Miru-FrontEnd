@@ -1,81 +1,73 @@
 package com.back.miru.model.dto;
 
 public class ListParameterDto {
-	private String type;
-	private String inputText;
-	private int start;
-	private int currentPerPage;
-	private String lat;
-	private String lng;
-	private String id;
+    private int start;
+    private int currentPerPage;
+    private String keyword;
+    private String sortKeyword;
+    private boolean ifPicture;
+    private String id;
 
-	public ListParameterDto() {
-	}
+    public ListParameterDto() {
+    }
 
-	public ListParameterDto(String type, String inputText) {
-		this.type = type;
-		this.inputText = inputText;
-	}
+    public int getStart() {
+        return start;
+    }
 
-	public String getType() {
-		return type;
-	}
+    public void setStart(int start) {
+        this.start = start;
+    }
 
-	public void setType(String type) {
-		this.type = type;
-	}
+    public int getCurrentPerPage() {
+        return currentPerPage;
+    }
 
-	public String getInputText() {
-		return inputText;
-	}
+    public void setCurrentPerPage(int currentPerPage) {
+        this.currentPerPage = currentPerPage;
+    }
 
-	public void setInputText(String inputText) {
-		this.inputText = inputText;
-	}
+    public String getKeyword() {
+        return keyword;
+    }
 
-	public int getStart() {
-		return start;
-	}
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
+    }
 
-	public void setStart(int start) {
-		this.start = start;
-	}
+    public String getSortKeyword() {
+        return sortKeyword;
+    }
 
-	public int getCurrentPerPage() {
-		return currentPerPage;
-	}
+    public void setSortKeyword(String sortKeyword) {
+        this.sortKeyword = sortKeyword;
+    }
 
-	public void setCurrentPerPage(int currentPerPage) {
-		this.currentPerPage = currentPerPage;
-	}
+    public boolean isIfPicture() {
+        return ifPicture;
+    }
 
-	public String getLat() {
-		return lat;
-	}
+    public void setIfPicture(boolean ifPicture) {
+        this.ifPicture = ifPicture;
+    }
 
-	public void setLat(String lat) {
-		this.lat = lat;
-	}
+    public String getId() {
+        return id;
+    }
 
-	public String getLng() {
-		return lng;
-	}
+    public void setId(String id) {
+        this.id = id;
+    }
 
-	public void setLng(String lng) {
-		this.lng = lng;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	@Override
-	public String toString() {
-		return "ListParameterDto [type=" + type + ", inputText=" + inputText + ", lat=" + lat + ", lng=" + lng + "]";
-	}
-
+    @Override
+    public String toString() {
+        return "ListParameterDto{" +
+                "start=" + start +
+                ", currentPerPage=" + currentPerPage +
+                ", keyword='" + keyword + '\'' +
+                ", sortKeyword='" + sortKeyword + '\'' +
+                ", ifPicture=" + ifPicture +
+                ", id='" + id + '\'' +
+                '}';
+    }
 }
