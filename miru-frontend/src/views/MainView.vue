@@ -59,7 +59,7 @@
   <div class="modal-dialog modal-fullscreen">
     <div class="modal-content container-fluid m-0 p-0">
       <button type="button" class="btn-close position-absolute top-0 end-0 me-3 mt-3" data-bs-dismiss="modal" aria-label="Close"></button>
-      <video src="@/assets/videos/flowers.mp4" type="video/mp4" id="artVideo" class="h-100"></video>
+      <video src="@/assets/videos/flowers.mp4" type="video/mp4" id="artVideo" class="h-100" @ended="check"></video>
       <button type="button" class="btn btn-primary position-absolute bottom-0 end-0 me-3 mb-3" data-bs-dismiss="modal" id="artButton">
         설명으로 가기
       </button>
@@ -100,6 +100,11 @@ import { onMounted } from '@vue/runtime-core'
 export default {
   name: 'MainView',
   components: {
+  },
+  methods: {
+    check () {
+      console.log('!!!!')
+    }
   },
   setup() {
     function myBottomScroll(y) {
