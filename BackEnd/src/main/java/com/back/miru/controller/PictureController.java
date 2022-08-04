@@ -1,6 +1,6 @@
 package com.back.miru.controller;
 
-import com.back.miru.model.dto.FavoritePicture;
+import com.back.miru.ai.TransformPainting;
 import com.back.miru.model.dto.Picture;
 import com.back.miru.model.service.JwtService;
 import com.back.miru.model.service.PictureService;
@@ -30,6 +30,61 @@ public class PictureController {
     @Autowired
     private PictureService pictureService;
 
+    @GetMapping("/path")
+    public ResponseEntity<Map<String, Object>> getPictureFilePaths(@PathVariable String id, HttpServletRequest request) {
+        System.out.println("getPictureFilePaths 시작");
+        Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status;
+        if (jwtService.isUsable(request.getHeader("token"))) {
+            logger.info("사용 가능한 토큰!!!");
+            try {
+                List<String> PicturefilePaths = pictureService.selectAllFilePath(id);
+                System.out.println(PicturefilePaths);
+                resultMap.put("PicturefilePaths", PicturefilePaths);
+                resultMap.put("message", SUCCESS);
+                status = HttpStatus.ACCEPTED;
+            } catch (Exception e) {
+                logger.error("정보조회 실패 : {}", e);
+                resultMap.put("message", e.getMessage());
+                status = HttpStatus.INTERNAL_SERVER_ERROR;
+            }
+        } else {
+            logger.error("사용 불가능 토큰!!!");
+            resultMap.put("message", FAIL);
+            status = HttpStatus.ACCEPTED;
+        }
+        return new ResponseEntity<Map<String, Object>>(resultMap, status);
+    }
+
+    @GetMapping("/transfer")
+    public ResponseEntity<Map<String, Object>> transferPicture(@RequestParam int optionNum,
+                                                               @RequestParam String styleFilePath,
+                                                               @RequestParam String contentFilePath,
+                                                               HttpServletRequest request) {
+        System.out.println("transferPicture 시작");
+        Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status;
+        if (jwtService.isUsable(request.getHeader("token"))) {
+            logger.info("사용 가능한 토큰!!!");
+            try {
+                String transferPicturePath = TransformPainting.transform(optionNum, styleFilePath, contentFilePath);
+                resultMap.put("transferPicturePath", transferPicturePath);
+                resultMap.put("message", SUCCESS);
+                status = HttpStatus.ACCEPTED;
+            } catch (Exception e) {
+                logger.error("정보조회 실패 : {}", e);
+                resultMap.put("message", e.getMessage());
+                status = HttpStatus.INTERNAL_SERVER_ERROR;
+            }
+        } else {
+            logger.error("사용 불가능 토큰!!!");
+            resultMap.put("message", FAIL);
+            status = HttpStatus.ACCEPTED;
+        }
+        return new ResponseEntity<Map<String, Object>>(resultMap, status);
+    }
+
+
     @GetMapping()
     public ResponseEntity<Map<String, Object>> getPictureList(@RequestBody Map<String, String> map) {
         System.out.println("PictureList controller 시작");
@@ -49,6 +104,13 @@ public class PictureController {
         }
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
     }
+
+//    @GetMapping("/picture/")
+//    public ResponseEntity<Map<String, Object>> getFavoriteUserInfo(@PathVariable String id, HttpServletRequest request) {
+//        System.out.println("pictureInfo controller 시작");
+//        Map<String, Object> resultMap = new HashMap<>();
+//        return new ResponseEntity<Map<String, Object>>(resultMap, status);
+//    }
 //
 //    @GetMapping("/picture/{pictureIdx}")
 //    public ResponseEntity<Map<String, Object>> getFavoriteUserInfo(@PathVariable String id, HttpServletRequest request) {

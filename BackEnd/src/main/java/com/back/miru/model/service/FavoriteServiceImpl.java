@@ -3,11 +3,9 @@ package com.back.miru.model.service;
 import com.back.miru.model.dao.FavoriteDAO;
 import com.back.miru.model.dto.FavoritePicture;
 import com.back.miru.model.dto.FavoriteUser;
-import com.back.miru.model.dto.PageNavigation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -22,7 +20,8 @@ public class FavoriteServiceImpl implements FavoriteService {
     }
 
     @Override
-    public void deleteFavoriteUser(Map<String, String> map) throws Exception {
+    public void deleteFavoriteUser(String followId, Map<String, String> map) throws Exception {
+        map.put("followId", followId);
         favoriteDAO.deleteFavoriteUser(map);
     }
 
@@ -33,40 +32,17 @@ public class FavoriteServiceImpl implements FavoriteService {
 
     @Override
     public void registFavoritePicture(Map<String, String> map) throws Exception {
-        System.out.println(map);
         favoriteDAO.registFavoritePicture(map);
     }
 
     @Override
-    public void deleteFavoritePicture(Map<String, String> map) throws Exception {
+    public void deleteFavoritePicture(String pictureIdx, Map<String, String> map) throws Exception {
+        map.put("pictureIdx", pictureIdx);
         favoriteDAO.deleteFavoritePicture(map);
     }
 
     @Override
     public List<FavoritePicture> infoFavoritePicture(String id) throws Exception {
         return favoriteDAO.infoFavoritePicture(id);
-    }
-
-    @Override
-    public PageNavigation makePageNavigation(String id, String pg) throws Exception {
-        PageNavigation pageNavigation = new PageNavigation();
-        int pgno = Integer.parseInt(pg);
-        int currentPage = pgno;
-        int naviSize = 5;
-        int countPerPage = 5;
-        pageNavigation.setCurrentPage(currentPage);
-        pageNavigation.setCountPerPage(countPerPage);
-        pageNavigation.setNaviSize(naviSize);
-
-        int totalCount = favoriteDAO.getTotalCount(id);
-        pageNavigation.setTotalCount(totalCount);
-        int totalPageCount = (totalCount - 1) / countPerPage + 1;
-        pageNavigation.setTotalPageCount(totalPageCount);
-
-        pageNavigation.setStartRange(currentPage <= naviSize);
-        boolean endRange = (totalPageCount - 1) / naviSize * naviSize < currentPage;
-        pageNavigation.setEndRange(endRange);
-        pageNavigation.makeNavigator();
-        return pageNavigation;
     }
 }

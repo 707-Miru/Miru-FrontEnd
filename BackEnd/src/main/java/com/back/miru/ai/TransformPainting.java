@@ -1,28 +1,61 @@
 package com.back.miru.ai;
 
-
 import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecutor;
 import org.apache.commons.exec.PumpStreamHandler;
 
 import java.io.ByteArrayOutputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 public class TransformPainting {
 
     public static void main(String[] args) throws Exception {
-        transform();
+        System.out.println(transform(0, "purple.jpg", "cat.mp4"));
     }
 
-    public static void transform() throws Exception {
-        String root = "C:/Users/SSAFY/Desktop/PyTorch-Multi-Style-Transfer/experiments/";
+    public static String transform(int optionNum, String styleFilePath, String contentFilePath) throws Exception {
+        Map<Integer, String> m = new HashMap<>();
+        m.put(1, "candy");
+        m.put(2, "composition_vii");
+        m.put(3, "escher_sphere");
+        m.put(4, "feathers");
+        m.put(5, "frida_kahlo");
+        m.put(6, "la_muse");
+        m.put(7, "mosaic");
+        m.put(8, "mosaic_ducks_massimo");
+        m.put(9, "pencil");
+        m.put(10, "picasso");
+        m.put(11, "portrait");
+        m.put(12, "rain_princess");
+        m.put(13, "seated_nude");
+        m.put(14, "shipwreck");
+        m.put(15, "starry_night");
+        m.put(16, "stars");
+        m.put(17, "strip");
+        m.put(18, "the_scream");
+        m.put(19, "udnie");
+        m.put(20, "wave");
+        m.put(21, "woman");
+
+//        python main.py optim --content-image t.jpg --style-image m.jpeg --cuda=0
+//        python main.py eval --content-image t.jpg --style-image m.jpeg --model models/21styles.model --content-size 1024 --cuda=0
+//        String root = "C, /Users/SSAFY/Desktop/Picture/src/main/java/com/back/miru/ai/";
+        String root = "src/main/java/com/back/miru/ai/";
         String[] command = new String[12];
         command[0] = "python";
         command[1] = root + "main.py";
         command[2] = "eval";
         command[3] = "--content-image";
-        command[4] = root + "images/content/venice-boat.jpg";
+        command[4] = root + contentFilePath;
         command[5] = "--style-image";
-        command[6] = root + "images/21styles/candy.jpg";
+
+        if (optionNum == 0) {
+            command[6] = root + styleFilePath;
+        } else {
+            command[6] = root + "21styles/" + m.get(optionNum) + ".jpg";
+        }
+
         command[7] = "--model";
         command[8] = root + "models/21styles.model";
         command[9] = "--content-size";
@@ -38,8 +71,10 @@ public class TransformPainting {
         PumpStreamHandler pumpStreamHandler = new PumpStreamHandler(outputStream);
         DefaultExecutor executor = new DefaultExecutor();
         executor.setStreamHandler(pumpStreamHandler);
+        System.out.println(commandLine);
         int result = executor.execute(commandLine);
         System.out.println("result: " + result);
         System.out.println("output: " + outputStream);
+        return "output.jpg";
     }
 }

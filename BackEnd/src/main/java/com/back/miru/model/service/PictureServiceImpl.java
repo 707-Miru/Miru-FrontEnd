@@ -67,4 +67,9 @@ public class PictureServiceImpl implements PictureService {
         return pageNavigation;
     }
 
+    @Override
+    public List<String> selectAllFilePath(String id) {
+        return null;
+    }
+
 }

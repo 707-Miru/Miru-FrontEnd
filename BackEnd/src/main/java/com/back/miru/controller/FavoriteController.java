@@ -54,15 +54,15 @@ public class FavoriteController {
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
     }
 
-    @DeleteMapping("/user")
-    public ResponseEntity<Map<String, Object>> deleteFavoriteUser(@RequestBody Map<String, String> map, HttpServletRequest request) {
+    @DeleteMapping("/user/{followId}")
+    public ResponseEntity<Map<String, Object>> deleteFavoriteUser(@PathVariable String followId, @RequestBody Map<String, String> map, HttpServletRequest request) {
         System.out.println("deleteFavorite controller 시작");
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;
         if (jwtService.isUsable(request.getHeader("token"))) {
             logger.info("사용 가능한 토큰!!!");
             try {
-                favoriteService.deleteFavoriteUser(map);
+                favoriteService.deleteFavoriteUser(followId, map);
                 resultMap.put("message", SUCCESS);
                 status = HttpStatus.ACCEPTED;
             } catch (Exception e) {
@@ -128,15 +128,15 @@ public class FavoriteController {
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
     }
 
-    @DeleteMapping("/picture")
-    public ResponseEntity<Map<String, Object>> deleteFavoritePicture(@RequestBody Map<String, String> map, HttpServletRequest request) {
+    @DeleteMapping("/picture/{pictureIdx}")
+    public ResponseEntity<Map<String, Object>> deleteFavoritePicture(@PathVariable String pictureIdx, @RequestBody Map<String, String> map, HttpServletRequest request) {
         System.out.println("deleteFavorite controller 시작");
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;
         if (jwtService.isUsable(request.getHeader("token"))) {
             logger.info("사용 가능한 토큰!!!");
             try {
-                favoriteService.deleteFavoritePicture(map);
+                favoriteService.deleteFavoritePicture(pictureIdx, map);
                 resultMap.put("message", SUCCESS);
                 status = HttpStatus.ACCEPTED;
             } catch (Exception e) {

@@ -44,6 +44,7 @@ public class UserContorller {
     public ResponseEntity<String> registUser(@RequestBody Map<String, String> map) throws Exception {
         System.out.println("resister controller 시작");
         userService.registUser(map);
+        System.out.println("map : " + map);
         User loginUser = userService.loginUser(map.get("id"), map.get("password"));
         String token = "";
         if (loginUser != null) {

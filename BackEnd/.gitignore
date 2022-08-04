@@ -1,3 +1,9 @@
+# Ai picture transfer by ty
+*.DS_Store
+*.swp
+*.pyc
+*.pth
+
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar

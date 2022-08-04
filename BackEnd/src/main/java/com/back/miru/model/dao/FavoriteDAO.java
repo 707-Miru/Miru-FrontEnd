@@ -20,6 +20,6 @@ public interface FavoriteDAO {
 
 	void deleteFavoritePicture(Map<String, String> map) throws Exception;
 
-	List<FavoritePicture> infoFavoritePicture(String id) throws SException;
+	List<FavoritePicture> infoFavoritePicture(String id) throws Exception;
 
 }

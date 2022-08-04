@@ -9,6 +9,7 @@ import java.util.Map;
 
 @Mapper
 public interface PictureDAO {
+
     List<Picture> selectAllPictures(ListParameterDto listParameterDto) throws Exception;
 
     void registPicture(Map<String, String> map) throws Exception;
