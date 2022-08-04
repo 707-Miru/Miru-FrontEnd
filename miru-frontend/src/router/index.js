@@ -4,6 +4,7 @@ import LoginView from '@/views/LoginView.vue'
 import SignupView from '@/views/SingupView.vue'
 import FindPassWordView from '@/views/FindPassWordView.vue'
 import ResetPassWordView from '@/views/ResetPassWordView.vue'
+import MyAlbumView from '@/views/MyAlbumView.vue'
 import PhotoDetailView from '@/views/PhotoDetailView.vue'
 import store from '../store'
 
@@ -35,6 +36,11 @@ const routes = [
     component : ResetPassWordView,
   },
   {
+    path : "/myalbum",
+    name : "MyAlbumView",
+    component : MyAlbumView,
+  },
+  {
     path : "/detail",      
     // /????/detail
     name : "PhotoDetailView",
@@ -53,7 +59,7 @@ router.beforeEach((to, from, next) => {
 
   const { isLoggedIn } = store.getters
 
-  const noAuthPages = ['LoginView', 'SignupView', 'FindPassWordView', 'MainView', 'PhotoDetailView']
+  const noAuthPages = ['LoginView', 'SignupView', 'FindPassWordView', 'MainView',]
 
   const isAuthRequired = !noAuthPages.includes(to.name)
 
