@@ -18,7 +18,9 @@ export default {
     changePw : (id) => HOST + `user/${id}`
   },
 
-  picture: {
-    picture: () => HOST + 'picture/'
+  pictures: {
+    picture: () => HOST + 'picture/',
+    totalPictures: () => HOST + 'pictures/',
+    transfer: () => HOST + '/picture/transfer/',
   },
 }
