@@ -121,7 +121,6 @@ export default {
         {value: 0, text: '나만의 스타일'},
         {value: 1, text: '고흐'},
         {value: 2, text: '모네'},
-        {value: 3, text: '피카소'},
       ],
     }
   },
