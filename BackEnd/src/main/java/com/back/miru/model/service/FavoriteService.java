@@ -2,6 +2,7 @@ package com.back.miru.model.service;
 
 import com.back.miru.model.dto.FavoritePicture;
 import com.back.miru.model.dto.FavoriteUser;
+import com.back.miru.model.dto.Picture;
 
 import java.util.List;
 import java.util.Map;
@@ -17,5 +18,7 @@ public interface FavoriteService {
 
     void deleteFavoritePicture(String pictureIdx, Map<String, String> map) throws Exception;
 
-    List<FavoritePicture> infoFavoritePicture(String id) throws Exception;
+    List<Picture> infoFavoritePicture(String id, Map<String, String> map) throws Exception;
+
+    int getTotalPictureCnt(String id) throws Exception;
 }
