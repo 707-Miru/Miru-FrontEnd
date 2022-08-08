@@ -115,7 +115,7 @@ public class UserServiceImpl implements UserService {
         prop.put("mail.smtp.ssl.enable", "true");
         prop.put("mail.smtp.ssl.trust", "smtp.gmail.com");
 
-        Session session = Session.getDefaultInstance(prop, new javax.mail.Authenticator() {
+        Session session = Session.getDefaultInstance(prop, new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(username, password);
             }
