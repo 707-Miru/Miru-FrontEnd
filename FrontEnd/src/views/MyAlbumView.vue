@@ -50,17 +50,19 @@
 </template>
 
 <script>
-import { onMounted } from '@vue/runtime-core'
-import { mapActions, mapGetters } from 'vuex'
+import { computed, onMounted } from "vue";
+import { useStore } from "vuex";
 
 export default {
   name: 'MyAlbumView',
   setup() {
+    const store = useStore()
+    const myPictures = computed(() => store.actions.fetchMyPictures)
     onMounted(() => {
       const draggables = document.querySelectorAll(".draggable")
       const preview = document.querySelector(".preview")
       const myStyle = document.querySelector(".myStyle")
-
+      myPictures(1)
       draggables.forEach(draggable => {
         draggable.addEventListener("dragstart", () => {
           draggable.classList.add("dragging")
@@ -125,7 +127,6 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['fetchTotalPictures', 'transfer',]),
     preview() {
       const previewContent = document.querySelector('.selectedcontent img')
       this.transfer(this.previewData).then(
@@ -134,7 +135,6 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(['totalPictures', 'transferPicture']),
     previewData() {
       const option_num = this.artSelected
       const content_file_path = document.querySelector('.selectedContent img').src
