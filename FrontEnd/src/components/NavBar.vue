@@ -1,5 +1,5 @@
 <template>
-    <nav class="fixed-top navbar navbar-expand-lg navbar-light bg-light justify-content-between shadow-sm">
+    <nav class="sticky-top navbar navbar-expand-lg navbar-light bg-light justify-content-between shadow-sm">
 
         <div>
             <span>
@@ -129,6 +129,7 @@ div.clickEffect{
     border-radius:50%;
     animation:clickEffect 1.5s ease-out;
     z-index:99999;
+    pointer-events: none;
 }
 @keyframes clickEffect{
     0%{

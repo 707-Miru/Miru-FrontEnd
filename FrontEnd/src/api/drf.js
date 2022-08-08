@@ -20,7 +20,8 @@ export default {
 
   pictures: {
     picture: () => HOST + 'picture/',
-    myPictures: () => HOST + 'pictures/',
-    transfer: () => HOST + '/picture/transfer/',
+    myPictures: () => HOST + 'favorite/picture/',
+    transfer: () => HOST + 'picture/transfer/',
+    uploadPicture: () => HOST + 'picture/upload/',
   },
 }

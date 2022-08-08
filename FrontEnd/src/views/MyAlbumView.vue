@@ -16,7 +16,7 @@
           </div>
         </div>
         <div>
-          <b-button class="w-100 mb-1 mt-1" variant="secondary" @click="preview(previewData)">미리보기</b-button>
+          <b-button class="w-100 mb-1 mt-1" variant="secondary" @click.prevent="preview(previewData)">미리보기</b-button>
           <b-button class="w-100" variant="primary">액자로 전송</b-button>
         </div>
       </div>
@@ -24,6 +24,11 @@
     <!-- <div v-for="picture in totalPictures" :key="picture.id">
       <img :src="picture.url" :alt="picture.id">
     </div> -->
+    <div>
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#uploadModal">
+        파일업로드
+      </button>
+    </div>
     <div class="container">
       <b-row>
         <div draggable="true" class="col-12 col-sm-6 col-md-4 col-lg-2 mb-3 draggable">
@@ -46,23 +51,73 @@
         </div>
       </b-row>
     </div>
+    <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">파일업로드</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="formData">
+              <div class="mb-3">
+                <label for="formFile" class="form-label">그림 파일 선택</label>
+                <input class="form-control" type="file" id="formFile">
+              </div>
+              <div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="publicFlag" id="publicFlag1" value="1">
+                  <label class="form-check-label" for="publicFlag1">
+                    파일 공개
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="publicFlag" id="publicFlag2" value="0" checked>
+                  <label class="form-check-label" for="publicFlag2">
+                    파일 비공개
+                  </label>
+                </div>
+              </div>
+              <hr>
+              <div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="isPicture" id="isPicture1" value="1" checked>
+                  <label class="form-check-label" for="isPicture1">
+                    그림
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="isPicture" id="isPicture2" value="0">
+                  <label class="form-check-label" for="isPicture2">
+                    동영상
+                  </label>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+            <button type="submit" @click="uploadData()" data-bs-dismiss="modal" class="btn btn-primary">업로드</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import { computed, onMounted } from "vue";
-import { useStore } from "vuex";
+import { onMounted } from '@vue/runtime-core'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'MyAlbumView',
   setup() {
-    const store = useStore()
-    const myPictures = computed(() => store.actions.fetchMyPictures)
+
     onMounted(() => {
       const draggables = document.querySelectorAll(".draggable")
       const preview = document.querySelector(".preview")
       const myStyle = document.querySelector(".myStyle")
-      myPictures(1)
+
       draggables.forEach(draggable => {
         draggable.addEventListener("dragstart", () => {
           draggable.classList.add("dragging")
@@ -115,6 +170,8 @@ export default {
       })
       
     })
+    return {
+    }
   },
   data () {
     return {
@@ -127,24 +184,36 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['fetchMyPictures', 'transfer', 'uploadPicture']),
     preview() {
-      const previewContent = document.querySelector('.selectedcontent img')
+      const previewContent = document.querySelector('.selectedContent img')
       this.transfer(this.previewData).then(
         previewContent.src = this.transferPicture.src
       )
     },
+    uploadData() {
+      const formData = new FormData()
+      const publicFlag = document.querySelector('input[name="publicFlag"]:checked').value
+      const isPicture = document.querySelector('input[name="isPicture"]:checked').value
+      formData.append('data',document.querySelector('#formFile').files[0]);
+      formData.append('publicFlag', publicFlag)
+      formData.append('isPicture', isPicture)
+      formData.append('id', localStorage.getItem('currentUser'))
+      this.uploadPicture(formData)
+    },
   },
   computed: {
+    ...mapGetters(['totalPictures', 'transferPicture']),
     previewData() {
       const option_num = this.artSelected
       const content_file_path = document.querySelector('.selectedContent img').src
       const style = document.querySelector('.selectedStyle img')
       let style_file_path = null
       if (option_num === 0) {
-        if (style === null) {
-          console.error("스타일을 선택해야 합니다.")
-        } else {
+        if (style) {
           style_file_path = style.src
+        } else {
+          console.error("스타일을 선택해야 합니다.")
         }
 
         const body = {
