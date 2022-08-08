@@ -8,16 +8,20 @@ export const pictures = {
   state: {
     pictures: [],
     picture: {},
-    page: 0,
+    page: 1,
     keyword: '',
+    sortKeyword : 'time',
     totalPictures : [],
     transferPicture : {},
+    isPicture : true
   },
 
   getters: {
     pictures: state => state.pictures,
     picture: state => state.picture,
     page: state => state.page,
+    sortKeyword : state => state.sortKeyword,
+    isPicture : state => state.isPicture,
     totalPictures: state => state.totalPictures,
     transferPicture: state => state.transferPicture
   },
@@ -32,21 +36,21 @@ export const pictures = {
   },
 
   actions: {
-    fetchPicture ({ commit, getters }) {
+    fetchPicture ({ commit, getters }, d) {
+      console.log(d)
       axios({
-        url: drf.picture.picture(),
+        url: drf.pictures.picture(),
         method: 'get',
-        data: {
-          'page': getters.page,
-          'sortKeyword': getters.keyword,
-         }
-
+        params: d,
+        headers: getters.authHeader
       })
       .then( res => {
+        
+        console.log(res)
         commit('FETCH_PICTURE', res.data)
         commit('INCREASE_PAGE', getters.page)
       })
-      .catch( err => console.error( err.response ))
+      .catch( err => console.error( err ))
     },
 
     fetchTotalPictures ({ commit }, data) {

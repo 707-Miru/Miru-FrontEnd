@@ -16,6 +16,7 @@ import PictureListItem from '@/components/PictureListItem'
 import { mapActions, mapGetters } from 'vuex'
 
 
+
 export default {
   name: 'PictureList',
 
@@ -44,21 +45,29 @@ export default {
         {
           'url': require('@/assets/frame.png')
         }
-      ]
+      ],
     }
   },
 
   computed: {
-    ...mapGetters(['pictures'])
+    ...mapGetters(['pictures', 'currentUserId', 'page', 'sortKeyword',])
   },
+
 
   methods: {
     ...mapActions(['fetchPicture'])
   },
 
-  // setup () {
-  //   this.fetchPicture()
-  // }
+  created () {
+    const data = {
+      'page': this.page,
+      'sortKeyword': this.sortKeyword,
+      'id' : this.currentUserId
+          }
+    console.log(typeof(data.page))
+    console.log(typeof(data.id))
+    this.fetchPicture(data)
+  }
 }
 </script>
 
