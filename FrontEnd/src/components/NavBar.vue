@@ -129,6 +129,7 @@ div.clickEffect{
     border-radius:50%;
     animation:clickEffect 1.5s ease-out;
     z-index:99999;
+    pointer-events: none;
 }
 @keyframes clickEffect{
     0%{
