@@ -34,13 +34,18 @@
           AND pictureIdx = #{pictureIdx}
     </delete>
 
-    <select id="infoFavoritePicture" parameterType="String" resultType="Map">
-        SELECT pictureIdx
-        FROM favoritePicture
-        WHERE id = #{id}
+    <select id="infoFavoritePicture" parameterType="ListParameterDto" resultType="Map">
+        SELECT pictureIdx, filepath, tag, updateTime
+        FROM picture
+        WHERE pictureIdx
+            IN(SELECT pictureIdx
+               FROM favoritePicture
+               WHERE id = #{id})
+        ORDER BY updateTime DESC, pictureIdx DESC
+        LIMIT #{start}, #{currentPerPage}
     </select>
 
-    <select id="getTotalCount" parameterType="String" resultType="Int">
+    <select id="getTotalPictureCnt" parameterType="String" resultType="Int">
         SELECT count(*)
         FROM favoritePicture
         WHERE id = #{id}

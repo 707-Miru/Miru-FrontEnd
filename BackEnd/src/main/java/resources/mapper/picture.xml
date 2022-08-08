@@ -11,9 +11,30 @@
     </insert>
 
     <!-- 전체 사진 불러오기 -->
-    <select id="selectAllPictures" parameterType="String" resultType="Map">
-        SELECT *
-        FROM picture
+    <select id="selectAllPictures" parameterType="ListParameterDto" resultType="Map">
+        SELECT p.pictureIdx, p.filepath, p.tag,
+               IFNULL((SELECT COUNT(*)
+                       FROM favoritePicture
+                       GROUP BY pictureIdx
+                       HAVING pictureIdx = p.pictureIdx), 0) likeCnt,
+               IF(p.pictureIdx
+                      IN (SELECT pictureIdx
+                          FROM favoritePicture
+                          WHERE id = #{id}), 1, 0) likeFlag, p.updateTime
+        FROM picture p LEFT OUTER JOIN favoritePicture fp
+            ON p.pictureIdx = fp.pictureIdx
+        WHERE p.publicFlag = 1 OR p.id = #{id}
+        GROUP BY p.pictureIdx
+        ORDER BY
+        <choose>
+            <when test="sortKeyword == 'like'">
+                likeCnt DESC, p.updateTime DESC, pictureIdx DESC
+            </when>
+            <otherwise>
+                p.updateTime DESC, likeCnt DESC, pictureIdx DESC
+            </otherwise>
+        </choose>
+        LIMIT #{start}, #{currentPerPage}
     </select>
 
     <!-- 전체 태그 불러오기 -->
@@ -54,4 +75,32 @@
           AND followId = #{followId}
     </delete>
 
+    <!-- 사진 검색하기 -->
+    <select id="searchPictureList" parameterType="ListParameterDto" resultType="Map">
+        SELECT p.pictureIdx, p.filepath, p.tag,
+        IFNULL((SELECT COUNT(*)
+        FROM favoritePicture
+        GROUP BY pictureIdx
+        HAVING pictureIdx = p.pictureIdx), 0) likeCnt,
+        IF(p.pictureIdx
+        IN (SELECT pictureIdx
+        FROM favoritePicture
+        WHERE id = #{id}), 1, 0) likeFlag, p.updateTime
+        FROM picture p LEFT OUTER JOIN favoritePicture fp
+        ON p.pictureIdx = fp.pictureIdx
+        WHERE (p.publicFlag = 1 OR p.id = #{id})
+        AND p.isPicture = #{isPicture}
+        AND p.tag LIKE CONCAT('%', #{keyword}, '%')
+        GROUP BY p.pictureIdx
+        ORDER BY
+        <choose>
+            <when test="sortKeyword == 'like'">
+                likeCnt DESC, p.updateTime DESC, pictureIdx DESC
+            </when>
+            <otherwise>
+                p.updateTime DESC, likeCnt DESC, pictureIdx DESC
+            </otherwise>
+        </choose>
+        LIMIT #{start}, #{currentPerPage}
+    </select>
 </mapper>
