@@ -5,8 +5,8 @@
       <a type="button" class="" data-bs-toggle="modal" data-bs-target="#artModal" style="width:15%; position: absolute; top: 10.5%; left: 51.8%;">
         <img class="w-100" src="@/assets/images/art.png" alt="">
       </a>
-      <a type="button" class="" data-bs-toggle="modal" data-bs-target="#seasonModal" style="width:34%; position: absolute; top: 42.5%; left: 49%;">
-        <img class="w-100" src="@/assets/images/season.png" alt="">
+      <a type="button" class="" data-bs-toggle="modal" data-bs-target="#seasonModal" style="width:34%; position: absolute; top: 41.5%; left: 49%;">
+        <video class="w-100 h-100 small" src="@/assets/videos/flowers.mp4" alt="" autoplay loop></video>
       </a>
       <a type="button" class="" data-bs-toggle="modal" data-bs-target="#weatherModal" style="width:10%; position: absolute; top: 44.8%; left: 33.2%;">
         <img class="w-100" src="@/assets/images/weather.png" alt="">
@@ -70,13 +70,10 @@
   </div>
   <div class="modal fade" id="seasonModal" tabindex="-1" aria-labelledby="seasonLabel" aria-hidden="true">
   <div class="modal-dialog modal-fullscreen">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="seasonLabel">사계절 적용기능</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
+    <div class="modal-content">   
+      <button type="button" class="btn-close position-absolute top-0 end-0 me-3 mt-3" data-bs-dismiss="modal" aria-label="Close"></button>
       <div class="modal-body">
-        <img src="@/assets/images/season.png" alt="">
+        <video src="@/assets/videos/flowers.mp4" type="video/mp4" id="seasonVideo" class="h-100"></video>
       </div>
     </div>
   </div>
@@ -140,7 +137,9 @@ export default {
       const topArrow = document.querySelector('#topArrow')
       const bottomArrow = document.querySelector('#bottomArrow')
       const artModalEl = document.querySelector('#artModal')
+      const seasonModalEl = document.querySelector('#seasonModal')
       const art = document.querySelector('#artVideo')
+      const season = document.querySelector('#seasonVideo')
       const artButton = document.querySelector('#artButton')
       const artPage = document.querySelector('#artPage')
       const weatherPage = document.querySelector('#weatherPage')
@@ -178,6 +177,9 @@ export default {
         art.currentTime = 0
         art.pause()
         artButton.style.display = 'none'
+      })
+      seasonModalEl.addEventListener('shown.bs.modal', () => {
+        season.play()
       })
       art.addEventListener('ended',() => {
         artButton.style.display = 'inline'
@@ -221,5 +223,19 @@ button {
 }
 #topArrow :hover {
   cursor: pointer;
+}
+
+video.small {
+  animation: full 2s;
+}
+
+@keyframes full {
+  0%{
+
+  }
+
+  100%{
+    left:50px;
+  }
 }
 </style>
