@@ -59,7 +59,9 @@
   <div class="modal-dialog modal-fullscreen">
     <div class="modal-content container-fluid m-0 p-0">
       <button type="button" class="btn-close position-absolute top-0 end-0 me-3 mt-3" data-bs-dismiss="modal" aria-label="Close"></button>
-      <video src="@/assets/videos/flowers.mp4" type="video/mp4" id="artVideo" class="h-100"></video>
+      <div class="modal-body">
+        <video src="@/assets/videos/flowers.mp4" type="video/mp4" id="artVideo" class="h-100"></video>
+      </div>
       <button type="button" class="btn btn-primary position-absolute bottom-0 end-0 me-3 mb-3" data-bs-dismiss="modal" id="artButton">
         설명으로 가기
       </button>
@@ -199,6 +201,14 @@ export default {
 button {
   z-index: 1;
 }
+
+.modal-body {
+  position: relative;
+}
+.modal-body:after {
+  position: absolute;
+}
+
 #artButton {
   display: none;
   z-index: 1;
