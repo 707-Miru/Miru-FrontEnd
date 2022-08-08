@@ -87,12 +87,32 @@ public class PictureController {
 
     @GetMapping()
     public ResponseEntity<Map<String, Object>> getPictureList(@RequestBody Map<String, String> map) {
-        System.out.println("PictureList controller 시작");
+        System.out.println("getPictureList controller 시작");
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;
         logger.info("사용 가능한 토큰!!!");
         try {
             List<Picture> pictureList = pictureService.getPictureList(map);
+            resultMap.put("pictureList", pictureList);
+            resultMap.put("message", SUCCESS);
+            status = HttpStatus.ACCEPTED;
+        } catch (Exception e) {
+            logger.error("정보조회 실패 : {}", e);
+            resultMap.put("message", e.getMessage());
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+            return new ResponseEntity<Map<String, Object>>(resultMap, status);
+        }
+        return new ResponseEntity<Map<String, Object>>(resultMap, status);
+    }
+
+    @GetMapping("/{keyword}")
+    public ResponseEntity<Map<String, Object>> searchPicture(@PathVariable String keyword, @RequestBody Map<String, String> map) {
+        System.out.println("searchPicture controller 시작");
+        Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status;
+        logger.info("사용 가능한 토큰!!!");
+        try {
+            List<Picture> pictureList = pictureService.searchPictureList(keyword, map);
             resultMap.put("pictureList", pictureList);
             resultMap.put("message", SUCCESS);
             status = HttpStatus.ACCEPTED;

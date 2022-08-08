@@ -17,4 +17,6 @@ public interface PictureService {
     PageNavigation makePageNavigation(String id, String pg) throws Exception;
 
     List<String> selectAllFilePath(String id);
+
+    List<Picture> searchPictureList(String keyword, Map<String, String> map);
 }

@@ -16,4 +16,5 @@ public interface PictureDAO {
 
     void deletePicture(Map<String, String> map) throws Exception;
 
+    List<Picture> searchPictureList(ListParameterDto listParameterDto);
 }

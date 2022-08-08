@@ -21,8 +21,7 @@ public class PictureServiceImpl implements PictureService {
         int pgno = Integer.parseInt(map.get("page"));
         int countPerPage = 20; // 한 페이지당 보여줄 개수
         int start = (pgno - 1) * countPerPage;
-        String sortKeyword = map.getOrDefault("sortKeyword", null);
-        sortKeyword = sortKeyword == null ? "time" : sortKeyword;
+        String sortKeyword = map.getOrDefault("sortKeyword", "time");
         String id = map.get("id");
 
         ListParameterDto listParameterDto = new ListParameterDto();
@@ -30,7 +29,6 @@ public class PictureServiceImpl implements PictureService {
         listParameterDto.setCurrentPerPage(countPerPage);
         listParameterDto.setSortKeyword(sortKeyword);
         listParameterDto.setId(id);
-        System.out.println("listParameterDto = " + listParameterDto);
         return pictureDAO.selectAllPictures(listParameterDto);
     }
 
@@ -72,4 +70,22 @@ public class PictureServiceImpl implements PictureService {
         return null;
     }
 
+    @Override
+    public List<Picture> searchPictureList(String keyword, Map<String, String> map) {
+        int pgno = Integer.parseInt(map.get("page"));
+        int countPerPage = 20; // 한 페이지당 보여줄 개수
+        int start = (pgno - 1) * countPerPage;
+        String sortKeyword = map.getOrDefault("sortKeyword", "time");
+        String id = map.get("id");
+        boolean isPicture = "true".equals(map.getOrDefault("isPicture", null)) ? true : false;
+
+        ListParameterDto listParameterDto = new ListParameterDto();
+        listParameterDto.setStart(start);
+        listParameterDto.setCurrentPerPage(countPerPage);
+        listParameterDto.setKeyword(keyword);
+        listParameterDto.setSortKeyword(sortKeyword);
+        listParameterDto.setIsPicture(isPicture);
+        listParameterDto.setId(id);
+        return pictureDAO.searchPictureList(listParameterDto);
+    }
 }
