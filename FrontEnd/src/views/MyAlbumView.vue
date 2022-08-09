@@ -21,9 +21,6 @@
         </div>
       </div>
     </div>
-    <!-- <div v-for="picture in totalPictures" :key="picture.id">
-      <img :src="picture.url" :alt="picture.id">
-    </div> -->
     <div>
       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#uploadModal">
         파일업로드
