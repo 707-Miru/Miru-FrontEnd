@@ -1,6 +1,5 @@
 package com.back.miru.model.service;
 
-import com.back.miru.model.dto.FavoritePicture;
 import com.back.miru.model.dto.FavoriteUser;
 import com.back.miru.model.dto.Picture;
 

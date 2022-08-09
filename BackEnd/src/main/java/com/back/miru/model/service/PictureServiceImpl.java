@@ -1,9 +1,7 @@
 package com.back.miru.model.service;
 
 import com.back.miru.model.dao.PictureDAO;
-import com.back.miru.model.dto.FavoriteUser;
 import com.back.miru.model.dto.ListParameterDto;
-import com.back.miru.model.dto.PageNavigation;
 import com.back.miru.model.dto.Picture;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,36 +36,8 @@ public class PictureServiceImpl implements PictureService {
     }
 
     @Override
-    public void deletePicture(Map<String, String> map) throws Exception {
-        pictureDAO.deletePicture(map);
-    }
-
-    @Override
-    public PageNavigation makePageNavigation(String id, String pg) throws Exception {
-        PageNavigation pageNavigation = new PageNavigation();
-        int pgno = Integer.parseInt(pg);
-        int currentPage = pgno;
-        int naviSize = 5;
-        int countPerPage = 5;
-        pageNavigation.setCurrentPage(currentPage);
-        pageNavigation.setCountPerPage(countPerPage);
-        pageNavigation.setNaviSize(naviSize);
-
-//        int totalCount = pictureDAO.getTotalCount(id);
-//        pageNavigation.setTotalCount(totalCount);
-//        int totalPageCount = (totalCount - 1) / countPerPage + 1;
-//        pageNavigation.setTotalPageCount(totalPageCount);
-//
-//        pageNavigation.setStartRange(currentPage <= naviSize);
-//        boolean endRange = (totalPageCount - 1) / naviSize * naviSize < currentPage;
-//        pageNavigation.setEndRange(endRange);
-//        pageNavigation.makeNavigator();
-        return pageNavigation;
-    }
-
-    @Override
-    public List<String> selectAllFilePath(String id) {
-        return null;
+    public void deletePicture(String pictureIdx) throws Exception {
+        pictureDAO.deletePicture(pictureIdx);
     }
 
     @Override
@@ -87,5 +57,10 @@ public class PictureServiceImpl implements PictureService {
         listParameterDto.setIsPicture(isPicture);
         listParameterDto.setId(id);
         return pictureDAO.searchPictureList(listParameterDto);
+    }
+
+    @Override
+    public Picture getPictureDetail(String pictureIdx) throws Exception {
+        return pictureDAO.getPictureDetail(pictureIdx);
     }
 }

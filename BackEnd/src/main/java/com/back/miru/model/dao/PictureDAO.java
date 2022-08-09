@@ -10,11 +10,15 @@ import java.util.Map;
 @Mapper
 public interface PictureDAO {
 
+    // getPictureList
     List<Picture> selectAllPictures(ListParameterDto listParameterDto) throws Exception;
 
     void registPicture(Map<String, String> map) throws Exception;
 
-    void deletePicture(Map<String, String> map) throws Exception;
+    void deletePicture(String pictureIdx) throws Exception;
 
     List<Picture> searchPictureList(ListParameterDto listParameterDto);
+
+    Picture getPictureDetail(String pictureIdx) throws Exception;
+
 }

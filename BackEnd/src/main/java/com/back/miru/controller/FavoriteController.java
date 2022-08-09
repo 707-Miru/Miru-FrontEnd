@@ -105,6 +105,7 @@ public class FavoriteController {
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
     }
 
+    // 좋아요 사진 등록
     @PostMapping("/picture")
     public ResponseEntity<Map<String, Object>> registFavoritePicture(@RequestBody Map<String, String> map, HttpServletRequest request) throws Exception {
         System.out.println("resistFavorite controller 시작");
@@ -129,6 +130,7 @@ public class FavoriteController {
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
     }
 
+    // 좋아요 사진 제거
     @DeleteMapping("/picture/{pictureIdx}")
     public ResponseEntity<Map<String, Object>> deleteFavoritePicture(@PathVariable String pictureIdx, @RequestBody Map<String, String> map, HttpServletRequest request) {
         System.out.println("deleteFavorite controller 시작");
