@@ -5,7 +5,7 @@ public class ListParameterDto {
     private int currentPerPage;
     private String keyword;
     private String sortKeyword;
-    private boolean ifPicture;
+    private boolean isPicture;
     private String id;
 
     public ListParameterDto() {
@@ -39,17 +39,11 @@ public class ListParameterDto {
         return sortKeyword;
     }
 
-    public void setSortKeyword(String sortKeyword) {
-        this.sortKeyword = sortKeyword;
-    }
+    public void setSortKeyword(String sortKeyword) { this.sortKeyword = sortKeyword; }
 
-    public boolean isIfPicture() {
-        return ifPicture;
-    }
+    public boolean getIsPicture() { return isPicture; }
 
-    public void setIfPicture(boolean ifPicture) {
-        this.ifPicture = ifPicture;
-    }
+    public void setIsPicture(boolean isPicture) { this.isPicture = isPicture; }
 
     public String getId() {
         return id;
@@ -66,7 +60,7 @@ public class ListParameterDto {
                 ", currentPerPage=" + currentPerPage +
                 ", keyword='" + keyword + '\'' +
                 ", sortKeyword='" + sortKeyword + '\'' +
-                ", ifPicture=" + ifPicture +
+                ", isPicture=" + isPicture +
                 ", id='" + id + '\'' +
                 '}';
     }

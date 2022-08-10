@@ -1,6 +1,5 @@
 package com.back.miru.model.service;
 
-import com.back.miru.model.dto.PageNavigation;
 import com.back.miru.model.dto.Picture;
 
 import java.util.List;
@@ -12,9 +11,9 @@ public interface PictureService {
 
     void registPicture(Map<String, String> map) throws Exception;
 
-    void deletePicture(Map<String, String> map) throws Exception;
+    void deletePicture(String pictureIdx) throws Exception;
 
-    PageNavigation makePageNavigation(String id, String pg) throws Exception;
+    List<Picture> searchPictureList(String keyword, Map<String, String> map);
 
-    List<String> selectAllFilePath(String id);
+    Picture getPictureDetail(String pictureIdx) throws Exception;
 }

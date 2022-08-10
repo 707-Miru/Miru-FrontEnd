@@ -1,9 +1,7 @@
 package com.back.miru.model.service;
 
 import com.back.miru.model.dao.PictureDAO;
-import com.back.miru.model.dto.FavoriteUser;
 import com.back.miru.model.dto.ListParameterDto;
-import com.back.miru.model.dto.PageNavigation;
 import com.back.miru.model.dto.Picture;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,8 +19,7 @@ public class PictureServiceImpl implements PictureService {
         int pgno = Integer.parseInt(map.get("page"));
         int countPerPage = 20; // 한 페이지당 보여줄 개수
         int start = (pgno - 1) * countPerPage;
-        String sortKeyword = map.getOrDefault("sortKeyword", null);
-        sortKeyword = sortKeyword == null ? "time" : sortKeyword;
+        String sortKeyword = map.getOrDefault("sortKeyword", "time");
         String id = map.get("id");
 
         ListParameterDto listParameterDto = new ListParameterDto();
@@ -30,7 +27,6 @@ public class PictureServiceImpl implements PictureService {
         listParameterDto.setCurrentPerPage(countPerPage);
         listParameterDto.setSortKeyword(sortKeyword);
         listParameterDto.setId(id);
-        System.out.println("listParameterDto = " + listParameterDto);
         return pictureDAO.selectAllPictures(listParameterDto);
     }
 
@@ -40,36 +36,31 @@ public class PictureServiceImpl implements PictureService {
     }
 
     @Override
-    public void deletePicture(Map<String, String> map) throws Exception {
-        pictureDAO.deletePicture(map);
+    public void deletePicture(String pictureIdx) throws Exception {
+        pictureDAO.deletePicture(pictureIdx);
     }
 
     @Override
-    public PageNavigation makePageNavigation(String id, String pg) throws Exception {
-        PageNavigation pageNavigation = new PageNavigation();
-        int pgno = Integer.parseInt(pg);
-        int currentPage = pgno;
-        int naviSize = 5;
-        int countPerPage = 5;
-        pageNavigation.setCurrentPage(currentPage);
-        pageNavigation.setCountPerPage(countPerPage);
-        pageNavigation.setNaviSize(naviSize);
+    public List<Picture> searchPictureList(String keyword, Map<String, String> map) {
+        int pgno = Integer.parseInt(map.get("page"));
+        int countPerPage = 20; // 한 페이지당 보여줄 개수
+        int start = (pgno - 1) * countPerPage;
+        String sortKeyword = map.getOrDefault("sortKeyword", "time");
+        String id = map.get("id");
+        boolean isPicture = "true".equals(map.getOrDefault("isPicture", null)) ? true : false;
 
-//        int totalCount = pictureDAO.getTotalCount(id);
-//        pageNavigation.setTotalCount(totalCount);
-//        int totalPageCount = (totalCount - 1) / countPerPage + 1;
-//        pageNavigation.setTotalPageCount(totalPageCount);
-//
-//        pageNavigation.setStartRange(currentPage <= naviSize);
-//        boolean endRange = (totalPageCount - 1) / naviSize * naviSize < currentPage;
-//        pageNavigation.setEndRange(endRange);
-//        pageNavigation.makeNavigator();
-        return pageNavigation;
+        ListParameterDto listParameterDto = new ListParameterDto();
+        listParameterDto.setStart(start);
+        listParameterDto.setCurrentPerPage(countPerPage);
+        listParameterDto.setKeyword(keyword);
+        listParameterDto.setSortKeyword(sortKeyword);
+        listParameterDto.setIsPicture(isPicture);
+        listParameterDto.setId(id);
+        return pictureDAO.searchPictureList(listParameterDto);
     }
 
     @Override
-    public List<String> selectAllFilePath(String id) {
-        return null;
+    public Picture getPictureDetail(String pictureIdx) throws Exception {
+        return pictureDAO.getPictureDetail(pictureIdx);
     }
-
 }
