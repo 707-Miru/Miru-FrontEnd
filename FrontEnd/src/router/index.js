@@ -4,6 +4,7 @@ import LoginView from '@/views/LoginView.vue'
 import SignupView from '@/views/SingupView.vue'
 import FindPassWordView from '@/views/FindPassWordView.vue'
 import ResetPassWordView from '@/views/ResetPassWordView.vue'
+import NotFoundView from '@/views/NotFoundView'
 
 import PictureView from '@/views/PictureView.vue'
 import MyAlbumView from '@/views/MyAlbumView.vue'
@@ -52,6 +53,16 @@ const routes = [
     // /????/detail
     name : "PhotoDetailView",
     component : PhotoDetailView,
+  },
+
+
+
+
+  
+  {
+    path: '/:catchAll(.*)',
+    name: 'NotFoundView',
+    component: NotFoundView
   }
 ]
 
