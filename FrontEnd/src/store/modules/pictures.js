@@ -10,6 +10,7 @@ export const pictures = {
     keyword: '',
     myPage: 1,
     myPictures : [],
+    totalPictureCnt : 0,
     transferPicture : {},
   },
 
@@ -24,7 +25,11 @@ export const pictures = {
   mutations: {
     FETCH_PICTURE: (state, pictures) => state.pictures.push(...pictures),
     INCREASE_PAGE: (state, page) => state.page = page + 20,
-    SET_MY_PICTURES : (state, myPictures) => state.myPictures = myPictures,
+    SET_MY_PICTURES : (state, myPictures) => {
+      const totalPictureCnt = myPictures.pop()
+      state.totalPictureCnt = totalPictureCnt['totalPictureCnt']
+      state.myPictures = myPictures
+    },
     SET_TRANSFER_PICTURE : (state, transferPicture) => state.transferPicture = transferPicture,
   },
 
@@ -47,7 +52,7 @@ export const pictures = {
     fetchMyPictures ({ commit, getters }) {
       const userId = localStorage.getItem('currentUser')
       axios({
-        url: drf.pictures.myPictures() + userId,
+        url: drf.pictures.myPictures(userId),
         method: 'get',
         headers: {
           token: localStorage.getItem('token')
@@ -95,9 +100,9 @@ export const pictures = {
         console.log(err)
       })
     },
-    deletePicture (data) {
+    deletePicture (context, data) {
       axios({
-        ure: drf.pictures.deletePicture(),
+        ure: drf.pictures.deletePicture(data.pictureIdx),
         method: 'delete',
         data,
       })
