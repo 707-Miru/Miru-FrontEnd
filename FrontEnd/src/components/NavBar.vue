@@ -1,5 +1,5 @@
 <template>
-    <nav class="fixed-top navbar navbar-expand-lg navbar-light bg-light justify-content-between shadow-sm">
+    <nav class="sticky-top navbar navbar-expand-lg navbar-light bg-light justify-content-between shadow-sm">
 
         <div>
             <span>
