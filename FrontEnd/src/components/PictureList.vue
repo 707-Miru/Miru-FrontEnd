@@ -7,7 +7,7 @@
     </picture-list-item>
   </div>
   <div>
-    <b-button >more</b-button>
+    <b-button>more</b-button>
   </div>
 </template>
 
@@ -50,7 +50,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['pictures', 'currentUserId', 'page', 'sortKeyword',])
+    ...mapGetters(['pictures', 'currentUserId', 'page', ])
   },
 
 
@@ -61,12 +61,12 @@ export default {
   created () {
     const data = {
       'page': this.page,
-      'sortKeyword': this.sortKeyword,
+      // 'sortKeyword': 'like',
       'id' : this.currentUserId
           }
     console.log(typeof(data.page))
     console.log(typeof(data.id))
-    this.fetchPicture(data)
+    // this.fetchPicture(data)
   }
 }
 </script>

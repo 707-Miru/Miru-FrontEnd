@@ -66,7 +66,7 @@ router.beforeEach((to, from, next) => {
 
   const { isLoggedIn } = store.getters
 
-  const noAuthPages = ['LoginView', 'SignupView', 'FindPassWordView', 'MainView']
+  const noAuthPages = ['LoginView', 'SignupView', 'FindPassWordView', 'MainView', 'MyAlbumView', 'PictureView']
 
   const isAuthRequired = !noAuthPages.includes(to.name)
 

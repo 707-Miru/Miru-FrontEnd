@@ -9,19 +9,15 @@ export const pictures = {
     pictures: [],
     picture: {},
     page: 1,
-    keyword: '',
-    sortKeyword : 'time',
     totalPictures : [],
     transferPicture : {},
-    isPicture : true
+    
   },
 
   getters: {
     pictures: state => state.pictures,
     picture: state => state.picture,
     page: state => state.page,
-    sortKeyword : state => state.sortKeyword,
-    isPicture : state => state.isPicture,
     totalPictures: state => state.totalPictures,
     transferPicture: state => state.transferPicture
   },
@@ -45,12 +41,20 @@ export const pictures = {
         headers: getters.authHeader
       })
       .then( res => {
-        
         console.log(res)
         commit('FETCH_PICTURE', res.data)
         commit('INCREASE_PAGE', getters.page)
       })
       .catch( err => console.error( err ))
+    },
+
+    fetchSearchPicture ({ getters }, data, keyword) {
+      axios({
+        url:  drf.pictures.search(keyword),
+        method: 'post',
+        data: data,
+        headers: getters.authHeader
+      })
     },
 
     fetchTotalPictures ({ commit }, data) {

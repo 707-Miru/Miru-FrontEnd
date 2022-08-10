@@ -1,6 +1,6 @@
 
 
-const HOST = 'http://15.165.15.68:9999/'
+const HOST = 'http://localhost:9999/'
 
 
 
@@ -22,5 +22,6 @@ export default {
     picture: () => HOST + 'picture/',
     totalPictures: () => HOST + 'pictures/',
     transfer: () => HOST + '/picture/transfer/',
+    search: (keyword) => HOST + `/picture/${keyword}`
   },
 }
