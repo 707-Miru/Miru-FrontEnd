@@ -21,33 +21,13 @@
         </div>
       </div>
     </div>
-    <div>
+    <div class="d-flex mb-3">
       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#uploadModal">
         파일업로드
       </button>
     </div>
-    <div class="container">
-      <b-row>
-        <div draggable="true" class="col-12 col-sm-6 col-md-4 col-lg-2 mb-3 draggable">
-          <img class="mw-100 mh-100" src="@/assets/images/placeholder_600x400.png" alt="1">
-        </div>
-        <div draggable="true" class="col-12 col-sm-6 col-md-4 col-lg-2 mb-3 draggable">
-          <img class="mw-100 mh-100" src="@/assets/images/placeholder_600x400.png" alt="2">
-        </div>
-        <div draggable="true" class="col-12 col-sm-6 col-md-4 col-lg-2 mb-3 draggable">
-          <img class="mw-100 mh-100" src="@/assets/images/placeholder_600x400.png" alt="3">
-        </div>
-        <div draggable="true" class="col-12 col-sm-6 col-md-4 col-lg-2 mb-3 draggable">
-          <img class="mw-100 mh-100" src="@/assets/images/placeholder_600x400.png" alt="4">
-        </div>
-        <div draggable="true" class="col-12 col-sm-6 col-md-4 col-lg-2 mb-3 draggable">
-          <img class="mw-100 mh-100" src="@/assets/images/placeholder_600x400.png" alt="5">
-        </div>
-        <div draggable="true" class="col-12 col-sm-6 col-md-4 col-lg-2 mb-3 draggable">
-          <img class="mw-100 mh-100" src="@/assets/images/placeholder_600x400.png" alt="6">
-        </div>
-      </b-row>
-    </div>
+    <my-picture-list></my-picture-list>
+    <my-picture-pagenation></my-picture-pagenation>
     <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -103,72 +83,16 @@
 </template>
 
 <script>
-import { onMounted } from '@vue/runtime-core'
+import myPictureList from '@/components/myPictureList'
+import myPicturePagenation from '@/components/myPicturePagenation'
+
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'MyAlbumView',
-  setup() {
-
-    onMounted(() => {
-      const draggables = document.querySelectorAll(".draggable")
-      const preview = document.querySelector(".preview")
-      const myStyle = document.querySelector(".myStyle")
-
-      draggables.forEach(draggable => {
-        draggable.addEventListener("dragstart", () => {
-          draggable.classList.add("dragging")
-        })
-  
-        draggable.addEventListener("dragend", () => {
-          draggable.classList.remove("dragging")
-        })
-      })
-
-      preview.addEventListener("dragover", e => {
-        e.preventDefault()
-        if (preview.hasChildNodes()) {
-          preview.removeChild(preview.firstChild)
-        }
-      })
-
-      preview.addEventListener("drop", e => {
-        e.preventDefault()
-        const draggable = document.querySelector(".dragging")
-        const newDraggable = draggable.cloneNode(true)
-        newDraggable.classList.add("w-100")
-        newDraggable.classList.add("h-100")
-        newDraggable.classList.remove("draggable")
-        newDraggable.classList.add("selectedContent")
-        preview.appendChild(newDraggable)
-      })
-
-      myStyle.addEventListener("dragover", e => {
-        e.preventDefault()
-        if (myStyle.childElementCount > 1) {
-          const myStyleText = document.querySelector(".myStyleText")
-          myStyle.removeChild(myStyle.lastChild)
-          myStyleText.style.display = 'inline'
-        }
-      })
-
-      myStyle.addEventListener("drop", e => {
-        e.preventDefault()
-        const draggable = document.querySelector(".dragging")
-        const newDraggable = draggable.cloneNode(true)
-        const myStyleText = document.querySelector(".myStyleText")
-        newDraggable.classList.add("w-100")
-        newDraggable.classList.add("h-100")
-        newDraggable.classList.remove("mb-3")
-        newDraggable.classList.remove("draggable")
-        newDraggable.classList.add("selectedStyle")
-        myStyleText.style.display = 'none'
-        myStyle.appendChild(newDraggable)
-      })
-      
-    })
-    return {
-    }
+  components : {
+    myPictureList,
+    myPicturePagenation,
   },
   data () {
     return {
@@ -200,7 +124,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(['totalPictures', 'transferPicture']),
+    ...mapGetters(['myPictures', 'transferPicture']),
     previewData() {
       const option_num = this.artSelected
       const content_file_path = document.querySelector('.selectedContent img').src
@@ -229,22 +153,59 @@ export default {
       }
     },
   },
+  mounted() {
+    const preview = document.querySelector(".preview")
+    const myStyle = document.querySelector(".myStyle")
+
+    preview.addEventListener("dragover", e => {
+      e.preventDefault()
+    })
+
+    preview.addEventListener("drop", e => {
+      e.preventDefault()
+      if (preview.hasChildNodes()) {
+        preview.removeChild(preview.firstChild)
+      }
+      const draggable = document.querySelector(".dragging")
+      const newDraggable = draggable.cloneNode(true)
+      newDraggable.classList.add("w-100")
+      newDraggable.classList.add("h-100")
+      newDraggable.classList.remove("draggable")
+      newDraggable.classList.remove("dragging")
+      newDraggable.classList.add("selectedContent")
+      preview.appendChild(newDraggable)
+    })
+
+    myStyle.addEventListener("dragover", e => {
+      e.preventDefault()
+    })
+
+    myStyle.addEventListener("drop", e => {
+      e.preventDefault()
+      if (myStyle.childElementCount > 1) {
+        const myStyleText = document.querySelector(".myStyleText")
+        myStyle.removeChild(myStyle.lastChild)
+        myStyleText.style.display = 'inline'
+      }
+      const draggable = document.querySelector(".dragging")
+      const newDraggable = draggable.cloneNode(true)
+      const myStyleText = document.querySelector(".myStyleText")
+      newDraggable.classList.add("w-100")
+      newDraggable.classList.add("h-100")
+      newDraggable.classList.remove("mb-3")
+      newDraggable.classList.remove("draggable")
+      newDraggable.classList.remove("dragging")
+      newDraggable.classList.add("selectedStyle")
+      myStyleText.style.display = 'none'
+      myStyle.appendChild(newDraggable)
+    })
+  }
 }
 </script>
 
 <style scoped>
 .preview {
-  max-width: 640px;
-  height: 360px;
-}
-.draggable {
-  cursor: pointer;
-}
-.draggable :hover {
-  transition: all 0.2s linear;
-  transform:scale(1.2);
-  -webkit-transform:scale(1.2);
-  -moz-transform:scale(1.2);
-  -o-transform:scale(1.2);
+  min-width: 640px;
+  min-height: 360px;
 }
 </style>

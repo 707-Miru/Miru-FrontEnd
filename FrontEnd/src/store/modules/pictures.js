@@ -10,7 +10,7 @@ export const pictures = {
     keyword: '',
     myPage: 1,
     myPictures : [],
-    totalPictureCnt : 0,
+    totalPictureCnt : 50,
     transferPicture : {},
   },
 
@@ -19,7 +19,8 @@ export const pictures = {
     page: state => state.page,
     myPage: state => state.myPage,
     myPictures: state => state.myPictures,
-    transferPicture: state => state.transferPicture
+    transferPicture: state => state.transferPicture,
+    totalPictureCnt: state => state.totalPictureCnt
   },
 
   mutations: {
@@ -30,6 +31,7 @@ export const pictures = {
       state.totalPictureCnt = totalPictureCnt['totalPictureCnt']
       state.myPictures = myPictures
     },
+    SET_MY_PAGE: (state, myPage) => state.myPage = myPage,
     SET_TRANSFER_PICTURE : (state, transferPicture) => state.transferPicture = transferPicture,
   },
 
