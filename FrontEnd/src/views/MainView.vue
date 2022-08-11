@@ -2,13 +2,13 @@
   <div class="main container-fluid p-0">
     <div class="item position-relative">
       <img class="w-100" src="@/assets/images/background.png" alt="">
-      <a type="button" class="" data-bs-toggle="modal" data-bs-target="#artModal" style="width:15%; position: absolute; top: 10.5%; left: 51.8%;">
+      <a type="button" class="" style="width:15%; position: absolute; top: 10.5%; left: 51.8%;">
         <img class="w-100" src="@/assets/images/art.png" alt="">
       </a>
-      <a type="button" class="" data-bs-toggle="modal" data-bs-target="#seasonModal" style="width:34%; position: absolute; top: 41.5%; left: 49%;">
+      <a type="button" class=""  style="width:34%; position: absolute; top: 41.5%; left: 49%;">
         <video class="w-100 h-100 small" src="@/assets/videos/flowers.mp4" alt="" autoplay loop></video>
       </a>
-      <a type="button" class="" data-bs-toggle="modal" data-bs-target="#weatherModal" style="width:10%; position: absolute; top: 44.8%; left: 33.2%;">
+      <a type="button" class=""  style="width:10%; position: absolute; top: 44.8%; left: 33.2%;">
         <img class="w-100" src="@/assets/images/weather.png" alt="">
       </a>
     </div>
@@ -55,42 +55,34 @@
       </div>
     </div>
   </div>
-  <div class="modal fade" id="artModal" tabindex="-1" aria-labelledby="artLabel" aria-hidden="true">
-  <div class="modal-dialog modal-fullscreen">
-    <div class="modal-content container-fluid m-0 p-0">
-      <button type="button" class="btn-close position-absolute top-0 end-0 me-3 mt-3" data-bs-dismiss="modal" aria-label="Close"></button>
-      <div class="modal-body">
-        <video src="@/assets/videos/flowers.mp4" type="video/mp4" id="artVideo" class="h-100"></video>
+
+ 
+  <div class="video-wrap">
+    <div class="video-inner">
+      <video class="video-player" src="@/assets/videos/flowers.mp4"  preload="auto">
+        <source src="@/assets/videos/flowers.mp4" type='video/mp4; codecs="vp8.0, vorbis"'>
+        <p>Sorry, but your browser does not support this video format.</p>
+      </video>
+      <button class="action action--close">
+        <i class="fa fa-close"></i>
+        <span class="action__label action__label--hidden">Close preview</span>
+      </button>
+    </div>
+
+
+    <div class="content">
+      <div class="loader">
+        <i class="fa fa-spinner fa-pulse"></i>
       </div>
-      <button type="button" class="btn btn-primary position-absolute bottom-0 end-0 me-3 mb-3" data-bs-dismiss="modal" id="artButton">
-        설명으로 가기
+      <button class="action action--hidden action--play">
+        <i class="fa fa-play"></i><span class="action__label">Watch the video</span>
       </button>
     </div>
   </div>
-  </div>
-  <div class="modal fade" id="seasonModal" tabindex="-1" aria-labelledby="seasonLabel" aria-hidden="true">
-  <div class="modal-dialog modal-fullscreen">
-    <div class="modal-content">   
-      <button type="button" class="btn-close position-absolute top-0 end-0 me-3 mt-3" data-bs-dismiss="modal" aria-label="Close"></button>
-      <div class="modal-body">
-        <video src="@/assets/videos/flowers.mp4" type="video/mp4" id="seasonVideo" class="h-100"></video>
-      </div>
-    </div>
-  </div>
-  </div>
-  <div class="modal fade" id="weatherModal" tabindex="-1" aria-labelledby="weatherLabel" aria-hidden="true">
-  <div class="modal-dialog modal-fullscreen">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="weatherLabel">날씨에 따른 사진 추천 기능</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <img src="@/assets/images/weather.png" alt="">
-      </div>
-    </div>
-  </div>
-  </div>
+
+  
+
+
 </template>
 
 <script>
@@ -101,6 +93,9 @@ export default {
   components: {
   },
   setup() {
+    
+
+
     function myBottomScroll(y) {
       const artPage = document.querySelector('#artPage')
       const seasonPage = document.querySelector('#seasonPage')
@@ -134,13 +129,46 @@ export default {
       return yTo
     }
     onMounted(() => {
+        var bodyEl = document.body,
+        videoWrap = document.querySelector('.video-wrap'),
+        videoEl = videoWrap.querySelector('video'),
+        playCtrl = document.querySelector('.action--play'),
+        closeCtrl = document.querySelector('.action--close');
+
+        function init() {
+          initEvents();
+        }
+
+        function initEvents() {
+          playCtrl.addEventListener('click', play);
+          closeCtrl.addEventListener('click', hide);
+          videoEl.addEventListener('canplaythrough', allowPlay);
+          videoEl.addEventListener('ended', hide);
+        }
+
+        function allowPlay() {
+          bodyEl.classList.add('video-loaded');
+        }
+
+        function play() {
+          videoEl.currentTime = 0;
+          videoWrap.classList.remove('video-wrap--hide');
+          videoWrap.classList.add('video-wrap--show');
+          setTimeout(function() {videoEl.play();}, 600);
+        }
+
+        function hide() {
+          videoWrap.classList.remove('video-wrap--show');
+          videoWrap.classList.add('video-wrap--hide');
+          videoEl.pause();
+        }
+
+        init();
+
       const topArrow = document.querySelector('#topArrow')
       const bottomArrow = document.querySelector('#bottomArrow')
-      const artModalEl = document.querySelector('#artModal')
-      const seasonModalEl = document.querySelector('#seasonModal')
-      const art = document.querySelector('#artVideo')
-      const season = document.querySelector('#seasonVideo')
-      const artButton = document.querySelector('#artButton')
+ 
+
       const artPage = document.querySelector('#artPage')
       const weatherPage = document.querySelector('#weatherPage')
       const artTop = Math.ceil(window.pageYOffset + artPage.getBoundingClientRect().top)
@@ -170,29 +198,21 @@ export default {
       topArrow.addEventListener('click',() => {
         window.scrollTo({ left: 0, top: myTopScroll(Math.ceil(window.pageYOffset)), behavior: "smooth" })
       })
-      artModalEl.addEventListener('shown.bs.modal',() => {
-        art.play()
-      })
-      artModalEl.addEventListener('hidden.bs.modal',() => {
-        art.currentTime = 0
-        art.pause()
-        artButton.style.display = 'none'
-      })
-      seasonModalEl.addEventListener('shown.bs.modal', () => {
-        season.play()
-      })
-      art.addEventListener('ended',() => {
-        artButton.style.display = 'inline'
-      })
-      artButton.addEventListener('click',() => {
-        window.scrollTo({ left: 0, top: Math.ceil(window.pageYOffset + artPage.getBoundingClientRect().top), behavior: "smooth" })
-      })
+  
+
     })
   },
 }
 </script>
 
 <style scoped>
+*,
+*:after,
+*:before {
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
 .main {
   overflow: auto;
   scroll-snap-type: y mandatory;
@@ -229,13 +249,281 @@ video.small {
   animation: full 2s;
 }
 
-@keyframes full {
-  0%{
+.video-wrap {
+	position: fixed;
+	z-index: 1000;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-align-items: center;
+	align-items: center;
+}
 
-  }
+.video-wrap--show {
+	pointer-events: auto;
+}
 
-  100%{
-    left:50px;
-  }
+.video-inner {
+	position: relative;
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
+	margin: 0 auto;
+	opacity: 0;
+	background: black;
+}
+
+.video-wrap--show .video-inner {
+	opacity: 1;
+}
+
+.video-player {
+	position: absolute;
+	top: 50%;
+	width: 100%;
+	-webkit-transform: translate3d(0,-50%,0);
+	transform: translate3d(0,-50%,0);
+}
+
+.content {
+	position: relative;
+}
+
+/* Loader */
+.loader {
+	font-size: 2.5em;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate3d(-50%,-50%,0);
+	transform: translate3d(-50%,-50%,0);
+}
+
+.video-loaded .loader {
+	opacity: 0;
+	pointer-events: none;
+	-webkit-transition: opacity 0.3s;
+	transition: opacity 0.3s;
+}
+
+.action {
+	font-family: 'Avenir Next', 'Helvetica Neue', 'Lato', 'Segoe UI', Helvetica, Arial, sans-serif;
+	font-size: 1.15em;
+	font-weight: bold;
+	position: relative;
+	overflow: hidden;
+	margin: 0;
+	padding: 1em 2em;
+	color: #fff;
+	border: 2px solid;
+	border-radius: 40px;
+	background: none;
+	-webkit-flex: none;
+	flex: none;
+}
+
+.action:focus {
+	outline: none;
+}
+
+.action__label {
+	display: inline-block;
+	margin: 0 0 0 0.75em;
+}
+
+.action__label--hidden {
+	position: absolute;
+	top: 200%;
+}
+
+.action--play {
+	display: block;
+	margin: 1em auto;
+	opacity: 0;
+	pointer-events: none;
+	-webkit-transition: opacity 0.3s 0.1s;
+	transition: opacity 0.3s 0.1s;
+}
+
+.video-loaded .action--play {
+	opacity: 1;
+	pointer-events: auto;
+}
+
+.action--close {
+	line-height: 1;
+	position: absolute;
+	z-index: 1000;
+	top: 30px;
+	right: 30px;
+	width: 60px;
+	height: 60px;
+	padding: 0;
+	opacity: 0;
+	-webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
+	transition: transform 0.3s, opacity 0.3s;
+	-webkit-transform: scale3d(0.7,0.7,1);
+	transform: scale3d(0.7,0.7,1);
+}
+
+.video-wrap--show .action--close {
+	opacity: 1;
+	-webkit-transition-delay: 1.2s;
+	transition-delay: 1.2s;
+	-webkit-transform: scale3d(1,1,1);
+	transform: scale3d(1,1,1);
+}
+
+@media screen and (min-width: 25em) {
+	.video-inner {
+		width: 30vw;
+		height: 30vw;
+		border: 20px solid #fff;
+		-webkit-transform: scale3d(0.1,0.1,1) rotate3d(0,0,1,-5deg);
+		transform: scale3d(0.1,0.1,1) rotate3d(0,0,1,-5deg);
+	}
+	.video-wrap--show .video-inner {
+		opacity: 0;
+		-webkit-animation: showVideo-1 1.25s forwards;
+		animation: showVideo-1 1.25s forwards;
+	}
+	.video-wrap--hide .video-inner {
+		-webkit-animation: hideVideo 1.25s forwards;
+		animation: hideVideo 1.25s forwards;
+	}
+	.video-player {
+		left: 50%;
+		width: auto;
+		height: 100vh;
+		-webkit-transition: -webkit-transform 1s;
+		transition: transform 1s;
+		-webkit-transform: translate3d(-50%,-50%,0) scale3d(0.7,0.7,1) rotate3d(0,0,1,5deg);
+		transform: translate3d(-50%,-50%,0) scale3d(0.7,0.7,1) rotate3d(0,0,1,5deg);
+	}
+	.video-wrap--show .video-player,
+	.video-wrap--hide .video-player {
+		-webkit-transform: translate3d(-50%,-50%,0) scale3d(1,1,1);
+		transform: translate3d(-50%,-50%,0) scale3d(1,1,1);
+	}
+}
+
+@media screen and (min-width: 25em) and (min-aspect-ratio: 1280/720) {
+	.video-inner {
+		width: 30vh;
+		height: 30vh;
+	}
+	.video-wrap--show .video-inner {
+		-webkit-animation: showVideo-2 1.25s forwards;
+		animation: showVideo-2 1.25s forwards;
+	}
+	.video-player {
+		width: 100vw;
+		height: auto;
+	}
+}
+
+@-webkit-keyframes showVideo-1 {
+	50% {
+		width: 50vw;
+		height: 50vw;
+		opacity: 1;
+		-webkit-transform: scale3d(0.5,0.5,1) rotate3d(0,0,1,-5deg);
+		transform: scale3d(0.5,0.5,1) rotate3d(0,0,1,-5deg);
+	}
+	100% {
+		width: 100vw;
+		height: 100vh;
+		opacity: 1;
+		-webkit-transform: scale3d(1,1,1) rotate3d(0,0,1,0deg);
+		transform: scale3d(1,1,1) rotate3d(0,0,1,0deg);
+	}
+}
+
+@keyframes showVideo-1 {
+	50% {
+		width: 50vw;
+		height: 50vw;
+		opacity: 1;
+		-webkit-transform: scale3d(0.5,0.5,1) rotate3d(0,0,1,-5deg);
+		transform: scale3d(0.5,0.5,1) rotate3d(0,0,1,-5deg);
+	}
+	100% {
+		width: 100vw;
+		height: 100vh;
+		opacity: 1;
+		-webkit-transform: scale3d(1,1,1) rotate3d(0,0,1,0deg);
+		transform: scale3d(1,1,1) rotate3d(0,0,1,0deg);
+	}
+}
+
+@-webkit-keyframes showVideo-2 {
+	50% {
+		width: 50vh;
+		height: 50vh;
+		opacity: 1;
+		-webkit-transform: scale3d(0.5,0.5,1) rotate3d(0,0,1,-5deg);
+		transform: scale3d(0.5,0.5,1) rotate3d(0,0,1,-5deg);
+	}
+	100% {
+		width: 100vw;
+		height: 100vh;
+		opacity: 1;
+		-webkit-transform: scale3d(1,1,1) rotate3d(0,0,1,0deg);
+		transform: scale3d(1,1,1) rotate3d(0,0,1,0deg);
+	}
+}
+
+@keyframes showVideo-2 {
+	50% {
+		width: 50vh;
+		height: 50vh;
+		opacity: 1;
+		-webkit-transform: scale3d(0.5,0.5,1) rotate3d(0,0,1,-5deg);
+		transform: scale3d(0.5,0.5,1) rotate3d(0,0,1,-5deg);
+	}
+	100% {
+		width: 100vw;
+		height: 100vh;
+		opacity: 1;
+		-webkit-transform: scale3d(1,1,1) rotate3d(0,0,1,0deg);
+		transform: scale3d(1,1,1) rotate3d(0,0,1,0deg);
+	}
+}
+@-webkit-keyframes hideVideo {
+	0% {
+		width: 100vw;
+		height: 100vh;
+		opacity: 1;
+		-webkit-transform: scale3d(1,1,1) rotate3d(0,0,1,0deg);
+		transform: scale3d(1,1,1) rotate3d(0,0,1,0deg);
+	}
+	100% {
+		width: 100vw;
+		height: 100vh;
+		opacity: 0;
+		-webkit-transform: scale3d(1,1,1) rotate3d(0,0,1,0deg);
+		transform: scale3d(1,1,1) rotate3d(0,0,1,0deg);
+	}
+}
+
+@keyframes hideVideo {
+	0% {
+		width: 100vw;
+		height: 100vh;
+		opacity: 1;
+		-webkit-transform: scale3d(1,1,1) rotate3d(0,0,1,0deg);
+		transform: scale3d(1,1,1) rotate3d(0,0,1,0deg);
+	}
+	100% {
+		width: 100vw;
+		height: 100vh;
+		opacity: 0;
+		-webkit-transform: scale3d(1,1,1) rotate3d(0,0,1,0deg);
+		transform: scale3d(1,1,1) rotate3d(0,0,1,0deg);
+	}
 }
 </style>
