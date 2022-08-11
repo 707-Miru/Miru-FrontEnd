@@ -9,7 +9,7 @@ public class MainController {
 
     @GetMapping("/")
     public String index() throws Exception {
-        return "auto deployment test444444";
+        return "index";
     }
 
 }
