@@ -27,7 +27,7 @@
           <img src="@/assets/images/art.png" alt="">
         </div>
         <div class="text-start">
-          <h1 class="fw-bold">명화 변환 기능</h1>
+          <h1 class="fw-bold">명화 변환 기능222222</h1>
           <p class="fs-5">내가 찍은 사진을 MIRU의 AI가 내가 원하는 작가의 작품으로 만들어 드립니다</p>
         </div>
       </div>
