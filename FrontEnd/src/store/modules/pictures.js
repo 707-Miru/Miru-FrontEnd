@@ -86,7 +86,10 @@ export const pictures = {
       })         
     },
     uploadPicture (context, data) {
+      console.log(data.get('data'))
+      console.log(data.get('publicFlag'))
       console.log(data.get('isPicture'))
+      console.log(data.get('id'))
       axios({
         url: drf.pictures.uploadPicture(),
         method: 'post',
