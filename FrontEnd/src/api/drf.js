@@ -1,6 +1,6 @@
 
 
-const HOST = 'http://3.35.137.172:9999/'
+const HOST = 'http://i7a707.p.ssafy.io/api/'
 
 
 

@@ -2,6 +2,7 @@ package com.back.miru.controller;
 
 import com.back.miru.model.dto.FavoritePicture;
 import com.back.miru.model.dto.FavoriteUser;
+import com.back.miru.model.dto.Picture;
 import com.back.miru.model.service.FavoriteService;
 import com.back.miru.model.service.JwtService;
 import org.slf4j.Logger;
@@ -104,6 +105,7 @@ public class FavoriteController {
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
     }
 
+    // 좋아요 사진 등록
     @PostMapping("/picture")
     public ResponseEntity<Map<String, Object>> registFavoritePicture(@RequestBody Map<String, String> map, HttpServletRequest request) throws Exception {
         System.out.println("resistFavorite controller 시작");
@@ -128,6 +130,7 @@ public class FavoriteController {
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
     }
 
+    // 좋아요 사진 제거
     @DeleteMapping("/picture/{pictureIdx}")
     public ResponseEntity<Map<String, Object>> deleteFavoritePicture(@PathVariable String pictureIdx, @RequestBody Map<String, String> map, HttpServletRequest request) {
         System.out.println("deleteFavorite controller 시작");
@@ -153,15 +156,18 @@ public class FavoriteController {
     }
 
     @GetMapping("/picture/{id}")
-    public ResponseEntity<Map<String, Object>> getFavoritePictureInfo(@PathVariable String id, HttpServletRequest request) {
+    public ResponseEntity<Map<String, Object>> getFavoritePictureInfo(@PathVariable String id, @RequestBody Map<String, String> map, HttpServletRequest request) {
         System.out.println("FavoriteInfo controller 시작");
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;
         if (jwtService.isUsable(request.getHeader("token"))) {
             logger.info("사용 가능한 토큰!!!");
             try {
-                List<FavoritePicture> favoritePictureInfo = favoriteService.infoFavoritePicture(id);
+                List<Picture> favoritePictureInfo = favoriteService.infoFavoritePicture(id, map);
                 resultMap.put("favoritePictureInfo", favoritePictureInfo);
+                int totalPictureCnt = favoriteService.getTotalPictureCnt(id);
+
+                resultMap.put("totalPictureCnt", totalPictureCnt);
                 resultMap.put("message", SUCCESS);
                 status = HttpStatus.ACCEPTED;
             } catch (Exception e) {

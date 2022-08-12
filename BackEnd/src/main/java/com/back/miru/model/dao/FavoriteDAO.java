@@ -2,6 +2,8 @@ package com.back.miru.model.dao;
 
 import com.back.miru.model.dto.FavoritePicture;
 import com.back.miru.model.dto.FavoriteUser;
+import com.back.miru.model.dto.ListParameterDto;
+import com.back.miru.model.dto.Picture;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.sql.SQLException;
@@ -20,6 +22,7 @@ public interface FavoriteDAO {
 
 	void deleteFavoritePicture(Map<String, String> map) throws Exception;
 
-	List<FavoritePicture> infoFavoritePicture(String id) throws Exception;
+	List<Picture> infoFavoritePicture(ListParameterDto listParameterDto) throws Exception;
 
+	int getTotalPictureCnt(String id) throws Exception;
 }
