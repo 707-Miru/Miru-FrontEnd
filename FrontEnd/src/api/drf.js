@@ -1,6 +1,6 @@
 
 
-const HOST = 'http://15.165.15.68:9999/'
+const HOST = 'http://i7a707.p.ssafy.io/api/'
 
 
 
@@ -17,7 +17,10 @@ export default {
     sendEmail: (id) => HOST + `user/${id}`,
     changePw : (id) => HOST + `user/${id}`
   },
-  movies: {
 
+  pictures: {
+    picture: () => HOST + 'picture/',
+    totalPictures: () => HOST + 'pictures/',
+    transfer: () => HOST + '/picture/transfer/',
   },
 }

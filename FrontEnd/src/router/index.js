@@ -4,6 +4,11 @@ import LoginView from '@/views/LoginView.vue'
 import SignupView from '@/views/SingupView.vue'
 import FindPassWordView from '@/views/FindPassWordView.vue'
 import ResetPassWordView from '@/views/ResetPassWordView.vue'
+import NotFoundView from '@/views/NotFoundView'
+
+import PictureView from '@/views/PictureView.vue'
+import MyAlbumView from '@/views/MyAlbumView.vue'
+import PhotoDetailView from '@/views/PhotoDetailView.vue'
 import store from '../store'
 
 
@@ -32,6 +37,32 @@ const routes = [
     path : "/resetpw",
     name : "ResetPassWordView",
     component : ResetPassWordView,
+  },
+  {
+    path: '/picture',
+    name: 'PictureView',
+    component: PictureView
+  },
+  {
+    path : "/myalbum",
+    name : "MyAlbumView",
+    component : MyAlbumView,
+  },
+  {
+    path : "/detail",      
+    // /????/detail
+    name : "PhotoDetailView",
+    component : PhotoDetailView,
+  },
+
+
+
+
+  
+  {
+    path: '/:catchAll(.*)',
+    name: 'NotFoundView',
+    component: NotFoundView
   }
 ]
 
@@ -53,14 +84,12 @@ router.beforeEach((to, from, next) => {
   if (isAuthRequired && !isLoggedIn) {
     alert('Require Login. Redirecting..')
     next({ name: 'LoginView' })
-  } else if (!isAuthRequired && isLoggedIn) {
-    next({ name: 'MainView' })
   } else {
     next()
   }
-
-
-
+  if (!isAuthRequired && isLoggedIn) {
+    next({ name: 'MainView' })
+  } 
 })
 
 export default router

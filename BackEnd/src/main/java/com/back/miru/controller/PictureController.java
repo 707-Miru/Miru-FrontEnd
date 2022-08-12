@@ -58,7 +58,7 @@ public class PictureController {
     // 전체 사진 목록 불러오기
     // selectAllPictures
     @GetMapping()
-    public ResponseEntity<Map<String, Object>> getPictureList(@RequestBody Map<String, String> map) {
+    public ResponseEntity<Map<String, Object>> getPictureList(@RequestParam Map<String, String> map) {
         System.out.println("getPictureList controller 시작");
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;
@@ -77,7 +77,7 @@ public class PictureController {
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
     }
 
-    @GetMapping("/{keyword}")
+    @PostMapping("/{keyword}")
     public ResponseEntity<Map<String, Object>> searchPicture(@PathVariable String keyword, @RequestBody Map<String, String> map) {
         System.out.println("searchPicture controller 시작");
         Map<String, Object> resultMap = new HashMap<>();
