@@ -8,7 +8,7 @@
             <b-dropdown-item-button @click="changeSelect">동영상</b-dropdown-item-button>
         </b-dropdown>
         </template>
-        <b-form  @submit="c">
+        <b-form  @submit.prevent="searchKeyword">
             <b-form-input placeholder="이미지, 동영상 검색" v-model="keyword"></b-form-input>
         </b-form>
         <template #append>
@@ -23,6 +23,7 @@
 </template>
 
 <script>
+import router from '@/router'
 
 export default {
     name: 'SearchBar',
@@ -57,9 +58,10 @@ export default {
 					this.$emit('onChangeKeyword', this.sortKeyword)
         },
 
-				c () {
-					
-				}
+				searchKeyword () {
+          router.push({name:'SearchPictureView', params:{keyword:this.keyword.trim()}})
+          
+        }
     }
 
 }
