@@ -5,9 +5,16 @@
       <a type="button" class="" style="width:15%; position: absolute; top: 10.5%; left: 51.8%;">
         <img class="w-100" src="@/assets/images/art.png" alt="">
       </a>
-      <a type="button" class=""  style="width:34%; position: absolute; top: 41.5%; left: 49%;">
-        <video class="w-100 h-100 small" src="@/assets/videos/flowers.mp4" alt="" autoplay loop></video>
+      
+      <a type="button" class="action action--hidden action--play"  style="width:34%; position: absolute; top: 41.5%; left: 49%;">
+        <div class="video-wrap">
+          <div class="video-inner">
+            <video class="w-100 h-100 small video-player" src="@/assets/videos/flowers.mp4" alt="" autoplay loop></video>
+          </div>
+        </div>
+        
       </a>
+     
       <a type="button" class=""  style="width:10%; position: absolute; top: 44.8%; left: 33.2%;">
         <img class="w-100" src="@/assets/images/weather.png" alt="">
       </a>
@@ -66,16 +73,6 @@
       <button class="action action--close">
         <i class="fa fa-close"></i>
         <span class="action__label action__label--hidden">Close preview</span>
-      </button>
-    </div>
-
-
-    <div class="content">
-      <div class="loader">
-        <i class="fa fa-spinner fa-pulse"></i>
-      </div>
-      <button class="action action--hidden action--play">
-        <i class="fa fa-play"></i><span class="action__label">Watch the video</span>
       </button>
     </div>
   </div>
@@ -159,7 +156,7 @@ export default {
 
         function hide() {
           videoWrap.classList.remove('video-wrap--show');
-          videoWrap.classList.add('video-wrap--hide');
+          // videoWrap.classList.add('video-wrap--hide');
           videoEl.pause();
         }
 
@@ -209,7 +206,7 @@ export default {
 *,
 *:after,
 *:before {
-	-webkit-box-sizing: border-box;
+	
 	box-sizing: border-box;
 }
 
@@ -245,10 +242,8 @@ button {
   cursor: pointer;
 }
 
-video.small {
-  animation: full 2s;
-}
 
+/* 
 .video-wrap {
 	position: fixed;
 	z-index: 1000;
@@ -257,11 +252,9 @@ video.small {
 	width: 100%;
 	height: 100%;
 	pointer-events: none;
-	display: -webkit-flex;
 	display: flex;
-	-webkit-align-items: center;
 	align-items: center;
-}
+} */
 
 .video-wrap--show {
 	pointer-events: auto;
@@ -272,9 +265,9 @@ video.small {
 	overflow: hidden;
 	width: 100%;
 	height: 100%;
-	margin: 0 auto;
-	opacity: 0;
-	background: black;
+	margin: 0;
+	opacity: 1;
+	/* background: white; */
 }
 
 .video-wrap--show .video-inner {
@@ -282,47 +275,31 @@ video.small {
 }
 
 .video-player {
-	position: absolute;
+	
 	top: 50%;
 	width: 100%;
-	-webkit-transform: translate3d(0,-50%,0);
-	transform: translate3d(0,-50%,0);
+	
 }
 
 .content {
 	position: relative;
 }
 
-/* Loader */
-.loader {
-	font-size: 2.5em;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	-webkit-transform: translate3d(-50%,-50%,0);
-	transform: translate3d(-50%,-50%,0);
-}
 
-.video-loaded .loader {
+
+.video-loaded {
 	opacity: 0;
 	pointer-events: none;
-	-webkit-transition: opacity 0.3s;
+	
 	transition: opacity 0.3s;
 }
 
 .action {
-	font-family: 'Avenir Next', 'Helvetica Neue', 'Lato', 'Segoe UI', Helvetica, Arial, sans-serif;
-	font-size: 1.15em;
-	font-weight: bold;
 	position: relative;
 	overflow: hidden;
 	margin: 0;
-	padding: 1em 2em;
 	color: #fff;
-	border: 2px solid;
-	border-radius: 40px;
 	background: none;
-	-webkit-flex: none;
 	flex: none;
 }
 
@@ -342,10 +319,8 @@ video.small {
 
 .action--play {
 	display: block;
-	margin: 1em auto;
 	opacity: 0;
 	pointer-events: none;
-	-webkit-transition: opacity 0.3s 0.1s;
 	transition: opacity 0.3s 0.1s;
 }
 
@@ -364,61 +339,50 @@ video.small {
 	height: 60px;
 	padding: 0;
 	opacity: 0;
-	-webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
 	transition: transform 0.3s, opacity 0.3s;
-	-webkit-transform: scale3d(0.7,0.7,1);
 	transform: scale3d(0.7,0.7,1);
 }
 
 .video-wrap--show .action--close {
 	opacity: 1;
-	-webkit-transition-delay: 1.2s;
 	transition-delay: 1.2s;
-	-webkit-transform: scale3d(1,1,1);
 	transform: scale3d(1,1,1);
 }
 
 @media screen and (min-width: 25em) {
 	.video-inner {
-		width: 30vw;
+		/* width: 30vw;
 		height: 30vw;
-		border: 20px solid #fff;
-		-webkit-transform: scale3d(0.1,0.1,1) rotate3d(0,0,1,-5deg);
-		transform: scale3d(0.1,0.1,1) rotate3d(0,0,1,-5deg);
+		border: 10px solid #fff; */
+		/* transform: scale3d(1,1,1) ; */
 	}
 	.video-wrap--show .video-inner {
 		opacity: 0;
-		-webkit-animation: showVideo-1 1.25s forwards;
 		animation: showVideo-1 1.25s forwards;
 	}
 	.video-wrap--hide .video-inner {
-		-webkit-animation: hideVideo 1.25s forwards;
 		animation: hideVideo 1.25s forwards;
 	}
 	.video-player {
 		left: 50%;
 		width: auto;
 		height: 100vh;
-		-webkit-transition: -webkit-transform 1s;
-		transition: transform 1s;
-		-webkit-transform: translate3d(-50%,-50%,0) scale3d(0.7,0.7,1) rotate3d(0,0,1,5deg);
-		transform: translate3d(-50%,-50%,0) scale3d(0.7,0.7,1) rotate3d(0,0,1,5deg);
+		
 	}
-	.video-wrap--show .video-player,
+	/* .video-wrap--show .video-player,
 	.video-wrap--hide .video-player {
-		-webkit-transform: translate3d(-50%,-50%,0) scale3d(1,1,1);
+		
 		transform: translate3d(-50%,-50%,0) scale3d(1,1,1);
-	}
+	} */
 }
 
 @media screen and (min-width: 25em) and (min-aspect-ratio: 1280/720) {
 	.video-inner {
-		width: 30vh;
-		height: 30vh;
+		width: 100%;
+		height: 100%;
 	}
 	.video-wrap--show .video-inner {
-		-webkit-animation: showVideo-2 1.25s forwards;
-		animation: showVideo-2 1.25s forwards;
+		animation: showVideo-2 1.5s forwards;
 	}
 	.video-player {
 		width: 100vw;
@@ -426,104 +390,78 @@ video.small {
 	}
 }
 
-@-webkit-keyframes showVideo-1 {
-	50% {
-		width: 50vw;
-		height: 50vw;
-		opacity: 1;
-		-webkit-transform: scale3d(0.5,0.5,1) rotate3d(0,0,1,-5deg);
-		transform: scale3d(0.5,0.5,1) rotate3d(0,0,1,-5deg);
-	}
-	100% {
-		width: 100vw;
-		height: 100vh;
-		opacity: 1;
-		-webkit-transform: scale3d(1,1,1) rotate3d(0,0,1,0deg);
-		transform: scale3d(1,1,1) rotate3d(0,0,1,0deg);
-	}
-}
 
 @keyframes showVideo-1 {
-	50% {
-		width: 50vw;
-		height: 50vw;
+	0% {
+		width: 100%;
+		height: 100%;
 		opacity: 1;
-		-webkit-transform: scale3d(0.5,0.5,1) rotate3d(0,0,1,-5deg);
-		transform: scale3d(0.5,0.5,1) rotate3d(0,0,1,-5deg);
+		transform: scale3d(1,1,1) ;
 	}
 	100% {
-		width: 100vw;
-		height: 100vh;
+		/* width: 100vw;
+		height: 100vh; */
 		opacity: 1;
-		-webkit-transform: scale3d(1,1,1) rotate3d(0,0,1,0deg);
-		transform: scale3d(1,1,1) rotate3d(0,0,1,0deg);
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    background: white;
+    
 	}
 }
 
-@-webkit-keyframes showVideo-2 {
-	50% {
-		width: 50vh;
-		height: 50vh;
-		opacity: 1;
-		-webkit-transform: scale3d(0.5,0.5,1) rotate3d(0,0,1,-5deg);
-		transform: scale3d(0.5,0.5,1) rotate3d(0,0,1,-5deg);
-	}
-	100% {
-		width: 100vw;
-		height: 100vh;
-		opacity: 1;
-		-webkit-transform: scale3d(1,1,1) rotate3d(0,0,1,0deg);
-		transform: scale3d(1,1,1) rotate3d(0,0,1,0deg);
-	}
-}
+
 
 @keyframes showVideo-2 {
-	50% {
-		width: 50vh;
-		height: 50vh;
-		opacity: 1;
-		-webkit-transform: scale3d(0.5,0.5,1) rotate3d(0,0,1,-5deg);
-		transform: scale3d(0.5,0.5,1) rotate3d(0,0,1,-5deg);
-	}
-	100% {
-		width: 100vw;
-		height: 100vh;
-		opacity: 1;
-		-webkit-transform: scale3d(1,1,1) rotate3d(0,0,1,0deg);
-		transform: scale3d(1,1,1) rotate3d(0,0,1,0deg);
-	}
-}
-@-webkit-keyframes hideVideo {
 	0% {
-		width: 100vw;
-		height: 100vh;
-		opacity: 1;
-		-webkit-transform: scale3d(1,1,1) rotate3d(0,0,1,0deg);
-		transform: scale3d(1,1,1) rotate3d(0,0,1,0deg);
+   
 	}
+  10%{
+    z-index: 1000;
+    
+    left:50%;
+    transform: translateX(-50%);
+  }
 	100% {
-		width: 100vw;
-		height: 100vh;
-		opacity: 0;
-		-webkit-transform: scale3d(1,1,1) rotate3d(0,0,1,0deg);
-		transform: scale3d(1,1,1) rotate3d(0,0,1,0deg);
+		/* width: 100vw;
+		height: 100vh; */
+		opacity: 1;
+		
+		position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    transform: scale3d(1,1,1);
+    display: flex;
+    align-items: center;
+    background: white;
 	}
 }
+
 
 @keyframes hideVideo {
 	0% {
 		width: 100vw;
 		height: 100vh;
 		opacity: 1;
-		-webkit-transform: scale3d(1,1,1) rotate3d(0,0,1,0deg);
-		transform: scale3d(1,1,1) rotate3d(0,0,1,0deg);
+		
+		transform: scale3d(1,1,1) ;
 	}
 	100% {
 		width: 100vw;
 		height: 100vh;
 		opacity: 0;
-		-webkit-transform: scale3d(1,1,1) rotate3d(0,0,1,0deg);
-		transform: scale3d(1,1,1) rotate3d(0,0,1,0deg);
+	
+		transform: scale3d(1,1,1) ;
 	}
 }
 </style>
