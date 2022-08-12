@@ -15,5 +15,5 @@ public interface PictureService {
 
     List<Picture> searchPictureList(String keyword, Map<String, String> map);
 
-    Picture getPictureDetail(String pictureIdx) throws Exception;
+    Map<String, Object> getPictureDetail(String pictureIdx) throws Exception;
 }

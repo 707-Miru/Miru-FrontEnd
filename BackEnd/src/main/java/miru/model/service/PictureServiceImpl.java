@@ -60,7 +60,7 @@ public class PictureServiceImpl implements PictureService {
     }
 
     @Override
-    public Picture getPictureDetail(String pictureIdx) throws Exception {
+    public Map<String, Object> getPictureDetail(String pictureIdx) throws Exception {
         return pictureDAO.getPictureDetail(pictureIdx);
     }
 }

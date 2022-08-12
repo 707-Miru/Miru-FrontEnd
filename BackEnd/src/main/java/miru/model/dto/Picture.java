@@ -1,5 +1,7 @@
 package com.back.miru.model.dto;
 
+import java.sql.Timestamp;
+
 public class Picture {
     private int pictureIdx;
     private String filepath;
@@ -7,9 +9,9 @@ public class Picture {
     private int publicFlag;
     private int isPicture;
     private String id;
-    private String updateTime;
+    private Timestamp updateTime;
 
-    public Picture(int pictureIdx, String filepath, String tag, int publicFlag, int isPicture, String id, String updateTime) {
+    public Picture(int pictureIdx, String filepath, String tag, int publicFlag, int isPicture, String id, Timestamp updateTime) {
         this.pictureIdx = pictureIdx;
         this.filepath = filepath;
         this.tag = tag;
@@ -67,11 +69,11 @@ public class Picture {
         this.id = id;
     }
 
-    public String getUpdateTime() {
+    public Timestamp getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(String updateTime) {
+    public void setUpdateTime(Timestamp updateTime) {
         this.updateTime = updateTime;
     }
 
