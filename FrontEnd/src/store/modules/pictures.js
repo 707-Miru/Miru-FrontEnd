@@ -88,11 +88,11 @@ export const pictures = {
       .catch( err => console.error( err ))
     },
 
-    fetchSearchPicture ({ getters }, data, keyword) {
+    fetchSearchPicture ({ getters }, datas) {
       axios({
-        url:  drf.pictures.search(keyword),
+        url:  drf.pictures.search(datas.keyword),
         method: 'post',
-        data: data,
+        data: datas.data,
         headers: getters.authHeader
       })
     },
