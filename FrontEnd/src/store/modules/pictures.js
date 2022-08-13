@@ -68,7 +68,9 @@ export const pictures = {
       commit('SET_SORTKEY', sortKey)
     },
 
+    likePicture () {
 
+    },
 
     fetchPicture ({ commit, getters }) {
       axios({

@@ -28,6 +28,7 @@ export default {
     transfer: () => HOST + 'picture/transfer/',
     uploadPicture: () => HOST + 'picture/upload/',
     deletePicture: (id) => HOST + `picture/delete/${id}`,
+   
 
   },
 }
