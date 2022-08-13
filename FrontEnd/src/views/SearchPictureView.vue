@@ -29,7 +29,17 @@ export default {
   },
 
   created () {
-    this.fetchSearchPicture(this.keyword)
+    const datas = {
+      'keyword' : this.keyword,
+      'data' : {
+        'isPicture' : this.isPicture,
+        'id' : this.currentUserId,
+        'sortKey' : this.sortKey,
+        'page' : this.page
+      }
+    }
+    this.fetchSearchPicture(datas)
+    console.log(datas)
   }
 
 
