@@ -4,7 +4,9 @@ import LoginView from '@/views/LoginView.vue'
 import SignupView from '@/views/SingupView.vue'
 import FindPassWordView from '@/views/FindPassWordView.vue'
 import ResetPassWordView from '@/views/ResetPassWordView.vue'
+import NotFoundView from '@/views/NotFoundView'
 
+import SearchPictureView from '@/views/SearchPictureView.vue'
 import PictureView from '@/views/PictureView.vue'
 import MyAlbumView from '@/views/MyAlbumView.vue'
 import PhotoDetailView from '@/views/PhotoDetailView.vue'
@@ -51,6 +53,22 @@ const routes = [
     path : "/picture/detail",
     name : "PhotoDetailView",
     component : PhotoDetailView,
+  },
+
+  {
+    path : "/searh/:keyword",      
+    name : "SearchPictureView",
+    component : SearchPictureView,
+  },
+
+
+
+
+  
+  {
+    path: '/:catchAll(.*)',
+    name: 'NotFoundView',
+    component: NotFoundView
   }
 ]
 
@@ -65,7 +83,9 @@ router.beforeEach((to, from, next) => {
 
   const { isLoggedIn } = store.getters
 
-  const noAuthPages = ['LoginView', 'SignupView', 'FindPassWordView', 'MainView', 'PhotoDetailView', 'PictureView', 'MyAlbumView']
+
+  const noAuthPages = ['LoginView', 'SignupView', 'FindPassWordView', 'MainView', 'MyAlbumView', 'ResetPassWordView', 'PhotoDetailView', 'PictureView']
+
 
   const isAuthRequired = !noAuthPages.includes(to.name)
 

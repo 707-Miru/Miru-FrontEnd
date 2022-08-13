@@ -34,7 +34,8 @@ export default {
       })
       .then(res => {
         if (res.data === 1) {
-          console.log('!')
+          console.log(res)
+          this.check = res.data
           // this.$ref.email.innerText = res
         } else if (res.data === 0) {
           this.check = res.data
@@ -50,6 +51,9 @@ export default {
           'email':this.email
         }
       })
+      .then(
+        console.log('!!!')
+      )
     }
   }
 
