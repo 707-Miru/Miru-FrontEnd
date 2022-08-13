@@ -23,7 +23,6 @@ export default {
   pictures: {
     picture: () => HOST + 'picture/',
     totalPictures: () => HOST + 'pictures/',
-    transfer: () => HOST + '/picture/transfer/',
     search: (keyword) => HOST + `/picture/${keyword}`,
     myPictures: (id) => HOST + `favorite/picture/${id}`,
     transfer: () => HOST + 'picture/transfer/',

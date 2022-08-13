@@ -8,7 +8,7 @@ export const pictures = {
     pictures: [],
 
     picture: {},
-    page: 1,
+    tpage: 1,
     totalPictures : [],
 
     page: 0,
@@ -28,7 +28,7 @@ export const pictures = {
     page: state => state.page,
 
     totalPictures: state => state.totalPictures,
-    transferPicture: state => state.transferPicture,
+
     select: state => state.select,
     sortKey: state => state.sortKey,
     isPicture (state) {
