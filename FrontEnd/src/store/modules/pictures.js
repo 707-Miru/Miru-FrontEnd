@@ -11,6 +11,8 @@ export const pictures = {
     page: 1,
     totalPictures : [],
     transferPicture : {},
+    select: '이미지',
+    sortKey: '업데이트 순'
     
   },
 
@@ -19,7 +21,15 @@ export const pictures = {
     picture: state => state.picture,
     page: state => state.page,
     totalPictures: state => state.totalPictures,
-    transferPicture: state => state.transferPicture
+    transferPicture: state => state.transferPicture,
+    select: state => state.select,
+    sortKey: state => state.sortKey,
+    isPicture (state) {
+      return state.select === '이미지' ? true:false
+    },
+    sortKeyword (state) {
+      return state.sortKey ==='업데이트 순' ? 'time':'like'
+    }
   },
 
   mutations: {
@@ -29,9 +39,19 @@ export const pictures = {
 
     SET_TOTAL_PICTURES : (state, totalPictures) => state.totalPictures = totalPictures,
     SET_TRANSFER_PICTURE : (state, transferPicture) => state.transferPicture = transferPicture,
+    SET_SELECT : (state, select) => state.select = select,
+    SET_SORTKEY  :(state, sortKey) => state.sortKey = sortKey
   },
 
   actions: {
+    onChangeSelect ({ commit }, select) {
+      commit('SET_SELECT', select)
+    },
+
+    onChangeKeyword ({ commit }, sortKey) {
+      commit('SET_SORTKEY', sortKey)
+    },
+
     fetchPicture ({ commit, getters }, d) {
       console.log(d)
       axios({

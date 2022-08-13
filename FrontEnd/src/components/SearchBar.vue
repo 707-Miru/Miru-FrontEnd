@@ -24,38 +24,36 @@
 
 <script>
 import router from '@/router'
+import { mapActions } from 'vuex'
 
 export default {
     name: 'SearchBar',
 		
     data () {
         return {
-					select: '이미지',
-					keyword: '',
-					sortKey: '업데이트 순',  
+					keyword: '', 
+          select: '이미지',
+          sortKey: '업데이트 순'
         }
     },
 
     computed: {
-			isPicture () {
-				return this.select === '이미지' ? true:false
-			},
-			sortKeyword () {
-				return this.sortKey ==='업데이트 순' ? 'time':'like'
-			}
+      
+
     },
 
     methods: {
+        ...mapActions(['onChangeSelect', 'onChangeKeyword']),
         changeSelect (event) {
-					const target = event.target
-					this.select = target.innerText
-					this.$emit('onChangeSelect', this.isPicture)
+          const target = event.target
+          this.select = target.innerText
+          this.onChangeSelect(this.select)
         },
 
         changeKeyword (event) {
 					const target = event.target
 					this.sortKey = target.innerText
-					this.$emit('onChangeKeyword', this.sortKeyword)
+          this.onChangeKeyword(this.sortKey)
         },
 
 				searchKeyword () {
