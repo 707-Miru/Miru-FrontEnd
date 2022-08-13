@@ -6,6 +6,7 @@ import FindPassWordView from '@/views/FindPassWordView.vue'
 import ResetPassWordView from '@/views/ResetPassWordView.vue'
 import NotFoundView from '@/views/NotFoundView'
 
+import SearchPictureView from '@/views/SearchPictureView.vue'
 import PictureView from '@/views/PictureView.vue'
 import MyAlbumView from '@/views/MyAlbumView.vue'
 import PhotoDetailView from '@/views/PhotoDetailView.vue'
@@ -55,6 +56,12 @@ const routes = [
     component : PhotoDetailView,
   },
 
+  {
+    path : "/searh/:keyword",      
+    name : "SearchPictureView",
+    component : SearchPictureView,
+  },
+
 
 
 
@@ -77,7 +84,9 @@ router.beforeEach((to, from, next) => {
 
   const { isLoggedIn } = store.getters
 
+
   const noAuthPages = ['LoginView', 'SignupView', 'FindPassWordView', 'MainView', 'MyAlbumView', 'ResetPassWordView', 'PhotoDetailView', 'PictureView']
+
 
   const isAuthRequired = !noAuthPages.includes(to.name)
 

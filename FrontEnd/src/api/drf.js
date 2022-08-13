@@ -1,6 +1,8 @@
 
 
+
 const HOST = 'https://i7a707.p.ssafy.io/api/'
+
 
 
 
@@ -20,9 +22,12 @@ export default {
 
   pictures: {
     picture: () => HOST + 'picture/',
+    totalPictures: () => HOST + 'pictures/',
+    search: (keyword) => HOST + `/picture/${keyword}`,
     myPictures: (id) => HOST + `favorite/picture/${id}`,
     transfer: () => HOST + 'picture/transfer/',
     uploadPicture: () => HOST + 'picture/upload/',
     deletePicture: (id) => HOST + `picture/delete/${id}`,
+
   },
 }
