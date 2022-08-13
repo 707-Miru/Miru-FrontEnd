@@ -11,10 +11,11 @@ import java.util.Map;
 public class TransformPainting {
 
     public static void main(String[] args) throws Exception {
-        System.out.println(transform(0, "purple.jpg", "cat.mp4"));
+        System.out.println(transform("0", "purple.jpg", "cat.mp4"));
     }
 
-    public static String transform(int optionNum, String styleFilePath, String contentFilePath) throws Exception {
+    public static String transform(String optionNum, String styleFilePath, String contentFilePath) throws Exception {
+        int on = Integer.parseInt(optionNum);
         Map<Integer, String> m = new HashMap<>();
         m.put(1, "candy");
         m.put(2, "composition_vii");
@@ -40,7 +41,6 @@ public class TransformPainting {
 
 //        python main.py optim --content-image t.jpg --style-image m.jpeg --cuda=0
 //        python main.py eval --content-image t.jpg --style-image m.jpeg --model models/21styles.model --content-size 1024 --cuda=0
-//        String root = "C, /Users/SSAFY/Desktop/Picture/src/main/java/com/back/miru/ai/";
         String root = "src/main/java/com/back/miru/ai/";
         String[] command = new String[12];
         command[0] = "python";
@@ -50,10 +50,10 @@ public class TransformPainting {
         command[4] = root + contentFilePath;
         command[5] = "--style-image";
 
-        if (optionNum == 0) {
+        if (on == 0) {
             command[6] = root + styleFilePath;
         } else {
-            command[6] = root + "21styles/" + m.get(optionNum) + ".jpg";
+            command[6] = root + "21styles/" + m.get(on) + ".jpg";
         }
 
         command[7] = "--model";
@@ -75,6 +75,6 @@ public class TransformPainting {
         int result = executor.execute(commandLine);
         System.out.println("result: " + result);
         System.out.println("output: " + outputStream);
-        return "output.jpg";
+        return "src/output.jpg";
     }
 }

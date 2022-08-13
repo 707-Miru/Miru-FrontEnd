@@ -1,6 +1,8 @@
 
 
-const HOST = 'http://localhost:9999/'
+
+const HOST = 'https://i7a707.p.ssafy.io/api/'
+
 
 
 
@@ -22,6 +24,11 @@ export default {
     picture: () => HOST + 'picture/',
     totalPictures: () => HOST + 'pictures/',
     transfer: () => HOST + '/picture/transfer/',
-    search: (keyword) => HOST + `/picture/${keyword}`
+    search: (keyword) => HOST + `/picture/${keyword}`,
+    myPictures: (id) => HOST + `favorite/picture/${id}`,
+    transfer: () => HOST + 'picture/transfer/',
+    uploadPicture: () => HOST + 'picture/upload/',
+    deletePicture: (id) => HOST + `picture/delete/${id}`,
+
   },
 }

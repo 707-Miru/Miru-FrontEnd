@@ -1,4 +1,3 @@
-
 import drf from "@/api/drf"
 import axios from "axios"
 
@@ -7,9 +6,17 @@ import axios from "axios"
 export const pictures = {
   state: {
     pictures: [],
+
     picture: {},
     page: 1,
     totalPictures : [],
+
+    page: 0,
+    keyword: '',
+    myPage: 1,
+    myPictures : [],
+    totalPictureCnt : 50,
+
     transferPicture : {},
     select: '이미지',
     sortKey: '업데이트 순'
@@ -18,8 +25,8 @@ export const pictures = {
 
   getters: {
     pictures: state => state.pictures,
-    picture: state => state.picture,
     page: state => state.page,
+
     totalPictures: state => state.totalPictures,
     transferPicture: state => state.transferPicture,
     select: state => state.select,
@@ -29,21 +36,30 @@ export const pictures = {
     },
     sortKeyword (state) {
       return state.sortKey ==='업데이트 순' ? 'time':'like'
-    }
+    },
+
+    myPage: state => state.myPage,
+    myPictures: state => state.myPictures,
+    transferPicture: state => state.transferPicture,
+    totalPictureCnt: state => state.totalPictureCnt
   },
 
   mutations: {
     FETCH_PICTURE: (state, pictures) => state.pictures.push(...pictures),
-
     INCREASE_PAGE: (state, page) => state.page = page + 20,
-
-    SET_TOTAL_PICTURES : (state, totalPictures) => state.totalPictures = totalPictures,
+    SET_MY_PICTURES : (state, myPictures) => {
+      const totalPictureCnt = myPictures.pop()
+      state.totalPictureCnt = totalPictureCnt['totalPictureCnt']
+      state.myPictures = myPictures
+    },
+    SET_MY_PAGE: (state, myPage) => state.myPage = myPage,
     SET_TRANSFER_PICTURE : (state, transferPicture) => state.transferPicture = transferPicture,
     SET_SELECT : (state, select) => state.select = select,
     SET_SORTKEY  :(state, sortKey) => state.sortKey = sortKey
   },
 
   actions: {
+
     onChangeSelect ({ commit }, select) {
       commit('SET_SELECT', select)
     },
@@ -52,13 +68,17 @@ export const pictures = {
       commit('SET_SORTKEY', sortKey)
     },
 
-    fetchPicture ({ commit, getters }, d) {
-      console.log(d)
+
+
+    fetchPicture ({ commit, getters }) {
       axios({
-        url: drf.pictures.picture(),
+        url: drf.picture.picture(),
         method: 'get',
-        params: d,
-        headers: getters.authHeader
+        data: {
+          'page': getters.page,
+          'sortKeyword': getters.keyword,
+         }
+
       })
       .then( res => {
         console.log(res)
@@ -76,16 +96,21 @@ export const pictures = {
         headers: getters.authHeader
       })
     },
-
-    fetchTotalPictures ({ commit }, data) {
+    fetchMyPictures ({ commit, getters }) {
+      const userId = localStorage.getItem('currentUser')
       axios({
-        url: drf.pictures.totalPictures(),
+        url: drf.pictures.myPictures(userId),
         method: 'get',
-        data,
+        headers: {
+          token: localStorage.getItem('token')
+        },
+        data: {
+          page: getters.myPage
+        },
       })
       .then(res => {        
         console.log(res)
-        commit('SET_TOTAL_PICTURES', res.data)
+        commit('SET_MY_PICTURES', res.data)
       })
       .catch(err => {
         console.log(err)
@@ -94,7 +119,7 @@ export const pictures = {
     transfer ({ commit }, data) {
       axios({
         url: drf.pictures.transfer(),
-        method: 'get',
+        method: 'post',
         data,
       })
       .then(res => {        
@@ -104,6 +129,39 @@ export const pictures = {
       .catch(err => {
         console.log(err)
       })         
+    },
+    uploadPicture (context, data) {
+      console.log(data.get('data'))
+      console.log(data.get('publicFlag'))
+      console.log(data.get('isPicture'))
+      console.log(data.get('id'))
+      axios({
+        url: drf.pictures.uploadPicture(),
+        method: 'post',
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        },
+        data,
+      })
+      .then(res => {
+        console.log(res)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    },
+    deletePicture (context, data) {
+      axios({
+        ure: drf.pictures.deletePicture(data.pictureIdx),
+        method: 'delete',
+        data,
+      })
+      .then(res => {
+        console.log(res)
+      })
+      .catch(err => {
+        console.log(err)
+      })
     },
   },
 }

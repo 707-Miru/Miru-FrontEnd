@@ -115,7 +115,7 @@ export const accounts = {
       }
     },
 
-    changePassWord ( obj) {
+    changePassWord ({ dispatch }, obj) {
       const id = obj.currentUser.id
       axios({
         url: drf.accounts.changePw(id),
@@ -124,7 +124,9 @@ export const accounts = {
       })
       .then(res => {
         console.log(res)
-        // dispatch('logout')
+        dispatch('removeToken')
+        dispatch('removeCurrentUser')
+        router.push('login')
       })
     }
 
