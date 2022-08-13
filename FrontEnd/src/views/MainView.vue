@@ -12,9 +12,11 @@
         <img class="w-100" src="@/assets/images/weather.png" alt="">
       </a>
     </div>
-    <svg xmlns="http://www.w3.org/2000/svg" id="bottomArrow" width="32" height="32" fill="currentColor" class="bi bi-arrow-down-circle-fill fixed-bottom mx-auto mb-3" viewBox="0 0 16 16">
+    <!-- 밑에 위치한 화살표(아래로 향함) -->
+    <svg xmlns="http://www.w3.org/2000/svg" id="bottomArrow" width="32" height="32" fill="currentColor" class="bi bi-arrow-down-circle-fill fixed-bottom mx-auto mb-3" viewBox="0 0 16 16" opacity = "0.2">
       <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"/>
     </svg>
+    <!-- 아래에 위치한 화살표(위로 향함) -->
     <svg xmlns="http://www.w3.org/2000/svg" id="topArrow" width="32" height="32" fill="currentColor" class="bi bi-arrow-up-circle-fill fixed-top mx-auto mt-3" viewBox="0 0 16 16">
       <path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/>
     </svg>
@@ -205,11 +207,19 @@ button {
 }
 #bottomArrow :hover {
   cursor: pointer;
+  fill: black !important;
+  opacity: 1;
+
 }
 #topArrow {
   display: none;
+  top: 50px;
+  opacity: 0.2;
 }
 #topArrow :hover {
   cursor: pointer;
+  fill: black !important;
+  opacity: 1;
+
 }
 </style>
