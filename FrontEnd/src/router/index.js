@@ -48,8 +48,7 @@ const routes = [
     component : MyAlbumView,
   },
   {
-    path : "/detail",      
-    // /????/detail
+    path : "/picture/detail",
     name : "PhotoDetailView",
     component : PhotoDetailView,
   }
@@ -66,7 +65,7 @@ router.beforeEach((to, from, next) => {
 
   const { isLoggedIn } = store.getters
 
-  const noAuthPages = ['LoginView', 'SignupView', 'FindPassWordView', 'MainView']
+  const noAuthPages = ['LoginView', 'SignupView', 'FindPassWordView', 'MainView', 'PhotoDetailView', 'PictureView', 'MyAlbumView']
 
   const isAuthRequired = !noAuthPages.includes(to.name)
 
