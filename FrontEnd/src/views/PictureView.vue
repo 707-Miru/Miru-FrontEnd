@@ -1,7 +1,7 @@
 <template>
   <div>
-    <search-bar @onChangeSelect="changeSelect" @onChangeKeyword="changeKeyword"></search-bar>
-    <picture-list></picture-list>
+    <search-bar></search-bar>
+    <picture-list :pictures="pictuers"></picture-list>
 
   </div>
 </template>
@@ -9,36 +9,36 @@
 <script>
 import PictureList from '@/components/PictureList.vue'
 import SearchBar from '@/components/SearchBar.vue'
+import { mapActions, mapGetters } from 'vuex'
 
 
 
 export default {
   name: 'PictureView',
 
-  emits: ['onChangeSelect', 'onChangeKeyword'],
-
   components:{
     PictureList,
     SearchBar
   },
 
-  data () {
-    return {
-      isPicture:'',
-      SortKey: ''
-    }
+
+
+  computed: {
+    ...mapGetters(['pictures', 'currentUserId', 'page', 'sortKeyword', 'isPicture'])
   },
 
   methods:{
-    changeSelect (isP) {
-      
-      this.isPicture = isP
-      console.log(this.isPicture)
-    },
-    changeKeyword (key) {
-      console.log(key)
-      this.sortKey = key
+    ...mapActions(['fetchPicture']),
+  },
+
+  created () {
+    const datas = {
+      'id' : this.currentUserId,
+      'sortKeyword' : this.sortKey,
+      'page' : this.page
     }
+    this.fetchPicture(datas),
+    console.log(datas)
   }
 
 }

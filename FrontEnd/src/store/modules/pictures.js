@@ -68,19 +68,26 @@ export const pictures = {
       commit('SET_SORTKEY', sortKey)
     },
 
-    likePicture () {
-
+    likePicture ({getters}, id) {
+      axios({
+        url: drf.pictures.like(),
+        method: 'post',
+        data: {
+          'id' : getters.currentUserId,
+          'pictureIdx' : id
+        }
+      })
     },
 
     fetchPicture ({ commit, getters }) {
       axios({
-        url: drf.picture.picture(),
+        url: drf.pictures.picture(),
         method: 'get',
-        data: {
+        headers: getters.authHeader,
+        params: {
           'page': getters.page,
           'sortKeyword': getters.keyword,
          }
-
       })
       .then( res => {
         console.log(res)
@@ -90,14 +97,19 @@ export const pictures = {
       .catch( err => console.error( err ))
     },
 
-    fetchSearchPicture ({ getters }, datas) {
+    fetchSearchPicture ({ getters, commit }, datas) {
       axios({
         url:  drf.pictures.search(datas.keyword),
         method: 'post',
         data: datas.data,
         headers: getters.authHeader
       })
+      .then( res => {
+        commit('FETCH_PICTURE', res.data)
+      })
+      .catch( err => console.log(err))
     },
+
     fetchMyPictures ({ commit, getters }) {
       const userId = localStorage.getItem('currentUser')
       axios({
@@ -118,6 +130,7 @@ export const pictures = {
         console.log(err)
       })         
     },
+
     transfer ({ commit }, data) {
       axios({
         url: drf.pictures.transfer(),
@@ -132,6 +145,7 @@ export const pictures = {
         console.log(err)
       })         
     },
+
     uploadPicture (context, data) {
       console.log(data.get('data'))
       console.log(data.get('publicFlag'))
@@ -152,6 +166,7 @@ export const pictures = {
         console.log(err)
       })
     },
+
     deletePicture (context, data) {
       axios({
         ure: drf.pictures.deletePicture(data.pictureIdx),

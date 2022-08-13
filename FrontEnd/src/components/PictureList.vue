@@ -13,12 +13,16 @@
 
 <script>
 import PictureListItem from '@/components/PictureListItem'
-import { mapActions, mapGetters } from 'vuex'
+
 
 
 
 export default {
   name: 'PictureList',
+
+  props: {
+    pictures: Array
+  },
 
   components:{
     PictureListItem,
@@ -49,14 +53,9 @@ export default {
     }
   },
 
-  computed: {
-    ...mapGetters(['pictures', 'currentUserId', 'page', ])
-  },
 
 
-  methods: {
-    ...mapActions(['fetchPicture'])
-  },
+ 
 
   created () {
     const data = {
