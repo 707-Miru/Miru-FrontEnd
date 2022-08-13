@@ -26,10 +26,10 @@ export default {
   },
   methods : {
     ...mapActions(['fetchSearchPicture'])
-  }
-  ,
-  setup: {
-    
+  },
+
+  created () {
+    this.fetchSearchPicture(this.keyword)
   }
 
 
