@@ -1,5 +1,9 @@
 <template>
-  <div class="main container-fluid p-0">
+  <div class="first-video" id="first-video-wrap">
+    <video class="w-100 h-100 small video-player" src="@/assets/videos/flowers.mp4" alt="" id="first-video" muted></video>
+  </div>
+
+  <div class="main container-fluid p-0 hide" id="main">
     <div class="item position-relative">
       <img class="w-100" src="@/assets/images/background.png" alt="">
       <a type="button" class="" style="width:15%; position: absolute; top: 10.5%; left: 51.8%;">
@@ -9,7 +13,7 @@
       <a type="button" class="action action--hidden action--play"  style="width:34%; position: absolute; top: 41.5%; left: 49%;">
         <div class="video-wrap">
           <div class="video-inner">
-            <video class="w-100 h-100 small video-player" src="@/assets/videos/flowers.mp4" alt="" autoplay loop></video>
+            <video class="w-100 h-100 small video-player" src="@/assets/videos/flowers.mp4" alt="" autoplay loop muted></video>
           </div>
         </div>
         
@@ -64,7 +68,7 @@
   </div>
 
  
-  <div class="video-wrap">
+  <!-- <div class="video-wrap">
     <div class="video-inner">
       <video class="video-player" src="@/assets/videos/flowers.mp4"  preload="auto">
         <source src="@/assets/videos/flowers.mp4" type='video/mp4; codecs="vp8.0, vorbis"'>
@@ -75,7 +79,7 @@
         <span class="action__label action__label--hidden">Close preview</span>
       </button>
     </div>
-  </div>
+  </div> -->
 
   
 
@@ -126,41 +130,58 @@ export default {
       return yTo
     }
     onMounted(() => {
-        var bodyEl = document.body,
-        videoWrap = document.querySelector('.video-wrap'),
-        videoEl = videoWrap.querySelector('video'),
-        playCtrl = document.querySelector('.action--play'),
-        closeCtrl = document.querySelector('.action--close');
+      const firstVideo = document.getElementById('first-video')
+      firstVideo.play()
+      const firstwrap = document.getElementById('first-video-wrap')
+      const main = document.getElementById('main')
+      firstVideo.addEventListener('ended', changePage)
 
-        function init() {
-          initEvents();
-        }
+      function changePage () {
+        firstwrap.classList.add('frame')
+        setTimeout(() => {
+          firstwrap.classList.add('hide')
+          main.classList.remove('hide')
+        }, 1000);
+      }
 
-        function initEvents() {
-          playCtrl.addEventListener('click', play);
-          closeCtrl.addEventListener('click', hide);
-          videoEl.addEventListener('canplaythrough', allowPlay);
-          videoEl.addEventListener('ended', hide);
-        }
 
-        function allowPlay() {
-          bodyEl.classList.add('video-loaded');
-        }
 
-        function play() {
-          videoEl.currentTime = 0;
-          videoWrap.classList.remove('video-wrap--hide');
-          videoWrap.classList.add('video-wrap--show');
-          setTimeout(function() {videoEl.play();}, 600);
-        }
 
-        function hide() {
-          videoWrap.classList.remove('video-wrap--show');
-          // videoWrap.classList.add('video-wrap--hide');
-          videoEl.pause();
-        }
+      var bodyEl = document.body,
+      videoWrap = document.querySelector('.video-wrap'),
+      videoEl = videoWrap.querySelector('video'),
+      playCtrl = document.querySelector('.action--play'),
+      closeCtrl = document.querySelector('.action--close');
 
-        init();
+      function init() {
+        initEvents();
+      }
+
+      function initEvents() {
+        playCtrl.addEventListener('click', play);
+        closeCtrl.addEventListener('click', hide);
+        videoEl.addEventListener('canplaythrough', allowPlay);
+        videoEl.addEventListener('ended', hide);
+      }
+
+      function allowPlay() {
+        bodyEl.classList.add('video-loaded');
+      }
+
+      function play() {
+        videoEl.currentTime = 0;
+        videoWrap.classList.remove('video-wrap--hide');
+        videoWrap.classList.add('video-wrap--show');
+        setTimeout(function() {videoEl.play();}, 600);
+      }
+
+      function hide() {
+        videoWrap.classList.remove('video-wrap--show');
+        // videoWrap.classList.add('video-wrap--hide');
+        videoEl.pause();
+      }
+
+      init();
 
       const topArrow = document.querySelector('#topArrow')
       const bottomArrow = document.querySelector('#bottomArrow')
@@ -217,6 +238,11 @@ export default {
 .item {
   scroll-snap-align: center;
 }
+
+.frame {
+  box-shadow: 2px 3px 5px 0px;
+}
+
 button {
   z-index: 1;
 }
@@ -285,6 +311,9 @@ button {
 	position: relative;
 }
 
+.hide {
+  display: none;
+}
 
 
 .video-loaded {
@@ -420,13 +449,14 @@ button {
 
 @keyframes showVideo-2 {
 	0% {
-   
+   position: fixed;
+   transform: translate(-50%)
 	}
   10%{
     z-index: 1000;
     
     left:50%;
-    transform: translateX(-50%);
+    /* transform: translateX(-50%); */
   }
 	100% {
 		/* width: 100vw;
