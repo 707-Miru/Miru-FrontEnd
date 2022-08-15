@@ -1,6 +1,5 @@
 package com.back.miru.model.dao;
 
-import com.back.miru.model.dto.Interest;
 import com.back.miru.model.dto.User;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -25,11 +24,5 @@ public interface UserDAO {
 	int checkPasswordFind(Map<String, String> map) throws SQLException;
 
 	void updatePassword(Map<String, String> map) throws SQLException;
-
-	List<Interest> getInterestList(String id) throws Exception;
-
-	int registerInterest(Map<String, String> map) throws Exception;
-
-	int deleteInterest(Map<String, String> map) throws Exception;
 
 }

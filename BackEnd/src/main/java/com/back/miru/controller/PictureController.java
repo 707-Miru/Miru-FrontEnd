@@ -26,9 +26,6 @@ public class PictureController {
     private static final String FAIL = "fail";
 
     @Autowired
-    private JwtService jwtService;
-
-    @Autowired
     private PictureService pictureService;
 
     @PostMapping("/tracking")
@@ -36,21 +33,15 @@ public class PictureController {
         System.out.println("transferPicture 시작");
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;
-        if (jwtService.isUsable(request.getHeader("token"))) {
-            logger.info("사용 가능한 토큰!!!");
-            try {
-                HandTracking.tracking();
-                resultMap.put("message", SUCCESS);
-                status = HttpStatus.ACCEPTED;
-            } catch (Exception e) {
-                logger.error("핸드 트래킹 실패 : {}", e);
-                resultMap.put("message", e.getMessage());
-                status = HttpStatus.INTERNAL_SERVER_ERROR;
-            }
-        } else {
-            logger.error("사용 불가능 토큰!!!");
-            resultMap.put("message", FAIL);
+        try {
+            HandTracking.tracking();
+            resultMap.put("message", SUCCESS);
             status = HttpStatus.ACCEPTED;
+        } catch (Exception e) {
+            logger.error("핸드 트래킹 실패 : {}", e);
+            resultMap.put("message", e.getMessage());
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+            return new ResponseEntity<Map<String, Object>>(resultMap, status);
         }
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
     }
@@ -60,22 +51,16 @@ public class PictureController {
         System.out.println("transferPicture 시작");
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;
-        if (jwtService.isUsable(request.getHeader("token"))) {
-            logger.info("사용 가능한 토큰!!!");
-            try {
-                String transferPicturePath = TransformPainting.transform(map.get("optionNum"), map.get("styleFilePath"), map.get("contentFilePath"));
-                resultMap.put("transferPicturePath", transferPicturePath);
-                resultMap.put("message", SUCCESS);
-                status = HttpStatus.ACCEPTED;
-            } catch (Exception e) {
-                logger.error("파일 명화 변경 실패 : {}", e);
-                resultMap.put("message", e.getMessage());
-                status = HttpStatus.INTERNAL_SERVER_ERROR;
-            }
-        } else {
-            logger.error("사용 불가능 토큰!!!");
-            resultMap.put("message", FAIL);
+        try {
+            String transferPicturePath = TransformPainting.transform(map.get("optionNum"), map.get("styleFilePath"), map.get("contentFilePath"));
+            resultMap.put("transferPicturePath", transferPicturePath);
+            resultMap.put("message", SUCCESS);
             status = HttpStatus.ACCEPTED;
+        } catch (Exception e) {
+            logger.error("파일 명화 변경 실패 : {}", e);
+            resultMap.put("message", e.getMessage());
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+            return new ResponseEntity<Map<String, Object>>(resultMap, status);
         }
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
     }
@@ -87,7 +72,6 @@ public class PictureController {
         System.out.println("getPictureList controller 시작");
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;
-        logger.info("사용 가능한 토큰!!!");
         try {
             List<Picture> pictureList = pictureService.getPictureList(map);
             resultMap.put("pictureList", pictureList);
@@ -107,7 +91,6 @@ public class PictureController {
         System.out.println("searchPicture controller 시작");
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;
-        logger.info("사용 가능한 토큰!!!");
         try {
             List<Picture> pictureList = pictureService.searchPictureList(keyword, map);
             resultMap.put("pictureList", pictureList);
@@ -128,22 +111,16 @@ public class PictureController {
         System.out.println("getPictureDetail 시작");
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;
-        if (jwtService.isUsable(request.getHeader("token"))) {
-            logger.info("사용 가능한 토큰!!!");
-            try {
-                Map<String, Object> picture = pictureService.getPictureDetail(pictureIdx);
-                resultMap.put("picture", picture);
-                resultMap.put("message", SUCCESS);
-                status = HttpStatus.ACCEPTED;
-            } catch (Exception e) {
-                logger.error("정보 조회 실패 : {}", e);
-                resultMap.put("message", e.getMessage());
-                status = HttpStatus.INTERNAL_SERVER_ERROR;
-            }
-        } else {
-            logger.error("사용 불가능 토큰!!!");
-            resultMap.put("message", FAIL);
+        try {
+            Map<String, Object> picture = pictureService.getPictureDetail(pictureIdx);
+            resultMap.put("picture", picture);
+            resultMap.put("message", SUCCESS);
             status = HttpStatus.ACCEPTED;
+        } catch (Exception e) {
+            logger.error("정보 조회 실패 : {}", e);
+            resultMap.put("message", e.getMessage());
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+            return new ResponseEntity<Map<String, Object>>(resultMap, status);
         }
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
     }
@@ -154,23 +131,18 @@ public class PictureController {
         System.out.println("registPicture 시작");
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;
-        if (jwtService.isUsable(request.getHeader("token"))) {
-            logger.info("사용 가능한 토큰!!!");
-            try {
-                map.put("filepath", "c:\\filename.jpg");
-                pictureService.registPicture(map);
-                resultMap.put("message", SUCCESS);
-                status = HttpStatus.ACCEPTED;
-            } catch (Exception e) {
-                logger.error("파일 업로드 실패 : {}", e);
-                resultMap.put("message", e.getMessage());
-                status = HttpStatus.INTERNAL_SERVER_ERROR;
-            }
-        } else {
-            logger.error("사용 불가능 토큰!!!");
-            resultMap.put("message", FAIL);
+        try {
+            map.put("filepath", "c:\\filename.jpg");
+            pictureService.registPicture(map);
+            resultMap.put("message", SUCCESS);
             status = HttpStatus.ACCEPTED;
+        } catch (Exception e) {
+            logger.error("파일 업로드 실패 : {}", e);
+            resultMap.put("message", e.getMessage());
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+            return new ResponseEntity<Map<String, Object>>(resultMap, status);
         }
+
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
     }
 
@@ -180,21 +152,15 @@ public class PictureController {
         System.out.println("deletePicture 시작");
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;
-        if (jwtService.isUsable(request.getHeader("token"))) {
-            logger.info("사용 가능한 토큰!!!");
-            try {
-                pictureService.deletePicture(pictureIdx);
-                resultMap.put("message", SUCCESS);
-                status = HttpStatus.ACCEPTED;
-            } catch (Exception e) {
-                logger.error("정보조회 실패 : {}", e);
-                resultMap.put("message", e.getMessage());
-                status = HttpStatus.INTERNAL_SERVER_ERROR;
-            }
-        } else {
-            logger.error("사용 불가능 토큰!!!");
-            resultMap.put("message", FAIL);
+        try {
+            pictureService.deletePicture(pictureIdx);
+            resultMap.put("message", SUCCESS);
             status = HttpStatus.ACCEPTED;
+        } catch (Exception e) {
+            logger.error("정보조회 실패 : {}", e);
+            resultMap.put("message", e.getMessage());
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+            return new ResponseEntity<Map<String, Object>>(resultMap, status);
         }
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
     }

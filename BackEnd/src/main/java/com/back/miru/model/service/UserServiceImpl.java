@@ -1,7 +1,6 @@
 package com.back.miru.model.service;
 
 import com.back.miru.model.dao.UserDAO;
-import com.back.miru.model.dto.Interest;
 import com.back.miru.model.dto.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -81,21 +80,6 @@ public class UserServiceImpl implements UserService {
         map.put("password", randomGenerateString(8));
         map.put("salt", randomGenerateString(16));
         userDao.updatePassword(map);
-    }
-
-    @Override
-    public boolean resisterInterest(Map<String, String> map) throws Exception {
-        return userDao.registerInterest(map) == 1;
-    }
-
-    @Override
-    public boolean deleteInterest(Map<String, String> map) throws Exception {
-        return userDao.deleteInterest(map) >= 1;
-    }
-
-    @Override
-    public List<Interest> getInterestList(String id) throws Exception {
-        return userDao.getInterestList(id);
     }
 
     public String randomGenerateString(int targetStringLength) {
