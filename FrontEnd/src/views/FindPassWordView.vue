@@ -42,6 +42,7 @@ export default {
         }
       })
     },
+    
 
     sendEmail (id) {
       axios({
