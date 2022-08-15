@@ -2,6 +2,7 @@
   <div id="app">
     <nav-bar class="nav"></nav-bar>
     <router-view/>
+    <footer><a href="https://www.flaticon.com/free-icons/pond" title="pond icons">Pond icons created by Nikita Golubev - Flaticon</a></footer>
   </div>
 </template>
 

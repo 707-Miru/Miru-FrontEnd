@@ -117,6 +117,7 @@ export const pictures = {
       })         
     },
     transfer ({ commit }, data) {
+      console.log(data)
       axios({
         url: drf.pictures.transfer(),
         method: 'post',

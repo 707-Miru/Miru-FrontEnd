@@ -22,7 +22,7 @@
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
-  name: 'myPicturePagenation',
+  name: 'myPicturePagination',
   data () {
     return {
       pageCount: 5,
