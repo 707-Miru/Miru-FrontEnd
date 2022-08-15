@@ -1,4 +1,4 @@
-package com.back.com.back.miru.model.dto;
+package com.back.miru.model.dto;
 
 import java.sql.Timestamp;
 

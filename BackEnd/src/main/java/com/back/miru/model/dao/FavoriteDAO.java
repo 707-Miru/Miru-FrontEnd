@@ -1,4 +1,4 @@
-package com.back.com.back.miru.model.dao;
+package com.back.miru.model.dao;
 
 import com.back.miru.model.dto.FavoritePicture;
 import com.back.miru.model.dto.FavoriteUser;

@@ -1,4 +1,4 @@
-package com.back.com.back.miru.ai.transfer;
+package com.back.miru.ai.transfer;
 
 import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecutor;

@@ -1,4 +1,4 @@
-package com.back.com.back.miru.controller;
+package com.back.miru.controller;
 
 import com.back.miru.ai.tracking.HandTracking;
 import com.back.miru.ai.transfer.TransformPainting;

@@ -1,4 +1,4 @@
-package com.back.com.back.miru.ai.tracking;
+package com.back.miru.ai.tracking;
 
 import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecutor;

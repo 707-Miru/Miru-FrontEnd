@@ -1,4 +1,4 @@
-package com.back.com.back.miru.controller;
+package com.back.miru.controller;
 
 import com.back.miru.model.dto.Interest;
 import com.back.miru.model.dto.User;

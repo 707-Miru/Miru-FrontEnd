@@ -1,4 +1,4 @@
-package com.back.com.back.miru.controller;
+package com.back.miru.controller;
 
 import com.back.miru.model.dto.FavoritePicture;
 import com.back.miru.model.dto.FavoriteUser;

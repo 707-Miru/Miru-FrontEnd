@@ -1,4 +1,4 @@
-package com.back.com.back.miru.model.dao;
+package com.back.miru.model.dao;
 
 import com.back.miru.model.dto.ListParameterDto;
 import com.back.miru.model.dto.Picture;

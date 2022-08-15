@@ -1,4 +1,4 @@
-package com.back.com.back.miru.config;
+package com.back.miru.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

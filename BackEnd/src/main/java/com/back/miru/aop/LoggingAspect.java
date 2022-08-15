@@ -1,4 +1,4 @@
-package com.back.com.back.miru.aop;
+package com.back.miru.aop;
 //임포트 다시
 //@Component
 //@Aspect

@@ -1,4 +1,4 @@
-package com.back.com.back.miru.model.service;
+package com.back.miru.model.service;
 
 import com.back.miru.exception.UnauthorizedException;
 import io.jsonwebtoken.Claims;

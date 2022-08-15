@@ -1,4 +1,4 @@
-package com.back.com.back.miru;
+package com.back.miru;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

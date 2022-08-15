@@ -1,4 +1,4 @@
-package com.back.com.back.miru.controller;
+package com.back.miru.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

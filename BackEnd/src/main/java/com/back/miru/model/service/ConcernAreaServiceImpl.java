@@ -1,4 +1,4 @@
-package com.back.com.back.miru.model.service;
+package com.back.miru.model.service;
 
 import com.back.miru.model.dao.ConcernAreaDAO;
 import com.back.miru.model.dao.UserDAO;

@@ -1,4 +1,4 @@
-package com.back.com.back.miru.interceptor;
+package com.back.miru.interceptor;
 
 import com.back.miru.exception.UnauthorizedException;
 import com.back.miru.model.service.JwtService;
