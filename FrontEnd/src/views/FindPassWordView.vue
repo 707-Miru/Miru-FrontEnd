@@ -4,8 +4,10 @@
     <b-form-input type="text" v-model="id" placeholder="Miru 아이디"></b-form-input>
     <b-button @click="checkId(id)">다음</b-button>
     <h4 ref="email"></h4>
-    
-    <img src="@/assets/email.png" alt="" v-if="check" @click="sendEmail">
+    <div v-if="check">
+      <b-form-input type="text" v-model="email" placeholder="Miru 이메일"></b-form-input>
+      <img src="@/assets/email.png" alt=""  @click="sendEmail">
+    </div>
 
   </div>
 

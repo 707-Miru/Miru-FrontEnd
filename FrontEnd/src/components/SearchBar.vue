@@ -8,11 +8,11 @@
             <b-dropdown-item-button @click="changeSelect">동영상</b-dropdown-item-button>
         </b-dropdown>
         </template>
-        <b-form  @submit="fetchPicture">
+        <b-form  @submit.prevent="searchKeyword">
             <b-form-input placeholder="이미지, 동영상 검색" v-model="keyword"></b-form-input>
         </b-form>
         <template #append>
-        <b-dropdown :text="sortKeyword" variant="outline-secondary">
+        <b-dropdown :text="sortKey" variant="outline-secondary">
             <b-dropdown-item-button @click="changeKeyword">업데이트 순</b-dropdown-item-button>
             <b-dropdown-item-button @click="changeKeyword">좋아요 순</b-dropdown-item-button>
         </b-dropdown>
@@ -23,32 +23,42 @@
 </template>
 
 <script>
+import router from '@/router'
 import { mapActions } from 'vuex'
+
 export default {
     name: 'SearchBar',
-
+		
     data () {
         return {
-            select: '이미지',
-            sortKeyword: '업데이트 순',
-            keyword: ''
+					keyword: '', 
+          select: '이미지',
+          sortKey: '업데이트 순'
         }
     },
 
+    computed: {
+      
+
+    },
+
     methods: {
-        ...mapActions(['fetchPicture']),
-
+        ...mapActions(['onChangeSelect', 'onChangeKeyword']),
         changeSelect (event) {
-            const target = event.target
-            this.select = target.innerText
-        },
-        changeKeyword (event) {
-            const target = event.target
-            this.sortKeyword = target.innerText
+          const target = event.target
+          this.select = target.innerText
+          this.onChangeSelect(this.select)
         },
 
-        check() {
-            console.log('!!')
+        changeKeyword (event) {
+					const target = event.target
+					this.sortKey = target.innerText
+          this.onChangeKeyword(this.sortKey)
+        },
+
+				searchKeyword () {
+          router.push({name:'SearchPictureView', params:{keyword:this.keyword.trim()}})
+          
         }
     }
 

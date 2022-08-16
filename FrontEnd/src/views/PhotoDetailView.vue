@@ -3,31 +3,31 @@
                     <!-- 상단 컴포넌트 -->
         <div>
             <div class="cover-left cover"> 
-                <div class="cover">
-                    <a href="#">
+                <!-- <div>
+                    <div class="cover modal-dialog modal-fullscreen">
                         <img src="@/assets/zoom.svg" alt="" width="30" height="30" >
-                    </a>
-                </div>
+                    </div>
+                </div> -->
 
-                <div class="cover" v-if="!isLoggedIn" >
+                <div class="cover" v-if="likecnt === 1" v-on:click="likecnt--">
                     <a href="#">
                         <img src="@/assets/heart.svg" alt="" width="30" height="30" >
                     </a>
                 </div>
 
-                <div class="cover" v-if="!!isLoggedIn">
+                <div class="cover" v-if="likecnt === 0" v-on:click="likecnt++">
                     <a href="#">
                         <img src="@/assets/non-heart.svg" alt="" width="30" height="30" >
                     </a>
                 </div>
 
-                <div class="cover" v-if="!isLoggedIn" >
+                <div class="cover" v-if="bookmarkcnt === 1" v-on:click="bookmarkcnt--">
                     <a href="#">
                         <img src="@/assets/star.svg" alt="" width="30" height="30" >
                     </a>
                 </div>
 
-                <div class="cover" v-if="!!isLoggedIn">
+                <div class="cover" v-if="bookmarkcnt === 0" v-on:click="bookmarkcnt++">
                     <a href="#">
                         <img src="@/assets/non-star.svg" alt="" width="30" height="30" >
                     </a>
@@ -37,41 +37,39 @@
             </div>
 
             <div class="cover-right">
-                <a href="#">
+                <a href="/picture">
                     <img src="@/assets/detail_close.svg" alt="" width="30" height="30" >
                 </a>
             </div>
         </div>
 
             <!-- 디테일 사진과 양쪽 화살표 -->
-        <div>
+        <!-- <div>
             <a href="#" class="contain-left">
                 <img src="@/assets/go-previous.svg" alt="" width="30" height="30" >
             </a>
-        </div>
+        </div> -->
         <div class="container-main">
             <a href="#">
                 <img src="@/assets/images/art.png" alt="">  
             </a>
         </div>
-        <div>
+        <!-- <div>
             <a href="#" class="contain-right">
                 <img src="@/assets/go-next.svg" alt="" width="30" height="30" >
             </a>
-        </div>
+        </div> -->
 
 <!-- 태그 컴포넌트 만들기 (임시) -->
-        <p class="tags">
-            <a href="/ko/images/search/%EB%AC%B4%EC%A7%80%EA%B0%9C/">무지개</a>
+        <!-- <p class="tags">
+            <a href="/ko/images/search/%EB%AC%B4%EC%A7%80%EA%B0%9C/">무지개
+            </a>
+
             <span class="noselect">
                 <a href="/ko/photos/">사진</a>
             </span>
-            <span class="report-tags">
-                <a class="modal" href="/ko/accounts/media/tags/report/photo/7350780/?reload">
-                    <span class="report icon pixicon-flag icon_flag"></span>Report
-                </a>
-            </span>
-        </p>
+        <div> {{ $store.state.keyword }}</div>  하나씩 뿌려주기
+        </p> -->
 
     </div>
 </template>
@@ -126,14 +124,15 @@
 <script>
 // import { mapGetters } from 'vuex'
 
-// export default {
-//     name: 'PhotoDetailView',
+export default {
+    name: 'PhotoDetailView',
 
-//     data () {
-//         return {
-            // liked: true,
-//         }
-//     }
-// }
+    data() {
+        return {
+            likecnt: 0,
+            bookmarkcnt: 0,
+        }
+    }
+}
 
 </script>
