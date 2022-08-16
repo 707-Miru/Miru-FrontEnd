@@ -43,7 +43,7 @@ export const pictures = {
         data: {
           'page': getters.page,
           'sortKeyword': getters.keyword,
-         }
+        },
       })
       .then( res => {
         commit('FETCH_PICTURE', res.data)
@@ -77,6 +77,9 @@ export const pictures = {
         url: drf.pictures.transfer(),
         method: 'post',
         data,
+        headers: {
+          token: localStorage.getItem('token')
+        }
       })
       .then(res => {        
         console.log(res)
@@ -95,7 +98,8 @@ export const pictures = {
         url: drf.pictures.uploadPicture(),
         method: 'post',
         headers: {
-          'Content-Type': 'multipart/form-data'
+          'Content-Type': 'multipart/form-data',
+          token: localStorage.getItem('token')
         },
         data,
       })
@@ -111,6 +115,9 @@ export const pictures = {
         ure: drf.pictures.deletePicture(data.pictureIdx),
         method: 'delete',
         data,
+        headers: {
+          token: localStorage.getItem('token')
+        }
       })
       .then(res => {
         console.log(res)
