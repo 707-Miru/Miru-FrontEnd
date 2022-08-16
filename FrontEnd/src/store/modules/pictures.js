@@ -140,7 +140,6 @@ export const pictures = {
         url: drf.pictures.uploadPicture(),
         method: 'post',
         headers: {
-          'Content-Type': 'multipart/form-data'
         },
         data,
       })
