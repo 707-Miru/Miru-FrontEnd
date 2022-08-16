@@ -7,10 +7,11 @@
         <div>
           <h5>기능 선택</h5>
           <ul class="pagination justify-content-center">
-            <li class="page-item" :class="{active : selectedConfig}"><a class="page-link" @click="selectConfig(true)">명화 변환</a></li>
-            <li class="page-item" :class="{active : !selectedConfig}"><a class="page-link" @click="selectConfig(false)">날씨 추천</a></li>
+            <li class="page-item" :class="{active : selectedConfig === 0}"><a class="page-link" @click="selectConfig(0)">일반</a></li>
+            <li class="page-item" :class="{active : selectedConfig === 1}"><a class="page-link" @click="selectConfig(1)">명화 변환</a></li>
+            <li class="page-item" :class="{active : selectedConfig === 2}"><a class="page-link" @click="selectConfig(2)">날씨 추천</a></li>
           </ul>
-          <div v-show="selectedConfig">
+          <div v-show="selectedConfig === 1">
             <h3>스타일 선택</h3>
             <b-form-select v-model="artSelected" :options="artOptions"></b-form-select>
             <div v-show="artSelected===0">
@@ -101,7 +102,7 @@ export default {
   },
   data () {
     return {
-      selectedConfig: true,
+      selectedConfig: 0,
       artSelected: null,
       artOptions: [
         {value: 0, text: '나만의 스타일'},
