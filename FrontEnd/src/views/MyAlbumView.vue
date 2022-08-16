@@ -75,6 +75,11 @@
                   </label>
                 </div>
               </div>
+              <hr>
+              <div>
+                <label class="form-label" for="userTags">태그(#tag1,#tag2,...)</label>
+                <input class="form-control" type="text" name="userTags" v-model="userTags">
+              </div>
             </form>
           </div>
           <div class="modal-footer">
@@ -127,6 +132,7 @@ export default {
         {value: 20, text: 'wave'},
         {value: 21, text: 'woman'},
       ],
+      userTags: '',
     }
   },
   methods: {
@@ -139,6 +145,7 @@ export default {
       formData.append('publicFlag', publicFlag)
       formData.append('isPicture', isPicture)
       formData.append('id', localStorage.getItem('currentUser'))
+      formData.append('tag', this.userTags)
       this.uploadPicture(formData)
     },
     preview() {
