@@ -26,9 +26,6 @@ public class FavoriteController {
     private static final String FAIL = "fail";
 
     @Autowired
-    private JwtService jwtService;
-
-    @Autowired
     private FavoriteService favoriteService;
 
     @PostMapping("/user")
@@ -36,21 +33,15 @@ public class FavoriteController {
         System.out.println("resistFavorite controller 시작");
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;
-        if (jwtService.isUsable(request.getHeader("token"))) {
-            logger.info("사용 가능한 토큰!!!");
-            try {
-                favoriteService.registFavoriteUser(map);
-                resultMap.put("message", SUCCESS);
-                status = HttpStatus.ACCEPTED;
-            } catch (Exception e) {
-                logger.error("정보조회 실패 : {}", e);
-                resultMap.put("message", e.getMessage());
-                status = HttpStatus.INTERNAL_SERVER_ERROR;
-            }
-        } else {
-            logger.error("사용 불가능 토큰!!!");
-            resultMap.put("message", FAIL);
+        try {
+            favoriteService.registFavoriteUser(map);
+            resultMap.put("message", SUCCESS);
             status = HttpStatus.ACCEPTED;
+        } catch (Exception e) {
+            logger.error("정보조회 실패 : {}", e);
+            resultMap.put("message", e.getMessage());
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+            return new ResponseEntity<Map<String, Object>>(resultMap, status);
         }
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
     }
@@ -60,21 +51,15 @@ public class FavoriteController {
         System.out.println("deleteFavorite controller 시작");
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;
-        if (jwtService.isUsable(request.getHeader("token"))) {
-            logger.info("사용 가능한 토큰!!!");
-            try {
-                favoriteService.deleteFavoriteUser(followId, map);
-                resultMap.put("message", SUCCESS);
-                status = HttpStatus.ACCEPTED;
-            } catch (Exception e) {
-                logger.error("정보조회 실패 : {}", e);
-                resultMap.put("message", e.getMessage());
-                status = HttpStatus.INTERNAL_SERVER_ERROR;
-            }
-        } else {
-            logger.error("사용 불가능 토큰!!!");
-            resultMap.put("message", FAIL);
+        try {
+            favoriteService.deleteFavoriteUser(followId, map);
+            resultMap.put("message", SUCCESS);
             status = HttpStatus.ACCEPTED;
+        } catch (Exception e) {
+            logger.error("정보조회 실패 : {}", e);
+            resultMap.put("message", e.getMessage());
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+            return new ResponseEntity<Map<String, Object>>(resultMap, status);
         }
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
     }
@@ -84,23 +69,17 @@ public class FavoriteController {
         System.out.println("FavoriteInfo controller 시작");
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;
-        if (jwtService.isUsable(request.getHeader("token"))) {
-            logger.info("사용 가능한 토큰!!!");
-            try {
-                List<FavoriteUser> favoriteUserInfo = favoriteService.infoFavoriteUser(id);
-                System.out.println(favoriteUserInfo);
-                resultMap.put("favoriteUserInfo", favoriteUserInfo);
-                resultMap.put("message", SUCCESS);
-                status = HttpStatus.ACCEPTED;
-            } catch (Exception e) {
-                logger.error("정보조회 실패 : {}", e);
-                resultMap.put("message", e.getMessage());
-                status = HttpStatus.INTERNAL_SERVER_ERROR;
-            }
-        } else {
-            logger.error("사용 불가능 토큰!!!");
-            resultMap.put("message", FAIL);
+        try {
+            List<FavoriteUser> favoriteUserInfo = favoriteService.infoFavoriteUser(id);
+            System.out.println(favoriteUserInfo);
+            resultMap.put("favoriteUserInfo", favoriteUserInfo);
+            resultMap.put("message", SUCCESS);
             status = HttpStatus.ACCEPTED;
+        } catch (Exception e) {
+            logger.error("정보조회 실패 : {}", e);
+            resultMap.put("message", e.getMessage());
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+            return new ResponseEntity<Map<String, Object>>(resultMap, status);
         }
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
     }
@@ -111,21 +90,15 @@ public class FavoriteController {
         System.out.println("resistFavorite controller 시작");
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;
-        if (jwtService.isUsable(request.getHeader("token"))) {
-            logger.info("사용 가능한 토큰!!!");
-            try {
-                favoriteService.registFavoritePicture(map);
-                resultMap.put("message", SUCCESS);
-                status = HttpStatus.ACCEPTED;
-            } catch (Exception e) {
-                logger.error("정보조회 실패 : {}", e);
-                resultMap.put("message", e.getMessage());
-                status = HttpStatus.INTERNAL_SERVER_ERROR;
-            }
-        } else {
-            logger.error("사용 불가능 토큰!!!");
-            resultMap.put("message", FAIL);
+        try {
+            favoriteService.registFavoritePicture(map);
+            resultMap.put("message", SUCCESS);
             status = HttpStatus.ACCEPTED;
+        } catch (Exception e) {
+            logger.error("정보조회 실패 : {}", e);
+            resultMap.put("message", e.getMessage());
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+            return new ResponseEntity<Map<String, Object>>(resultMap, status);
         }
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
     }
@@ -136,21 +109,15 @@ public class FavoriteController {
         System.out.println("deleteFavorite controller 시작");
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;
-        if (jwtService.isUsable(request.getHeader("token"))) {
-            logger.info("사용 가능한 토큰!!!");
-            try {
-                favoriteService.deleteFavoritePicture(pictureIdx, map);
-                resultMap.put("message", SUCCESS);
-                status = HttpStatus.ACCEPTED;
-            } catch (Exception e) {
-                logger.error("정보조회 실패 : {}", e);
-                resultMap.put("message", e.getMessage());
-                status = HttpStatus.INTERNAL_SERVER_ERROR;
-            }
-        } else {
-            logger.error("사용 불가능 토큰!!!");
-            resultMap.put("message", FAIL);
+        try {
+            favoriteService.deleteFavoritePicture(pictureIdx, map);
+            resultMap.put("message", SUCCESS);
             status = HttpStatus.ACCEPTED;
+        } catch (Exception e) {
+            logger.error("정보조회 실패 : {}", e);
+            resultMap.put("message", e.getMessage());
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+            return new ResponseEntity<Map<String, Object>>(resultMap, status);
         }
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
     }
@@ -160,25 +127,18 @@ public class FavoriteController {
         System.out.println("FavoriteInfo controller 시작");
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;
-        if (jwtService.isUsable(request.getHeader("token"))) {
-            logger.info("사용 가능한 토큰!!!");
-            try {
-                List<Picture> favoritePictureInfo = favoriteService.infoFavoritePicture(id, map);
-                resultMap.put("favoritePictureInfo", favoritePictureInfo);
-                int totalPictureCnt = favoriteService.getTotalPictureCnt(id);
-
-                resultMap.put("totalPictureCnt", totalPictureCnt);
-                resultMap.put("message", SUCCESS);
-                status = HttpStatus.ACCEPTED;
-            } catch (Exception e) {
-                logger.error("정보조회 실패 : {}", e);
-                resultMap.put("message", e.getMessage());
-                status = HttpStatus.INTERNAL_SERVER_ERROR;
-            }
-        } else {
-            logger.error("사용 불가능 토큰!!!");
-            resultMap.put("message", FAIL);
+        try {
+            List<Picture> favoritePictureInfo = favoriteService.infoFavoritePicture(id, map);
+            resultMap.put("favoritePictureInfo", favoritePictureInfo);
+            int totalPictureCnt = favoriteService.getTotalPictureCnt(id);
+            resultMap.put("totalPictureCnt", totalPictureCnt);
+            resultMap.put("message", SUCCESS);
             status = HttpStatus.ACCEPTED;
+        } catch (Exception e) {
+            logger.error("정보조회 실패 : {}", e);
+            resultMap.put("message", e.getMessage());
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+            return new ResponseEntity<Map<String, Object>>(resultMap, status);
         }
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
     }

@@ -133,7 +133,6 @@ export default {
         {value: 20, text: 'wave'},
         {value: 21, text: 'woman'},
       ],
-      userTags: '',
     }
   },
   methods: {
@@ -146,7 +145,6 @@ export default {
       formData.append('publicFlag', publicFlag)
       formData.append('isPicture', isPicture)
       formData.append('id', localStorage.getItem('currentUser'))
-      formData.append('tag', this.userTags)
       this.uploadPicture(formData)
     },
     preview() {
@@ -165,7 +163,6 @@ export default {
     previewData() {
       const option_num = this.artSelected
       const content_file_path = document.querySelector('.selectedContent img').src
-      const user_id = localStorage.getItem('currentUser')
       const style = document.querySelector('.selectedStyle img')
       let style_file_path = null
       if (option_num === 0) {
@@ -179,7 +176,6 @@ export default {
           option_num,
           content_file_path,
           style_file_path,
-          user_id
         }
         return body
       } else {
@@ -187,7 +183,6 @@ export default {
           option_num,
           content_file_path,
           style_file_path,
-          user_id
         }
         return body
       }

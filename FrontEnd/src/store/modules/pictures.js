@@ -6,17 +6,38 @@ import axios from "axios"
 export const pictures = {
   state: {
     pictures: [],
+
+    picture: {},
+    tpage: 1,
+    totalPictures : [],
+
     page: 0,
     keyword: '',
     myPage: 1,
     myPictures : [],
     totalPictureCnt : 50,
+
     transferPicture : {},
+    select: '이미지',
+    sortKey: '업데이트 순'
+    
   },
 
   getters: {
     pictures: state => state.pictures,
     page: state => state.page,
+
+    totalPictures: state => state.totalPictures,
+
+    select: state => state.select,
+    sortKey: state => state.sortKey,
+    isPicture (state) {
+      return state.select === '이미지' ? true:false
+    },
+    sortKeyword (state) {
+      return state.sortKey ==='업데이트 순' ? 'time':'like'
+    },
+
     myPage: state => state.myPage,
     myPictures: state => state.myPictures,
     transferPicture: state => state.transferPicture,
@@ -33,9 +54,22 @@ export const pictures = {
     },
     SET_MY_PAGE: (state, myPage) => state.myPage = myPage,
     SET_TRANSFER_PICTURE : (state, transferPicture) => state.transferPicture = transferPicture,
+    SET_SELECT : (state, select) => state.select = select,
+    SET_SORTKEY  :(state, sortKey) => state.sortKey = sortKey
   },
 
   actions: {
+
+    onChangeSelect ({ commit }, select) {
+      commit('SET_SELECT', select)
+    },
+
+    onChangeKeyword ({ commit }, sortKey) {
+      commit('SET_SORTKEY', sortKey)
+    },
+
+
+
     fetchPicture ({ commit, getters }) {
       axios({
         url: drf.picture.picture(),
@@ -43,13 +77,24 @@ export const pictures = {
         data: {
           'page': getters.page,
           'sortKeyword': getters.keyword,
-        },
+         }
+
       })
       .then( res => {
+        console.log(res)
         commit('FETCH_PICTURE', res.data)
         commit('INCREASE_PAGE', getters.page)
       })
-      .catch( err => console.error( err.response ))
+      .catch( err => console.error( err ))
+    },
+
+    fetchSearchPicture ({ getters }, datas) {
+      axios({
+        url:  drf.pictures.search(datas.keyword),
+        method: 'post',
+        data: datas.data,
+        headers: getters.authHeader
+      })
     },
     fetchMyPictures ({ commit, getters }) {
       const userId = localStorage.getItem('currentUser')
@@ -77,9 +122,6 @@ export const pictures = {
         url: drf.pictures.transfer(),
         method: 'post',
         data,
-        headers: {
-          token: localStorage.getItem('token')
-        }
       })
       .then(res => {        
         console.log(res)
@@ -95,8 +137,6 @@ export const pictures = {
         url: drf.pictures.uploadPicture(),
         method: 'post',
         headers: {
-          'Content-Type': 'multipart/form-data',
-          token: localStorage.getItem('token')
         },
         data,
       })
@@ -112,9 +152,6 @@ export const pictures = {
         ure: drf.pictures.deletePicture(data.pictureIdx),
         method: 'delete',
         data,
-        headers: {
-          token: localStorage.getItem('token')
-        }
       })
       .then(res => {
         console.log(res)

@@ -19,6 +19,6 @@ public interface PictureDAO {
 
     List<Picture> searchPictureList(ListParameterDto listParameterDto);
 
-    Picture getPictureDetail(String pictureIdx) throws Exception;
+    Map<String, Object> getPictureDetail(String pictureIdx) throws Exception;
 
 }
