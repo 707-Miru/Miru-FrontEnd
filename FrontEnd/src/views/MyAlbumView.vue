@@ -76,6 +76,11 @@
                   </label>
                 </div>
               </div>
+              <hr>
+              <div>
+                <label class="form-label" for="userTags">태그(#tag1,#tag2,#tag3,...)</label>
+                <input class="form-control" type="text" name="userTags" v-model="userTags">
+              </div>
             </form>
           </div>
           <div class="modal-footer">
