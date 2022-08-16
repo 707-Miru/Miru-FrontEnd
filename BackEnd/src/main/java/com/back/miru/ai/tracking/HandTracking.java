@@ -16,8 +16,9 @@ public class HandTracking {
     public static void tracking() throws Exception {
         System.out.println("tracking");
         String root = "src/main/java/com/back/miru/ai/tracking/";
+        String imgRoot = "/var/www/html/S07P12A707/BackEnd/src/main/resources/static/img/";
         String[] command = new String[2];
-        command[0] = "python";
+        command[0] = "python3";
         command[1] = root + "handtracking.py";
 
         CommandLine commandLine = CommandLine.parse(command[0]);
