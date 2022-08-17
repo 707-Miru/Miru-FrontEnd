@@ -1,4 +1,13 @@
 <template>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/style.css">
+
+  </head> 
   <div class="main container-fluid p-0">
     <div class="item position-relative">
       <img class="w-100" src="@/assets/images/background.png" alt="">
@@ -12,9 +21,11 @@
         <img class="w-100" src="@/assets/images/weather.png" alt="">
       </a>
     </div>
-    <svg xmlns="http://www.w3.org/2000/svg" id="bottomArrow" width="32" height="32" fill="currentColor" class="bi bi-arrow-down-circle-fill fixed-bottom mx-auto mb-3" viewBox="0 0 16 16">
+    <!-- 밑에 위치한 화살표(아래로 향함) -->
+    <svg xmlns="http://www.w3.org/2000/svg" id="bottomArrow" width="32" height="32" fill="currentColor" class="bi bi-arrow-down-circle-fill fixed-bottom mx-auto mb-3" viewBox="0 0 16 16" opacity = "0.2">
       <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"/>
     </svg>
+    <!-- 아래에 위치한 화살표(위로 향함) -->
     <svg xmlns="http://www.w3.org/2000/svg" id="topArrow" width="32" height="32" fill="currentColor" class="bi bi-arrow-up-circle-fill fixed-top mx-auto mt-3" viewBox="0 0 16 16">
       <path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/>
     </svg>
@@ -35,11 +46,24 @@
     <div class="item container d-flex align-items-center justify-content-center" style="height: 100vh;" id="seasonPage">
       <div class="">
         <div class="mb-5">
-          <img src="@/assets/images/season.png" alt="">
         </div>
         <div class="text-start">
-          <h1 class="fw-bold">사계절 적용 기능</h1>
-          <p class="fs-5">내가 찍은 풍경 사진을 MIRU의 AI가 현재 계절에 어울리게 바꾸어 드립니다</p>
+          <h1 class="fw-bold">다양한 테마로의 전환 기능</h1>
+          <p class="fs-5">내가 찍은 사진을 오늘의 모네가 다양한 테마로 바꾸어 드립니다</p>
+            <div class="item container d-flex align-items-center justify-content-center">
+              <div data-aos="fade-up" data-aos-once="True" data-aos-offset="1500" style="position: relative;">
+                <img src="@/assets/images/theme21/candy.jpg" alt="" style="height: 150px; margin:5px;">
+                <div data-aos="fade-up" data-aos-once="True" data-aos-offset="1500" style="position: absolute; top: -5px; left: 60px;"><img src="@/assets/images/theme21/strip.jpg" alt="" style="width: auto; height: 165px; margin:5px;"></div>
+              </div>
+              <img data-aos="fade-up" data-aos-once="True" data-aos-offset="1500" src="@/assets/images/theme21/the_scream.jpg" alt="" style="width: auto; height: 185px; margin:5px; z-index: 5;">
+              <img data-aos="fade-up" data-aos-once="True" data-aos-offset="1500" src="@/assets/images/theme21/udnie.jpg" alt="" style="width: auto; height: 200px; margin:5px; z-index: 6">
+              <img data-aos="fade-up" data-aos-once="True" data-aos-offset="1500" src="@/assets/images/theme21/mosaic.jpg" alt="" style="width: auto; height: 215px; margin:5px; z-index: 6">
+              <img data-aos="fade-up" data-aos-once="True" data-aos-offset="1500" src="@/assets/images/theme21/starry_night.jpg" alt="" style="width: auto; height: 185px; margin:5px; z-index: 5;">
+              <div data-aos="fade-up" data-aos-once="True" data-aos-offset="1500" class="" style="position: relative; left: 150px;">
+                <img src="@/assets/images/theme21/feathers.jpg" alt="" style="height: 140px; margin:5px;">
+                <div data-aos="fade-up" data-aos-once="True" data-aos-offset="1500" style="position: absolute; bottom: -5px; right: 60px;"><img src="@/assets/images/theme21/composition_vii.jpg" alt="" style="width: auto; height: 155px; margin:5px;"></div>
+              </div>
+            </div>  
         </div>
       </div>
     </div>
@@ -70,7 +94,7 @@
   <div class="modal-dialog modal-fullscreen">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="seasonLabel">사계절 적용기능</h5>
+        <h5 class="modal-title" id="seasonLabel">다양한 테마로의 전환 기능</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -96,6 +120,7 @@
 
 <script>
 import { onMounted } from '@vue/runtime-core'
+import AOS from 'aos'
 
 export default {
   name: 'MainView',
@@ -135,6 +160,7 @@ export default {
       return yTo
     }
     onMounted(() => {
+      AOS.init()
       const topArrow = document.querySelector('#topArrow')
       const bottomArrow = document.querySelector('#bottomArrow')
       const artModalEl = document.querySelector('#artModal')
@@ -205,11 +231,19 @@ button {
 }
 #bottomArrow :hover {
   cursor: pointer;
+  fill: black !important;
+  opacity: 1;
+
 }
 #topArrow {
   display: none;
+  top: 50px;
+  opacity: 0.2;
 }
 #topArrow :hover {
   cursor: pointer;
+  fill: black !important;
+  opacity: 1;
+
 }
 </style>

@@ -5,7 +5,13 @@
       </div>
       <div class="col-5 col-md-4 col-lg-3 d-flex flex-column justify-content-between">
         <div>
-          <div>
+          <h5>기능 선택</h5>
+          <ul class="pagination justify-content-center">
+            <li class="page-item" :class="{active : selectedConfig === 0}"><a class="page-link" @click="selectConfig(0)">일반</a></li>
+            <li class="page-item" :class="{active : selectedConfig === 1}"><a class="page-link" @click="selectConfig(1)">명화 변환</a></li>
+            <li class="page-item" :class="{active : selectedConfig === 2}"><a class="page-link" @click="selectConfig(2)">날씨 추천</a></li>
+          </ul>
+          <div v-show="selectedConfig === 1">
             <h3>스타일 선택</h3>
             <b-form-select v-model="artSelected" :options="artOptions"></b-form-select>
             <div v-show="artSelected===0">
@@ -16,7 +22,7 @@
           </div>
         </div>
         <div>
-          <b-button class="w-100 mb-1 mt-1" variant="secondary" @click.prevent="preview(previewData)">미리보기</b-button>
+          <b-button v-show="selectedConfig" class="w-100 mb-1 mt-1" variant="secondary" @click.prevent="preview()">미리보기</b-button>
           <b-button class="w-100" variant="primary">액자로 전송</b-button>
         </div>
       </div>
@@ -27,7 +33,7 @@
       </button>
     </div>
     <my-picture-list></my-picture-list>
-    <my-picture-pagenation></my-picture-pagenation>
+    <my-picture-pagination></my-picture-pagination>
     <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -70,6 +76,11 @@
                   </label>
                 </div>
               </div>
+              <hr>
+              <div>
+                <label class="form-label" for="userTags">태그(#tag1,#tag2,#tag3,...)</label>
+                <input class="form-control" type="text" name="userTags" v-model="userTags">
+              </div>
             </form>
           </div>
           <div class="modal-footer">
@@ -84,7 +95,7 @@
 
 <script>
 import myPictureList from '@/components/myPictureList'
-import myPicturePagenation from '@/components/myPicturePagenation'
+import myPicturePagination from '@/components/myPicturePagination'
 
 import { mapActions, mapGetters } from 'vuex'
 
@@ -92,26 +103,40 @@ export default {
   name: 'MyAlbumView',
   components : {
     myPictureList,
-    myPicturePagenation,
+    myPicturePagination,
   },
   data () {
     return {
+      selectedConfig: 0,
       artSelected: null,
       artOptions: [
         {value: 0, text: '나만의 스타일'},
-        {value: 1, text: '고흐'},
-        {value: 2, text: '모네'},
+        {value: 1, text: 'candy'},
+        {value: 2, text: 'composition_vii'},
+        {value: 3, text: 'escher_sphere'},
+        {value: 4, text: 'feathers'},
+        {value: 5, text: 'frida_kahlo'},
+        {value: 6, text: 'la_muse'},
+        {value: 7, text: 'mosaic'},
+        {value: 8, text: 'mosaic_ducks_massimo'},
+        {value: 9, text: 'pencil'},
+        {value: 10, text: 'picasso'},
+        {value: 11, text: 'portrait'},
+        {value: 12, text: 'rain_princess'},
+        {value: 13, text: 'seated_nude'},
+        {value: 14, text: 'shipwreck'},
+        {value: 15, text: 'starry_night'},
+        {value: 16, text: 'stars'},
+        {value: 17, text: 'strip'},
+        {value: 18, text: 'the_scream'},
+        {value: 19, text: 'udnie'},
+        {value: 20, text: 'wave'},
+        {value: 21, text: 'woman'},
       ],
     }
   },
   methods: {
-    ...mapActions(['fetchMyPictures', 'transfer', 'uploadPicture']),
-    preview() {
-      const previewContent = document.querySelector('.selectedContent img')
-      this.transfer(this.previewData).then(
-        previewContent.src = this.transferPicture.src
-      )
-    },
+    ...mapActions(['fetchMyPictures', 'uploadPicture', 'transfer']),
     uploadData() {
       const formData = new FormData()
       const publicFlag = document.querySelector('input[name="publicFlag"]:checked').value
@@ -122,6 +147,16 @@ export default {
       formData.append('id', localStorage.getItem('currentUser'))
       this.uploadPicture(formData)
     },
+    preview() {
+      const previewContent = document.querySelector('.selectedContent img')
+      this.transfer(this.previewData)
+      .then(
+        previewContent.src = this.transferPicture.src
+      )
+    },
+    selectConfig(data) {
+      this.selectedConfig = data
+    }
   },
   computed: {
     ...mapGetters(['myPictures', 'transferPicture']),

@@ -50,8 +50,7 @@ const routes = [
     component : MyAlbumView,
   },
   {
-    path : "/detail",      
-    // /????/detail
+    path : "/picture/detail",
     name : "PhotoDetailView",
     component : PhotoDetailView,
   },

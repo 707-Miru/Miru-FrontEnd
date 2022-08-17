@@ -132,6 +132,7 @@ export const pictures = {
     },
 
     transfer ({ commit }, data) {
+      console.log(data)
       axios({
         url: drf.pictures.transfer(),
         method: 'post',
@@ -147,15 +148,11 @@ export const pictures = {
     },
 
     uploadPicture (context, data) {
-      console.log(data.get('data'))
-      console.log(data.get('publicFlag'))
-      console.log(data.get('isPicture'))
-      console.log(data.get('id'))
+      console.log(data.get('tag'))
       axios({
         url: drf.pictures.uploadPicture(),
         method: 'post',
         headers: {
-          'Content-Type': 'multipart/form-data'
         },
         data,
       })
