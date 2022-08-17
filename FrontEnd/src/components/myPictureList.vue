@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <my-picture-list-item v-for="myPicture in myPictures" 
+    <my-picture-list-item v-for="myPicture in p" 
     :key="myPicture.id" 
     :myPicture="myPicture"
     draggable="true" class="col-12 col-sm-6 col-md-4 col-lg-2 mb-3 draggable"
@@ -28,19 +28,24 @@ export default {
     return {
       p:[
         {
-          'url': require('@/assets/images/art.png')
+          'url': require('@/assets/images/art.png'),
+          'id' : 1
         },
         {
-          'url': require('@/assets/images/search.png')
+          'url': require('@/assets/images/search.png'),
+          'id' : 2
         },
         {
-          'url': require('@/assets/images/season.png')
+          'url': require('@/assets/images/season.png'),
+          'id' : 3
         },
         {
-          'url': require('@/assets/images/weather.png')
+          'url': require('@/assets/images/weather.png'),
+          'id' : 4
         },
         {
-          'url': require('@/assets/frame.png')
+          'url': require('@/assets/frame.png'),
+          'id' : 5
         }
       ]
     }
