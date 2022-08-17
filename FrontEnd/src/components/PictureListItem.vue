@@ -11,6 +11,7 @@
     </div>
     <img :src="url + filepath" alt="">
     
+    
 
     <div class="tag">
       태그들 {{ picture.tag }}
@@ -45,6 +46,10 @@ export default {
   methods: {
     ...mapActions(['likePicture',])
   },
+
+  created () {
+    console.log(this.filepath)
+  }
 
 
 }
