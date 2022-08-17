@@ -2,7 +2,17 @@
   <div id="app">
     <nav-bar class="nav"></nav-bar>
     <router-view/>
-    <footer><a href="https://www.flaticon.com/free-icons/pond" title="pond icons">Pond icons created by Nikita Golubev - Flaticon</a></footer>
+
+  <footer class="text-center text-white">
+    <!-- Copyright -->
+    <div class="text-center text-dark p-3" style="background-color: #white;">
+      © 2022 Copyright:Miru ENT.
+    </div>
+    <div>
+      <a style="color:darkslateblue" href="https://www.flaticon.com/free-icons/pond" title="pond icons">Pond icons created by Nikita Golubev - Flaticon</a>
+    </div>      
+    <!-- Copyright -->
+  </footer>
   </div>
 </template>
 
