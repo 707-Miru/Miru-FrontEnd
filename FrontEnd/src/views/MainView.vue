@@ -51,17 +51,17 @@
           <h1 class="fw-bold">다양한 테마로의 전환 기능</h1>
           <p class="fs-5">내가 찍은 사진을 오늘의 모네가 다양한 테마로 바꾸어 드립니다</p>
             <div class="item container d-flex align-items-center justify-content-center">
-              <div data-aos="fade-up" data-aos-once="True" data-aos-offset="1500" style="position: relative;">
+              <div data-aos="fade-up" data-aos-once="True" data-aos-offset="1400" style="position: relative;">
                 <img src="@/assets/images/theme21/candy.jpg" alt="" style="height: 150px; margin:5px;">
-                <div data-aos="fade-up" data-aos-once="True" data-aos-offset="1500" style="position: absolute; top: -5px; left: 60px;"><img src="@/assets/images/theme21/strip.jpg" alt="" style="width: auto; height: 165px; margin:5px;"></div>
+                <div data-aos="fade-up" data-aos-once="True" data-aos-offset="1400" style="position: absolute; top: -5px; left: 60px;"><img src="@/assets/images/theme21/strip.jpg" alt="" style="width: auto; height: 165px; margin:5px;"></div>
               </div>
-              <img data-aos="fade-up" data-aos-once="True" data-aos-offset="1500" src="@/assets/images/theme21/the_scream.jpg" alt="" style="width: auto; height: 185px; margin:5px; z-index: 5;">
-              <img data-aos="fade-up" data-aos-once="True" data-aos-offset="1500" src="@/assets/images/theme21/udnie.jpg" alt="" style="width: auto; height: 200px; margin:5px; z-index: 6">
-              <img data-aos="fade-up" data-aos-once="True" data-aos-offset="1500" src="@/assets/images/theme21/mosaic.jpg" alt="" style="width: auto; height: 215px; margin:5px; z-index: 6">
-              <img data-aos="fade-up" data-aos-once="True" data-aos-offset="1500" src="@/assets/images/theme21/starry_night.jpg" alt="" style="width: auto; height: 185px; margin:5px; z-index: 5;">
-              <div data-aos="fade-up" data-aos-once="True" data-aos-offset="1500" class="" style="position: relative; left: 150px;">
+              <img data-aos="fade-up" data-aos-once="True" data-aos-offset="1400" src="@/assets/images/theme21/the_scream.jpg" alt="" style="width: auto; height: 185px; margin:5px; z-index: 5;">
+              <img data-aos="fade-up" data-aos-once="True" data-aos-offset="1400" src="@/assets/images/theme21/udnie.jpg" alt="" style="width: auto; height: 200px; margin:5px; z-index: 6">
+              <img data-aos="fade-up" data-aos-once="True" data-aos-offset="1400" src="@/assets/images/theme21/mosaic.jpg" alt="" style="width: auto; height: 215px; margin:5px; z-index: 6">
+              <img data-aos="fade-up" data-aos-once="True" data-aos-offset="1400" src="@/assets/images/theme21/starry_night.jpg" alt="" style="width: auto; height: 185px; margin:5px; z-index: 5;">
+              <div data-aos="fade-up" data-aos-once="True" data-aos-offset="1400" class="" style="position: relative; left: 150px;">
                 <img src="@/assets/images/theme21/feathers.jpg" alt="" style="height: 140px; margin:5px;">
-                <div data-aos="fade-up" data-aos-once="True" data-aos-offset="1500" style="position: absolute; bottom: -5px; right: 60px;"><img src="@/assets/images/theme21/composition_vii.jpg" alt="" style="width: auto; height: 155px; margin:5px;"></div>
+                <div data-aos="fade-up" data-aos-once="True" data-aos-offset="1400" style="position: absolute; bottom: -5px; right: 60px;"><img src="@/assets/images/theme21/composition_vii.jpg" alt="" style="width: auto; height: 155px; margin:5px;"></div>
               </div>
             </div>  
         </div>
