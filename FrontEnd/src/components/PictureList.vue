@@ -7,7 +7,7 @@
     </picture-list-item>
   </div>
   <div>
-    <b-button @click="fetchPicture(datas)">more</b-button>
+    <b-button @click="fetchPicture(params)">more</b-button>
   </div>
 </template>
 
@@ -29,7 +29,14 @@ export default {
 
   data () {
     return {
-      datas : {
+    
+    }
+  },
+
+  computed: {
+    ...mapGetters(['pictures', 'tpage', 'sortKeyword', 'currentUserId']),
+    params () {
+      return {
       'page' : this.tpage,
       'sortKeyword' : this.sortKeyword,
       'id' : this.currentUserId
@@ -37,20 +44,12 @@ export default {
     }
   },
 
-  computed: {
-    ...mapGetters(['pictures', 'tpage', 'sortKeyword', 'currentUserId'])
-  },
-
   methods: {
     ...mapActions(['fetchPicture'])
   },
  
 
-  created () {
 
-    console.log(this.pictures)
-
-  }
 }
 </script>
 

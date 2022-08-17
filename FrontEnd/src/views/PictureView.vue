@@ -37,8 +37,7 @@ export default {
       'sortKeyword' : this.sortKeyword,
       'id' : this.currentUserId
     }
-    this.fetchPicture(datas),
-    console.log(datas)
+    this.fetchPicture(datas)
   }
 
 }
