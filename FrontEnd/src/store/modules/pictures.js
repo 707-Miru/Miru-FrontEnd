@@ -103,6 +103,7 @@ export const pictures = {
         headers: getters.authHeader
       })
       .then( res => {
+        console.log(res)
         commit('FETCH_PICTURE', res.data)
       })
       .catch( err => console.log(err))
