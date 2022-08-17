@@ -26,6 +26,7 @@ export const pictures = {
   getters: {
     pictures: state => state.pictures,
     page: state => state.page,
+    tpage: state => state.tpage,
 
     totalPictures: state => state.totalPictures,
 
@@ -84,7 +85,7 @@ export const pictures = {
         url: drf.pictures.picture(),
         method: 'get',
         headers: getters.authHeader,
-        params: datas
+        params: datas 
       })
       .then( res => {
         console.log(res)
