@@ -47,7 +47,7 @@ export const pictures = {
 
   mutations: {
     FETCH_PICTURE: (state, pictures) => state.pictures.push(...pictures),
-    INCREASE_PAGE: (state, page) => state.page = page + 20,
+    INCREASE_PAGE: (state, page) => state.page = page + 1,
     SET_MY_PICTURES : (state, myPictures) => {
       const totalPictureCnt = myPictures.pop()
       state.totalPictureCnt = totalPictureCnt['totalPictureCnt']
@@ -89,8 +89,8 @@ export const pictures = {
       })
       .then( res => {
         console.log(res)
-        commit('FETCH_PICTURE', res.data)
-        commit('INCREASE_PAGE', getters.page)
+        commit('FETCH_PICTURE', res.data.pictureList)
+        commit('INCREASE_PAGE', getters.tpage)
       })
       .catch( err => console.error( err ))
     },
