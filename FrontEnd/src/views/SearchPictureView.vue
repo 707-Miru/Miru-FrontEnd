@@ -1,6 +1,6 @@
 <template>
   <div>
-    <picture-list></picture-list>
+    <picture-list :pictures="pictures"></picture-list>
   </div>
 </template>
 
@@ -22,7 +22,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['isPicture', 'sortKey', 'currentUserId', 'page'])
+    ...mapGetters(['isPicture', 'sortKey', 'currentUserId', 'page', 'pictures'])
   },
   methods : {
     ...mapActions(['fetchSearchPicture'])
@@ -34,7 +34,7 @@ export default {
       'data' : {
         'isPicture' : this.isPicture,
         'id' : this.currentUserId,
-        'sortKey' : this.sortKey,
+        'sortKeyword' : this.sortKey,
         'page' : this.page
       }
     }
