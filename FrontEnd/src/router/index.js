@@ -56,7 +56,7 @@ const routes = [
   },
 
   {
-    path : "/searh/:keyword",      
+    path : "/search/:keyword",      
     name : "SearchPictureView",
     component : SearchPictureView,
   },
