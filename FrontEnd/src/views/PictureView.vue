@@ -34,7 +34,7 @@ export default {
   created () {
     const datas = {
       'id' : this.currentUserId,
-      'sortKeyword' : this.sortKey,
+      'sortKeyword' : this.sortKeyword,
       'page' : this.page
     }
     this.fetchPicture(datas),
