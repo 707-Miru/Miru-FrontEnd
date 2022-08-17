@@ -1,7 +1,7 @@
 <template>
   <div id="columns">
-    <picture-list-item v-for="picture in p"
-    :key="picture.url"
+    <picture-list-item v-for="picture in pictures"
+    :key="picture.pictureIdx"
     :picture="picture"
     >
     </picture-list-item>
