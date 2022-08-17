@@ -21,7 +21,7 @@ export default {
   },
 
   pictures: {
-    picture: () => HOST + 'picture/',
+    picture: () => HOST + 'picture',
     totalPictures: () => HOST + 'pictures/',
     search: (keyword) => HOST + `/picture/${keyword}`,
     myPictures: (id) => HOST + `favorite/picture/${id}`,
