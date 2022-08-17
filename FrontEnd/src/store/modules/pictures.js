@@ -104,7 +104,7 @@ export const pictures = {
       })
       .then( res => {
         console.log(res)
-        commit('FETCH_PICTURE', res.data)
+        commit('FETCH_PICTURE', res.data.pictureList)
       })
       .catch( err => console.log(err))
     },

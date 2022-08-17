@@ -14,7 +14,7 @@
     
 
     <div class="tag">
-      태그들 {{ picture.tag }}
+      {{ picture.tag }}
     </div>
   </div>
 
@@ -47,9 +47,7 @@ export default {
     ...mapActions(['likePicture',])
   },
 
-  created () {
-    console.log(this.filepath)
-  }
+ 
 
 
 }
