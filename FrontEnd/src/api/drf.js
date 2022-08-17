@@ -1,6 +1,8 @@
 
 
-const HOST = 'http://15.165.15.68:9999/'
+
+const HOST = 'https://i7a707.p.ssafy.io/api/'
+
 
 
 
@@ -19,8 +21,14 @@ export default {
   },
 
   pictures: {
-    picture: () => HOST + 'picture/',
+    picture: () => HOST + 'picture',
     totalPictures: () => HOST + 'pictures/',
-    transfer: () => HOST + '/picture/transfer/',
+    search: (keyword) => HOST + `picture/${keyword}`,
+    myPictures: (id) => HOST + `favorite/picture/${id}`,
+    transfer: () => HOST + 'picture/transfer/',
+    uploadPicture: () => HOST + 'picture/upload/',
+    deletePicture: (id) => HOST + `picture/delete/${id}`,
+    like: () => HOST + 'favorite/picture/'
+
   },
 }

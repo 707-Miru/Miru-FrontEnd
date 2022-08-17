@@ -1,13 +1,13 @@
 <template>
   <div id="columns">
-    <picture-list-item v-for="picture in p"
-    :key="picture.url"
+    <picture-list-item v-for="picture in pictures"
+    :key="picture.pictureIdx"
     :picture="picture"
     >
     </picture-list-item>
   </div>
   <div>
-    <b-button >more</b-button>
+    <b-button @click="fetchPicture(datas)">more</b-button>
   </div>
 </template>
 
@@ -16,8 +16,12 @@ import PictureListItem from '@/components/PictureListItem'
 import { mapActions, mapGetters } from 'vuex'
 
 
+
+
 export default {
   name: 'PictureList',
+
+ 
 
   components:{
     PictureListItem,
@@ -25,40 +29,28 @@ export default {
 
   data () {
     return {
-      p:[
-        {
-          'url': require('@/assets/images/art.png')
-        },
-        // {
-        //   'url': require('@/assets/images/background.png')
-        // },
-        {
-          'url': require('@/assets/images/search.png')
-        },
-        {
-          'url': require('@/assets/images/season.png')
-        },
-        {
-          'url': require('@/assets/images/weather.png')
-        },
-        {
-          'url': require('@/assets/frame.png')
-        }
-      ]
+      datas : {
+      'page' : this.tpage,
+      'sortKeyword' : this.sortKeyword,
+      'id' : this.currentUserId
+      }
     }
   },
 
   computed: {
-    ...mapGetters(['pictures'])
+    ...mapGetters(['pictures', 'tpage', 'sortKeyword', 'currentUserId'])
   },
 
   methods: {
     ...mapActions(['fetchPicture'])
   },
+ 
 
-  // setup () {
-  //   this.fetchPicture()
-  // }
+  created () {
+
+    console.log(this.pictures)
+
+  }
 }
 </script>
 

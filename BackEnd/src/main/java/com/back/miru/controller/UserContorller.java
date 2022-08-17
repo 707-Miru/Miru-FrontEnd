@@ -1,6 +1,5 @@
 package com.back.miru.controller;
 
-import com.back.miru.model.dto.Interest;
 import com.back.miru.model.dto.User;
 import com.back.miru.model.service.JwtService;
 import com.back.miru.model.service.UserService;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -63,19 +61,16 @@ public class UserContorller {
         System.out.println("update User 호출");
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status = null;
-
         try {
             map.put("id", id);
             userService.updateUser(map);
             resultMap.put("userInfo", map);
             resultMap.put("message", SUCCESS);
             status = HttpStatus.ACCEPTED;
-
         } catch (Exception e) {
             logger.error("수정 실패 : {}", e);
             resultMap.put("message", e.getMessage());
             status = HttpStatus.INTERNAL_SERVER_ERROR;
-
         }
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
     }
@@ -87,19 +82,15 @@ public class UserContorller {
         System.out.println("delete user 호출");
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status = null;
-        System.out.println(id);
         try {
             userService.deleteUser(id);
             resultMap.put("message", SUCCESS);
             status = HttpStatus.ACCEPTED;
-
         } catch (Exception e) {
             logger.error("삭제 실패 : {}", e);
             resultMap.put("message", e.getMessage());
             status = HttpStatus.INTERNAL_SERVER_ERROR;
-
         }
-        System.out.println(status);
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
     }
 
@@ -145,47 +136,17 @@ public class UserContorller {
             HttpServletRequest request) {
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;
-        if (jwtService.isUsable(request.getHeader("token"))) {
-            logger.info("사용 가능한 토큰!!!");
-            try {
-                User user = userService.infoUser(id);
-                resultMap.put("userInfo", user);
-                resultMap.put("message", SUCCESS);
-                status = HttpStatus.ACCEPTED;
-            } catch (Exception e) {
-                logger.error("정보조회 실패 : {}", e);
-                resultMap.put("message", e.getMessage());
-                status = HttpStatus.INTERNAL_SERVER_ERROR;
-            }
-        } else {
-            logger.error("사용 불가능 토큰!!!");
-            resultMap.put("message", FAIL);
+        try {
+            User user = userService.infoUser(id);
+            resultMap.put("userInfo", user);
+            resultMap.put("message", SUCCESS);
             status = HttpStatus.ACCEPTED;
+        } catch (Exception e) {
+            logger.error("정보조회 실패 : {}", e);
+            resultMap.put("message", e.getMessage());
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+            return new ResponseEntity<Map<String, Object>>(resultMap, status);
         }
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
     }
-
-    @GetMapping("/interest/{id}")
-    public ResponseEntity<List<Interest>> getInterestList(@PathVariable String id) throws Exception {
-        return new ResponseEntity<List<Interest>>(userService.getInterestList(id), HttpStatus.OK);
-    }
-
-    @PostMapping("/interest")
-    public ResponseEntity<String> addInterest(@RequestBody Map<String, String> map) throws Exception {
-        if (userService.resisterInterest(map)) {
-            return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<String>(FAIL, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @PostMapping("/interest/remove")
-    public ResponseEntity<String> deleteInterest(@RequestBody Map<String, String> map) throws Exception {
-        if (userService.deleteInterest(map)) {
-            return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<String>(FAIL, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
 }

@@ -9,6 +9,7 @@
 <script>
 import PictureList from '@/components/PictureList.vue'
 import SearchBar from '@/components/SearchBar.vue'
+import { mapActions, mapGetters } from 'vuex'
 
 
 
@@ -18,8 +19,28 @@ export default {
   components:{
     PictureList,
     SearchBar
-    
+  },
+
+
+
+  computed: {
+    ...mapGetters(['currentUserId', 'tpage', 'sortKeyword', 'isPicture'])
+  },
+
+  methods:{
+    ...mapActions(['fetchPicture']),
+  },
+
+  created () {
+    const datas = {
+      'page' : this.tpage,
+      'sortKeyword' : this.sortKeyword,
+      'id' : this.currentUserId
+    }
+    this.fetchPicture(datas),
+    console.log(datas)
   }
+
 }
 </script>
 

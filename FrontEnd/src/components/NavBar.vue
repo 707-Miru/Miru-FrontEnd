@@ -1,5 +1,6 @@
 <template>
-    <nav class="fixed-top navbar navbar-expand-lg justify-content-between shadow-sm" style="background-color: rgba(255, 255, 255, 0.95)">
+    <nav class="sticky-top navbar navbar-expand-lg justify-content-between shadow-sm" style="background-color: rgba(255, 255, 255, 0.95)">
+
 
         <div>
             <span>
@@ -42,8 +43,8 @@
                     </li>
 
                     <li v-if="!!isLoggedIn" class="nav-item">
-                        <a class="nav-link" href="/logout" style="color:#C9BBCF">
-                            <img src="@/assets/logout.svg" alt="" width="18" height="18" class="d-inline-block nav-margin">Logout
+                        <a class="nav-link"  style="color:#C9BBCF" @click.prevent="logout">
+                            <img src="@/assets/logout.svg" alt="" width="18" height="18" class="d-inline-block nav-margin" >Logout
                         </a>
                     </li>
 
@@ -63,7 +64,7 @@
 
 
 <script>
-  import { mapGetters } from 'vuex'
+  import { mapActions, mapGetters } from 'vuex'
 
   export default {
     name: 'NavBar',
@@ -73,6 +74,14 @@
     //     return this.currentUser.username ? this.currentUser.username : 'guest'
     //   },
     },
+    methods: {
+        ...mapActions(['removeToken', 'removeCurrentUser']),
+
+        logout () {
+            this.removeToken()
+            this.removeCurrentUser()
+        }
+    }
   }
 
 function clickEffect(e){
