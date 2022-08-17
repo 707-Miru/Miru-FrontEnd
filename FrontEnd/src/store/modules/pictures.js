@@ -46,8 +46,9 @@ export const pictures = {
   },
 
   mutations: {
+    RESET_PICTURES: (state) => state.pictures = [],
     FETCH_PICTURE: (state, pictures) => state.pictures.push(...pictures),
-    INCREASE_PAGE: (state, page) => state.page = page + 1,
+    INCREASE_PAGE: (state, tpage) => state.tpage = tpage + 1,
     SET_MY_PICTURES : (state, myPictures) => {
       const totalPictureCnt = myPictures.pop()
       state.totalPictureCnt = totalPictureCnt['totalPictureCnt']
@@ -96,8 +97,9 @@ export const pictures = {
     },
 
     fetchSearchPicture ({ getters, commit }, datas) {
+      commit('RESET_PICTURES')
       axios({
-        url:  drf.pictures.search(datas.keyword),
+        url: drf.pictures.search(datas.keyword),
         method: 'post',
         data: datas.data,
         headers: getters.authHeader
@@ -106,7 +108,7 @@ export const pictures = {
         console.log(res)
         commit('FETCH_PICTURE', res.data.pictureList)
       })
-      .catch( err => console.log(err))
+      .catch( err => console.error(err))
     },
 
     fetchMyPictures ({ commit, getters }) {

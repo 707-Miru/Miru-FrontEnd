@@ -1,11 +1,11 @@
 <template>
   <div>
-    <picture-list :pictures="pictures"></picture-list>
+    <picture-list></picture-list>
   </div>
 </template>
 
 <script>
-import PictureList from '@/components/PictureListItem'
+import PictureList from '@/components/PictureList'
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
@@ -35,11 +35,11 @@ export default {
         'isPicture' : this.isPicture,
         'id' : this.currentUserId,
         'sortKeyword' : this.sortKey,
-        'page' : this.page
+        'page' : 1
       }
     }
     this.fetchSearchPicture(datas)
-    console.log(datas)
+   
   }
 
 
