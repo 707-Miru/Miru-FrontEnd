@@ -7,13 +7,13 @@
     </picture-list-item>
   </div>
   <div>
-    <b-button>more</b-button>
+    <b-button @click="fetchPicture(datas)">more</b-button>
   </div>
 </template>
 
 <script>
 import PictureListItem from '@/components/PictureListItem'
-import { mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 
 
@@ -29,34 +29,21 @@ export default {
 
   data () {
     return {
-      p:[
-        {
-          'url': require('@/assets/images/art.png')
-        },
-        // {
-        //   'url': require('@/assets/images/background.png')
-        // },
-        {
-          'url': require('@/assets/images/search.png')
-        },
-        {
-          'url': require('@/assets/images/season.png')
-        },
-        {
-          'url': require('@/assets/images/weather.png')
-        },
-        {
-          'url': require('@/assets/frame.png')
-        }
-      ],
+      datas : {
+      'page' : this.tpage,
+      'sortKeyword' : this.sortKeyword,
+      'id' : this.currentUserId
+      }
     }
   },
 
   computed: {
-    ...mapGetters(['pictures',])
+    ...mapGetters(['pictures', 'tpage', 'sortKeyword', 'currentUserId'])
   },
 
-
+  methods: {
+    ...mapActions(['fetchPicture'])
+  },
  
 
   created () {
