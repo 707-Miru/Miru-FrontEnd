@@ -11,12 +11,24 @@
         <b-form  @submit.prevent="searchKeyword">
             <b-form-input placeholder="이미지, 동영상 검색" v-model="keyword"></b-form-input>
         </b-form>
+
         <template #append>
         <b-dropdown :text="sortKey" variant="outline-secondary">
             <b-dropdown-item-button @click="changeKeyword">업데이트 순</b-dropdown-item-button>
             <b-dropdown-item-button @click="changeKeyword">좋아요 순</b-dropdown-item-button>
         </b-dropdown>
         </template>
+
+        <!-- <div>
+          <b-dropdown :text="sortKey" variant="link" toggle-class="text-decoration-none" no-caret>
+            <template #button-content>
+              &#x1f50d;
+            </template>
+            <b-dropdown-item @click="changeKeyword">업데이트 순</b-dropdown-item>
+            <b-dropdown-item @click="changeKeyword">좋아요 순</b-dropdown-item>
+          </b-dropdown>
+        </div> -->
+
     </b-input-group>
     </div>
   </div>
@@ -74,5 +86,6 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  opacity: 0.8;
 }
 </style>

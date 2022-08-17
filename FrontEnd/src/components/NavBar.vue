@@ -1,7 +1,6 @@
 <template>
     <nav class="sticky-top navbar navbar-expand-lg justify-content-between shadow-sm" style="background-color: rgba(255, 255, 255, 0.95)">
 
-
         <div>
             <span>
                 <a class=" navbar-text nav-margin" href="/picture" style="color:#898AA6">
@@ -43,11 +42,15 @@
                     </li>
 
                     <li v-if="!!isLoggedIn" class="nav-item">
-                        <a class="nav-link"  style="color:#C9BBCF" @click.prevent="logout">
-                            <img src="@/assets/logout.svg" alt="" width="18" height="18" class="d-inline-block nav-margin" >Logout
+                        <a class="nav-link" href="/logout" style="color:#C9BBCF">
+                            <img src="@/assets/logout.svg" alt="" width="20" height="20" class="d-inline-block nav-margin">로그아웃
                         </a>
                     </li>
-
+                    <li v-if="!!isLoggedIn" class="nav-item">
+                        <a class="nav-link" href="/myalbum" style="color:#C9BBCF">
+                            <img src="@/assets/myalbum.svg" alt="" width="24" height="24" class="d-inline-block nav-margin">나의 앨범
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -64,7 +67,7 @@
 
 
 <script>
-  import { mapActions, mapGetters } from 'vuex'
+  import { mapGetters } from 'vuex'
 
   export default {
     name: 'NavBar',
@@ -74,14 +77,6 @@
     //     return this.currentUser.username ? this.currentUser.username : 'guest'
     //   },
     },
-    methods: {
-        ...mapActions(['removeToken', 'removeCurrentUser']),
-
-        logout () {
-            this.removeToken()
-            this.removeCurrentUser()
-        }
-    }
   }
 
 function clickEffect(e){

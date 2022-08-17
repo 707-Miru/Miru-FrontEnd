@@ -7,7 +7,7 @@
     </picture-list-item>
   </div>
   <div>
-    <b-button @click="fetchPicture(params)">more</b-button>
+    <b-button class="btn btn-light" @click="fetchPicture(params)">more</b-button>
   </div>
 </template>
 
