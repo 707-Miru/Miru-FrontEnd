@@ -9,7 +9,7 @@
       </svg>
       <span>좋아요 수 {{ picture.likeCnt }}</span>
     </div>
-    <img :src="url + picture.filepath.split('/').reverse()[0]" alt="">
+    <img :src="url + filepath" alt="">
     
 
     <div class="tag">
@@ -37,7 +37,9 @@ export default {
   },
 
   computed: {
-    // filepath : this.picture.filepath.split('/').reverse()[0]
+    filepath () {
+      return this.picture.filepath.split('/').reverse()[0]
+    }
   },
 
   methods: {
