@@ -79,15 +79,12 @@ export const pictures = {
       })
     },
 
-    fetchPicture ({ commit, getters }) {
+    fetchPicture ({ commit, getters }, datas) {
       axios({
         url: drf.pictures.picture(),
         method: 'get',
         headers: getters.authHeader,
-        params: {
-          'page': getters.page,
-          'sortKeyword': getters.keyword,
-         }
+        params: datas
       })
       .then( res => {
         console.log(res)
