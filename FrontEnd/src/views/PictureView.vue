@@ -33,9 +33,9 @@ export default {
 
   created () {
     const datas = {
-      'id' : this.currentUserId,
+      'page' : this.tpage,
       'sortKeyword' : this.sortKeyword,
-      'page' : this.tpage
+      'id' : this.currentUserId
     }
     this.fetchPicture(datas),
     console.log(datas)
