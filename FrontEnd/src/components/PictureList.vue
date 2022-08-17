@@ -13,6 +13,7 @@
 
 <script>
 import PictureListItem from '@/components/PictureListItem'
+import { mapGetters } from 'vuex'
 
 
 
@@ -20,9 +21,7 @@ import PictureListItem from '@/components/PictureListItem'
 export default {
   name: 'PictureList',
 
-  props: {
-    pictures: Array
-  },
+ 
 
   components:{
     PictureListItem,
@@ -53,19 +52,17 @@ export default {
     }
   },
 
+  computed: {
+    ...mapGetters(['pictures',])
+  },
 
 
  
 
   created () {
-    const data = {
-      'page': this.page,
-      // 'sortKeyword': 'like',
-      'id' : this.currentUserId
-          }
-    console.log(typeof(data.page))
-    console.log(typeof(data.id))
-    // this.fetchPicture(data)
+
+    console.log(this.pictures)
+
   }
 }
 </script>
