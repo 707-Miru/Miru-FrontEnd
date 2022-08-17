@@ -24,7 +24,7 @@ export default {
 
 
   computed: {
-    ...mapGetters(['pictures', 'currentUserId', 'page', 'sortKeyword', 'isPicture'])
+    ...mapGetters(['pictures', 'currentUserId', 'tpage', 'sortKeyword', 'isPicture'])
   },
 
   methods:{
@@ -35,7 +35,7 @@ export default {
     const datas = {
       'id' : this.currentUserId,
       'sortKeyword' : this.sortKeyword,
-      'page' : this.page
+      'page' : this.tpage
     }
     this.fetchPicture(datas),
     console.log(datas)
