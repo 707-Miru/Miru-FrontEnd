@@ -1,7 +1,7 @@
 <template>
   <div>
     <search-bar></search-bar>
-    <picture-list :pictures="pictuers"></picture-list>
+    <picture-list></picture-list>
 
   </div>
 </template>
@@ -24,7 +24,7 @@ export default {
 
 
   computed: {
-    ...mapGetters(['pictures', 'currentUserId', 'tpage', 'sortKeyword', 'isPicture'])
+    ...mapGetters(['currentUserId', 'tpage', 'sortKeyword', 'isPicture'])
   },
 
   methods:{
