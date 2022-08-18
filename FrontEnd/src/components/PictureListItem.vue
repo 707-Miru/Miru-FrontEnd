@@ -33,7 +33,7 @@ export default {
     return {
       url : 'https://i7a707.p.ssafy.io/api/img/',
       check : 0,
-      cnt = 0
+      cnt : 0
     }
   },
 
