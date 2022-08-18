@@ -22,7 +22,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['isPicture', 'sortKey', 'currentUserId', 'page', 'pictures'])
+    ...mapGetters(['isPicture', 'sortKeyword', 'currentUserId', 'page', 'pictures'])
   },
   methods : {
     ...mapActions(['fetchSearchPicture'])
@@ -34,7 +34,7 @@ export default {
       'data' : {
         'isPicture' : this.isPicture,
         'id' : this.currentUserId,
-        'sortKeyword' : this.sortKey,
+        'sortKeyword' : this.sortKeyword,
         'page' : 1
       }
     }
