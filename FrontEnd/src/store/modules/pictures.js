@@ -66,16 +66,7 @@ export const pictures = {
       commit('SET_SORTKEY', sortKey)
     },
 
-    likePicture ({getters}, id) {
-      axios({
-        url: drf.pictures.like(),
-        method: 'post',
-        data: {
-          'id' : getters.currentUserId,
-          'pictureIdx' : id
-        }
-      })
-    },
+
 
     fetchPicture ({ commit, getters }, datas) {
       axios({
