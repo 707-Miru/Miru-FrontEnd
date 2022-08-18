@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <my-picture-list-item v-for="myPicture in p" 
+    <my-picture-list-item v-for="myPicture in myPictures" 
     :key="myPicture.id" 
     :myPicture="myPicture"
     draggable="true" class="col-12 col-sm-6 col-md-4 col-lg-2 mb-3 draggable"

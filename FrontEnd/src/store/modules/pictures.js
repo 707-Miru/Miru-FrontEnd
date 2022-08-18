@@ -15,7 +15,7 @@ export const pictures = {
     keyword: '',
     myPage: 1,
     myPictures : [],
-    totalPictureCnt : 50,
+    totalPictureCnt : 1,
 
     transferPicture : {},
     select: '이미지',
@@ -193,5 +193,21 @@ export const pictures = {
         console.log(err)
       })
     },
+
+    userPosition ({ getters }, data) {
+      console.log(data)
+      axios({
+        url: drf.pictures.weather(),
+        method: 'post',
+        headers: getters.authHeader,
+        data,
+      })
+      .then(res => {
+        console.log(res)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    }
   },
 }
