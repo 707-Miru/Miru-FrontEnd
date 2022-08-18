@@ -29,6 +29,7 @@ export default {
     uploadPicture: () => HOST + 'picture/upload/',
     deletePicture: (id) => HOST + `picture/delete/${id}`,
     like: () => HOST + 'favorite/picture/',
+    dislike : (pictureIdx) => HOST + `favorite/picture/${pictureIdx}`,
     showPicture: () => HOST + 'picture/show',
     weather: () => HOST + 'picture/weather',
   },
