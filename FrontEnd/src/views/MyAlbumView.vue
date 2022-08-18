@@ -204,7 +204,13 @@ export default {
     },
     userLocation() {
       navigator.geolocation.getCurrentPosition((pos) => {
-        this.userPosition(pos.coords)
+        const lat = pos.coords.latitude
+        const lon = pos.coords.longitude
+        const data = {
+          lat,
+          lon
+        }
+        this.userPosition(data)
       })
     }
   },

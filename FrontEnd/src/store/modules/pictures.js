@@ -195,7 +195,6 @@ export const pictures = {
     },
 
     userPosition ({ getters }, data) {
-      console.log(data)
       axios({
         url: drf.pictures.weather(),
         method: 'post',
