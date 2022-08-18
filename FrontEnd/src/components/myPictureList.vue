@@ -28,19 +28,24 @@ export default {
     return {
       p:[
         {
-          'url': require('@/assets/images/art.png')
+          'url': require('@/assets/images/art.png'),
+          'id' : 1
         },
         {
-          'url': require('@/assets/images/search.png')
+          'url': require('@/assets/images/search.png'),
+          'id' : 2
         },
         {
-          'url': require('@/assets/images/season.png')
+          'url': require('@/assets/images/season.png'),
+          'id' : 3
         },
         {
-          'url': require('@/assets/images/weather.png')
+          'url': require('@/assets/images/weather.png'),
+          'id' : 4
         },
         {
-          'url': require('@/assets/frame.png')
+          'url': require('@/assets/frame.png'),
+          'id' : 5
         }
       ]
     }

@@ -29,7 +29,7 @@ public class FavoriteController {
     private FavoriteService favoriteService;
 
     @PostMapping("/user")
-    public ResponseEntity<Map<String, Object>> registFavoriteUser(@RequestBody Map<String, String> map, HttpServletRequest request) throws Exception {
+    public ResponseEntity<Map<String, Object>> registFavoriteUser(@RequestBody Map<String, String> map) throws Exception {
         System.out.println("resistFavorite controller 시작");
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;
@@ -47,7 +47,7 @@ public class FavoriteController {
     }
 
     @DeleteMapping("/user/{followId}")
-    public ResponseEntity<Map<String, Object>> deleteFavoriteUser(@PathVariable String followId, @RequestBody Map<String, String> map, HttpServletRequest request) {
+    public ResponseEntity<Map<String, Object>> deleteFavoriteUser(@PathVariable String followId, @RequestBody Map<String, String> map) {
         System.out.println("deleteFavorite controller 시작");
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;
@@ -65,7 +65,7 @@ public class FavoriteController {
     }
 
     @GetMapping("/user/{id}")
-    public ResponseEntity<Map<String, Object>> getFavoriteUserInfo(@PathVariable String id, HttpServletRequest request) {
+    public ResponseEntity<Map<String, Object>> getFavoriteUserInfo(@PathVariable String id) {
         System.out.println("FavoriteInfo controller 시작");
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;
@@ -86,7 +86,7 @@ public class FavoriteController {
 
     // 좋아요 사진 등록
     @PostMapping("/picture")
-    public ResponseEntity<Map<String, Object>> registFavoritePicture(@RequestBody Map<String, String> map, HttpServletRequest request) throws Exception {
+    public ResponseEntity<Map<String, Object>> registFavoritePicture(@RequestBody Map<String, String> map) throws Exception {
         System.out.println("resistFavorite controller 시작");
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;
@@ -105,7 +105,7 @@ public class FavoriteController {
 
     // 좋아요 사진 제거
     @DeleteMapping("/picture/{pictureIdx}")
-    public ResponseEntity<Map<String, Object>> deleteFavoritePicture(@PathVariable String pictureIdx, @RequestBody Map<String, String> map, HttpServletRequest request) {
+    public ResponseEntity<Map<String, Object>> deleteFavoritePicture(@PathVariable String pictureIdx, @RequestBody Map<String, String> map) {
         System.out.println("deleteFavorite controller 시작");
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;
@@ -123,7 +123,7 @@ public class FavoriteController {
     }
 
     @GetMapping("/picture/{id}")
-    public ResponseEntity<Map<String, Object>> getFavoritePictureInfo(@PathVariable String id, @RequestBody Map<String, String> map, HttpServletRequest request) {
+    public ResponseEntity<Map<String, Object>> getFavoritePictureInfo(@PathVariable String id, @RequestBody Map<String, String> map) {
         System.out.println("FavoriteInfo controller 시작");
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;

@@ -15,7 +15,7 @@ export const pictures = {
     keyword: '',
     myPage: 1,
     myPictures : [],
-    totalPictureCnt : 50,
+    totalPictureCnt : 1,
 
     transferPicture : {},
     select: '이미지',
@@ -116,9 +116,7 @@ export const pictures = {
       axios({
         url: drf.pictures.myPictures(userId),
         method: 'get',
-        headers: {
-          token: localStorage.getItem('token')
-        },
+        headers: getters.authHeader,
         data: {
           page: getters.myPage
         },
@@ -132,11 +130,12 @@ export const pictures = {
       })         
     },
 
-    transfer ({ commit }, data) {
+    transfer ({ getters, commit }, data) {
       console.log(data)
       axios({
         url: drf.pictures.transfer(),
         method: 'post',
+        headers: getters.authHeader,
         data,
       })
       .then(res => {        
@@ -148,13 +147,12 @@ export const pictures = {
       })         
     },
 
-    uploadPicture (context, data) {
+    uploadPicture ({ getters }, data) {
       console.log(data.get('tag'))
       axios({
         url: drf.pictures.uploadPicture(),
         method: 'post',
-        headers: {
-        },
+        headers: getters.authHeader,
         data,
       })
       .then(res => {
@@ -165,10 +163,11 @@ export const pictures = {
       })
     },
 
-    deletePicture (context, data) {
+    deletePicture ({ getters }, data) {
       axios({
-        ure: drf.pictures.deletePicture(data.pictureIdx),
+        url: drf.pictures.deletePicture(data.pictureIdx),
         method: 'delete',
+        headers: getters.authHeader,
         data,
       })
       .then(res => {
@@ -178,5 +177,37 @@ export const pictures = {
         console.log(err)
       })
     },
+    
+    showPicture ({ getters }, data) {
+      console.log(data)
+      axios({
+        url: drf.pictures.showPicture(),
+        method: 'post',
+        headers: getters.authHeader,
+        data,
+      })
+      .then(res => {
+        console.log(res)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    },
+
+    userPosition ({ getters }, data) {
+      console.log(data)
+      axios({
+        url: drf.pictures.weather(),
+        method: 'post',
+        headers: getters.authHeader,
+        data,
+      })
+      .then(res => {
+        console.log(res)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    }
   },
 }

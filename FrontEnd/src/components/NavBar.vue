@@ -42,7 +42,7 @@
                     </li>
 
                     <li v-if="!!isLoggedIn" class="nav-item">
-                        <a class="nav-link" href="/logout" style="color:#C9BBCF">
+                        <a class="nav-link" @click.prevent="logout()" style="color:#C9BBCF">
                             <img src="@/assets/logout.svg" alt="" width="20" height="20" class="d-inline-block nav-margin">로그아웃
                         </a>
                     </li>
@@ -67,7 +67,7 @@
 
 
 <script>
-  import { mapGetters } from 'vuex'
+  import { mapGetters, mapActions } from 'vuex'
 
   export default {
     name: 'NavBar',
@@ -77,6 +77,9 @@
     //     return this.currentUser.username ? this.currentUser.username : 'guest'
     //   },
     },
+    methods: {
+      ...mapActions(['logout'])
+    }
   }
 
 function clickEffect(e){

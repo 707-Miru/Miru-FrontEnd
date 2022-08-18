@@ -22,8 +22,9 @@
           </div>
         </div>
         <div>
-          <b-button v-show="selectedConfig" class="w-100 mb-1 mt-1" variant="secondary" @click.prevent="preview()">미리보기</b-button>
-          <b-button class="w-100" variant="primary">액자로 전송</b-button>
+          <b-button v-show="selectedConfig == 1" class="w-100 mb-1 mt-1" variant="secondary" @click.prevent="preview()">미리보기</b-button>
+          <b-button v-show="selectedConfig == 2" class="w-100 mb-1 mt-1" variant="secondary" @click.prevent="userLocation()">현재위치 보내기</b-button>
+          <b-button class="w-100" variant="primary" data-bs-toggle="modal" data-bs-target="#showModal">액자로 전송</b-button>
         </div>
       </div>
     </div>
@@ -90,6 +91,34 @@
         </div>
       </div>
     </div>
+    <div class="modal fade" id="showModal" tabindex="-1" aria-labelledby="showModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">파일 전송</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="showFlag" id="showFlag1" value="1" checked>
+              <label class="form-check-label" for="showFlag1">
+                미리보기 사진만 출력
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="showFlag" id="showFlag2" value="2">
+              <label class="form-check-label" for="showFlag2">
+                전체사진 반복
+              </label>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+            <button type="submit" @click="showData()" data-bs-dismiss="modal" class="btn btn-primary">업로드</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -109,6 +138,7 @@ export default {
     return {
       selectedConfig: 0,
       artSelected: null,
+      userTags: '',
       artOptions: [
         {value: 0, text: '나만의 스타일'},
         {value: 1, text: 'candy'},
@@ -136,7 +166,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['fetchMyPictures', 'uploadPicture', 'transfer']),
+    ...mapActions(['fetchMyPictures', 'uploadPicture', 'transfer', 'showPicture', 'userPosition']),
     uploadData() {
       const formData = new FormData()
       const publicFlag = document.querySelector('input[name="publicFlag"]:checked').value
@@ -145,17 +175,37 @@ export default {
       formData.append('publicFlag', publicFlag)
       formData.append('isPicture', isPicture)
       formData.append('id', localStorage.getItem('currentUser'))
+      formData.append('tag', this.userTags)
       this.uploadPicture(formData)
     },
     preview() {
-      const previewContent = document.querySelector('.selectedContent img')
       this.transfer(this.previewData)
-      .then(
-        previewContent.src = this.transferPicture.src
-      )
     },
     selectConfig(data) {
       this.selectedConfig = data
+    },
+    showData() {
+      const showFlag = document.querySelector('input[name="showFlag"]:checked').value
+      if (showFlag == 1) {
+        const pictureidx = document.querySelector('.selectedContent img').getAttribute('alt')
+        const data = {
+        showFlag,
+        pictureidx,
+        }
+        this.showPicture(data)
+      } else {
+        const id = location.getItem('currentUser')
+        const data = {
+        showFlag,
+        id,
+        }
+        this.showPicture(data)
+      }
+    },
+    userLocation() {
+      navigator.geolocation.getCurrentPosition((pos) => {
+        this.userPosition(pos.coords)
+      })
     }
   },
   computed: {

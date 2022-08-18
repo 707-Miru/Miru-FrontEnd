@@ -28,7 +28,8 @@ export default {
     transfer: () => HOST + 'picture/transfer/',
     uploadPicture: () => HOST + 'picture/upload/',
     deletePicture: (id) => HOST + `picture/delete/${id}`,
-    like: () => HOST + 'favorite/picture/'
-
+    like: () => HOST + 'favorite/picture/',
+    showPicture: () => HOST + 'picture/show',
+    weather: () => HOST + 'picture/weather',
   },
 }

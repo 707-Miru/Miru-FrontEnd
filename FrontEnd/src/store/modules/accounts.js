@@ -81,17 +81,10 @@ export const accounts = {
 
     },
 
-    logout ({ getters, dispatch}) {
-      axios({
-        url:drf.accounts.logout(),
-        method:'post',
-        headers: getters.authHeader
-      })
-      .then(() => {
-        dispatch('removeToken')
-        alert('로그아웃 성공!')
-        router.push({name:'login'})
-      })
+    logout ({ dispatch }) {
+      dispatch('removeToken')
+      alert('로그아웃 성공!')
+      router.push({name:'login'})
     },
 
     fetchCurrentUser ({ commit, getters, dispatch}, id) { // user 식별 위해
