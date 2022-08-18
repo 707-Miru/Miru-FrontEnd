@@ -49,11 +49,7 @@ export const pictures = {
     RESET_PICTURES: (state) => state.pictures = [],
     FETCH_PICTURE: (state, pictures) => state.pictures.push(...pictures),
     INCREASE_PAGE: (state, tpage) => state.tpage = tpage + 1,
-    SET_MY_PICTURES : (state, myPictures) => {
-      const totalPictureCnt = myPictures.pop()
-      state.totalPictureCnt = totalPictureCnt['totalPictureCnt']
-      state.myPictures = myPictures
-    },
+    SET_MY_PICTURES : (state, myPictures) => state.myPictures.push(...myPictures),
     SET_MY_PAGE: (state, myPage) => state.myPage = myPage,
     SET_TRANSFER_PICTURE : (state, transferPicture) => state.transferPicture = transferPicture,
     SET_SELECT : (state, select) => state.select = select,
@@ -123,9 +119,8 @@ export const pictures = {
       })
       .then(res => {        
         console.log(res.data)
-        commit('SET_MY_PICTURES', res.data)
-        console.log(getters.myPictures)
-        console.log(getters.totalPictureCnt)
+        commit('SET_MY_PICTURES', res.data.favoritePictureInfo)
+        commit('SET_MY_PAGE', res.data.totalPictureCnt)
       })
       .catch(err => {
         console.log(err)
