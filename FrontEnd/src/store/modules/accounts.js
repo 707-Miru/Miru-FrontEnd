@@ -84,7 +84,7 @@ export const accounts = {
     logout ({ dispatch }) {
       dispatch('removeToken')
       alert('로그아웃 성공!')
-      router.push({name:'login'})
+      router.push({name:'LoginView'})
     },
 
     fetchCurrentUser ({ commit, getters, dispatch}, id) { // user 식별 위해
@@ -102,7 +102,7 @@ export const accounts = {
         .catch( err => {
           if (err.response.status === 401) {
             dispatch('removeToken')
-            router.push({name:'login'})
+            router.push({name:'LoginView'})
           }
         })
       }
@@ -119,7 +119,7 @@ export const accounts = {
         console.log(res)
         dispatch('removeToken')
         dispatch('removeCurrentUser')
-        router.push('login')
+        router.push({name:'LoginView'})
       })
     }
 
