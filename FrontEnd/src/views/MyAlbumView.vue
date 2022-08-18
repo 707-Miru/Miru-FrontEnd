@@ -23,7 +23,6 @@
         </div>
         <div>
           <b-button v-show="selectedConfig == 1" class="w-100 mb-1 mt-1" variant="secondary" @click.prevent="preview()">미리보기</b-button>
-          <b-button v-show="selectedConfig == 2" class="w-100 mb-1 mt-1" variant="secondary" @click.prevent="userLocation()">현재위치 보내기</b-button>
           <b-button class="w-100" variant="primary" data-bs-toggle="modal" data-bs-target="#showModal">액자로 전송</b-button>
         </div>
       </div>
@@ -166,7 +165,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['fetchMyPictures', 'uploadPicture', 'transfer', 'showPicture', 'userPosition']),
+    ...mapActions(['fetchMyPictures', 'uploadPicture', 'transfer', 'showPicture']),
     uploadData() {
       const formData = new FormData()
       const publicFlag = document.querySelector('input[name="publicFlag"]:checked').value
@@ -202,17 +201,6 @@ export default {
         this.showPicture(data)
       }
     },
-    userLocation() {
-      navigator.geolocation.getCurrentPosition((pos) => {
-        const lat = pos.coords.latitude
-        const lon = pos.coords.longitude
-        const data = {
-          lat,
-          lon
-        }
-        this.userPosition(data)
-      })
-    }
   },
   computed: {
     ...mapGetters(['myPictures', 'transferPicture']),
