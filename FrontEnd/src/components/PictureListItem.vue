@@ -43,7 +43,18 @@ export default {
 
   computed: {
     filepath () {
-      return this.picture.filepath.split('/').reverse()[0]
+      const path = this.picture.filepath.split('/').reverse()
+      let realpath = ''
+      for (var i = 0; i < path.length; i ++) {
+        if (path[i] !== 'img') {
+          realpath += path[i] + '/'
+        }
+        else if (path[i] === 'img') {
+          break
+        }
+      }
+
+      return realpath
     },
 
     likeCnt () {
