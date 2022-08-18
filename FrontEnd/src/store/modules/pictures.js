@@ -117,7 +117,7 @@ export const pictures = {
         url: drf.pictures.myPictures(userId),
         method: 'get',
         headers: getters.authHeader,
-        data: {
+        params: {
           page: getters.myPage
         },
       })

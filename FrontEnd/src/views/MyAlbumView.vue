@@ -1,9 +1,9 @@
 <template>
   <div class="container">
-    <div class="container row mt-5 mb-5 ">
-      <div class="col-7 col-md-8 col-lg-9 preview bg-secondary mx-auto p-3 d-flex">
+    <div class="container row mt-5 mb-5 justify-content-center">
+      <div class="col-7 col-md-8 col-lg-8 preview bg-secondary mx-auto p-3 d-flex">
       </div>
-      <div class="col-5 col-md-4 col-lg-3 d-flex flex-column justify-content-between">
+      <div class="col-8 col-md-6 col-lg-4 d-flex flex-column justify-content-between">
         <div>
           <h5>기능 선택</h5>
           <ul class="pagination justify-content-center">
@@ -298,5 +298,10 @@ export default {
 .preview {
   min-width: 640px;
   min-height: 360px;
+  border:1px solid rgba(0,0,0,0.2);
+  margin:0;
+  margin-top: 15px;
+  padding:10px;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.5);;
 }
 </style>
