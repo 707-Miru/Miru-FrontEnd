@@ -37,7 +37,7 @@
 
 <script>
 import router from '@/router'
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
     name: 'SearchBar',
@@ -51,7 +51,7 @@ export default {
     },
 
     computed: {
-      
+      ...mapGetters(['sortKeyword', 'isPictuer', 'tpage'])
 
     },
 
@@ -79,8 +79,11 @@ export default {
             const lat = pos.coords.latitude
             const lon = pos.coords.longitude
             const data = {
-              lat,
-              lon
+              'page':this.tpage,
+              'sortKeyword':this.sortKeyword,
+              'isPicture':this.isPicture,
+              'lat':String(lat),
+              'lon':String(lon)
             }
             this.userPosition(data)
           })
