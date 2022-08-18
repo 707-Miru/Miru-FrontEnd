@@ -1,5 +1,6 @@
 package com.back.miru.model.service;
 
+import com.back.miru.ai.transfer.TransformPainting;
 import com.back.miru.model.dao.PictureDAO;
 import com.back.miru.model.dto.ListParameterDto;
 import com.back.miru.model.dto.Picture;
@@ -74,27 +75,38 @@ public class PictureServiceImpl implements PictureService {
         int showFlag = Integer.parseInt(map.get("showFlag"));
         String[] pathArr;
         String path = null;
-        System.out.println(map);
+
         if (showFlag == 1) {
-            int pictureIdx = Integer.parseInt(map.get("pictureIdx"));
-            path = pictureDAO.getPicturePath(pictureIdx);
-        } else {
-            String id = map.get("id");
-            pathArr = pictureDAO.getPicturePathList(id);
+            path = pictureDAO.getPicturePath(map);
+        } else if (showFlag == 2) {
+            pathArr = pictureDAO.getPicturePathList(map);
             path = Arrays.toString(pathArr);
             path = path.substring(1, path.length() - 1);
+            StringTokenizer st = new StringTokenizer(path, ",");
+            StringBuilder sb = new StringBuilder();
+            while (st.hasMoreTokens()) {
+                String pa = st.nextToken();
+                pa = pa.substring(pa.indexOf("img"));
+                sb.append(pa).append(",");
+            }
+            sb.setLength(sb.length() - 1);
+            path = sb.toString();
+        } else {
+            String transferPicturePath = TransformPainting.transform(map.get("optionNum"), map.get("styleFilePath"), map.get("contentFilePath"), map.get("id"));
+            path = transferPicturePath.substring(transferPicturePath.indexOf("img"));
         }
+
         System.out.println("경로 : " + path);
-        // 사진 인덱스에 해당하는 파일의 경로 찾아오기 or 사진의 경로를 바로 전달
+
+        InetAddress ia = null;
         Socket socket = null;            //Server와 통신하기 위한 Socket
         PrintWriter out = null;            //서버로 내보내기 위한 출력 스트림
-        InetAddress ia = null;
 
         ia = InetAddress.getByName("miru707.ddns.net");    //서버로 접속, 서버 주소 입력
         socket = new Socket(ia, 8888); // 서버가 열어놓은 포트 입력
         out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())));
 
-        out.println(path);   //서버로 데이터 전송
+        out.println(map.get("id") + "," + path);   //서버로 데이터 전송
         out.flush();
         socket.close();
     }
