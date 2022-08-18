@@ -60,11 +60,6 @@ const routes = [
     name : "SearchPictureView",
     component : SearchPictureView,
   },
-
-
-
-
-  
   {
     path: '/:catchAll(.*)',
     name: 'NotFoundView',
