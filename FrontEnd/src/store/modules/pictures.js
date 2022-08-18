@@ -124,6 +124,8 @@ export const pictures = {
       .then(res => {        
         console.log(res.data)
         commit('SET_MY_PICTURES', res.data)
+        console.log(getters.myPictures)
+        console.log(getters.totalPictureCnt)
       })
       .catch(err => {
         console.log(err)
