@@ -175,7 +175,7 @@ export default {
       formData.append('publicFlag', publicFlag)
       formData.append('isPicture', isPicture)
       formData.append('id', localStorage.getItem('currentUser'))
-      formData.append('tag', this.userTags)
+      formData.append('tags', this.userTags)
       this.uploadPicture(formData)
     },
     preview() {
