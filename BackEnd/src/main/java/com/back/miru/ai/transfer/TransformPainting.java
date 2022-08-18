@@ -71,7 +71,7 @@ public class TransformPainting {
         if (!convFile.exists()) convFile.mkdir();
 
         String[] command = new String[20];
-        command[0] = "python";
+        command[0] = "python3";
         command[1] = root + "main.py";
         command[2] = "eval";
         command[3] = "--content-image";

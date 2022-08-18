@@ -21,7 +21,7 @@ public class HandTracking {
         String root = "src/main/java/com/back/miru/ai/tracking/";
 
         String[] command = new String[2];
-        command[0] = "python";
+        command[0] = "python3";
         command[1] = root + "handtracking.py";
 
         CommandLine commandLine = CommandLine.parse(command[0]);
