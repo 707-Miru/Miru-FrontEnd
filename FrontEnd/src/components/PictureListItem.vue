@@ -71,7 +71,7 @@ export default {
     likeflag () {
       let flag
       if (this.check === 0) {
-        flag = this.picture.likeflag
+        flag = this.picture.likeFlag
       } else if (this.check === 1) {
         flag = 1
       } else if (this.check === 2) {
