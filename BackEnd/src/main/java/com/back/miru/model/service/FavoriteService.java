@@ -20,4 +20,6 @@ public interface FavoriteService {
     List<Picture> infoFavoritePicture(String id, Map<String, String> map) throws Exception;
 
     int getTotalPictureCnt(String id) throws Exception;
+
+    int getFavoritepictureCnt(int pictureIdx) throws Exception;
 }

@@ -60,4 +60,9 @@ public class FavoriteServiceImpl implements FavoriteService {
     public int getTotalPictureCnt(String id) throws Exception {
         return favoriteDAO.getTotalPictureCnt(id);
     }
+
+    @Override
+    public int getFavoritepictureCnt(int pictureIdx) throws Exception {
+        return favoriteDAO.getFavoritepictureCnt(pictureIdx);
+    }
 }

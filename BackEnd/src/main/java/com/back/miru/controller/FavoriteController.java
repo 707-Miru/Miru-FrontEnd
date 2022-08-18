@@ -89,6 +89,8 @@ public class FavoriteController {
         HttpStatus status;
         try {
             favoriteService.registFavoritePicture(map);
+	int likeCnt = favoriteService.getFavoritepictureCnt(Integer.parseInt(map.get("pictureIdx")));
+	resultMap.put("likeCnt", likeCnt);
             resultMap.put("message", SUCCESS);
             status = HttpStatus.ACCEPTED;
         } catch (Exception e) {
@@ -108,6 +110,8 @@ public class FavoriteController {
         HttpStatus status;
         try {
             favoriteService.deleteFavoritePicture(pictureIdx, map);
+	int likeCnt = favoriteService.getFavoritepictureCnt(Integer.parseInt(map.get("pictureIdx")));
+	resultMap.put("likeCnt", likeCnt);
             resultMap.put("message", SUCCESS);
             status = HttpStatus.ACCEPTED;
         } catch (Exception e) {

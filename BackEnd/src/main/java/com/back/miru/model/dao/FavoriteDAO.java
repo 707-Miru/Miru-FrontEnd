@@ -25,4 +25,6 @@ public interface FavoriteDAO {
 	List<Picture> infoFavoritePicture(ListParameterDto listParameterDto) throws Exception;
 
 	int getTotalPictureCnt(String id) throws Exception;
+
+	int getFavoritepictureCnt(int pictureIdx) throws Exception;
 }
