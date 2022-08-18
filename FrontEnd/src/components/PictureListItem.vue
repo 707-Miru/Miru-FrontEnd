@@ -23,6 +23,7 @@
 <script>
 import drf from "@/api/drf"
 import axios from "axios"
+import { mapGetters } from 'vuex'
 
 
 export default {
@@ -42,6 +43,7 @@ export default {
   },
 
   computed: {
+    ...mapGetters(['currentUserId']),
     filepath () {
       const path = this.picture.filepath.split('/').reverse()
       let realpath = ''
@@ -81,26 +83,26 @@ export default {
 
   methods: {
 
-    likePicture ({getters}, id) {
+    likePicture ( id) {
       this.check = 1
       axios({
         url: drf.pictures.like(),
         method: 'post',
         data: {
-          'id' : getters.currentUserId,
+          'id' : this.currentUserId,
           'pictureIdx' : id
         }
       })
       .then( res => this.cnt = res.data.likeCnt)
     },
 
-    dislikePicture ({ getters }, id) {
+    dislikePicture (id) {
       this.check = 2
       axios({
         url: drf.pictures.dislike(id),
         method: 'delete',
         data: {
-          'id' : getters.currentUserId,
+          'id' : this.currentUserId,
         }
       })
       .then( res => this.cnt = res.data.likeCnt) 
