@@ -1,5 +1,8 @@
 <template>
   <div class="container">
+    <div id="loading" v-show="isLoading">
+      <div class="spinner"></div>
+    </div>
     <div class="container row mt-5 mb-5 justify-content-center">
       <div class="col-7 col-md-8 col-lg-8 preview bg-secondary mx-auto p-3 d-flex">
       </div>
@@ -203,7 +206,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(['myPictures', 'transferPicture']),
+    ...mapGetters(['myPictures', 'transferPicture', 'isLoading']),
     previewData() {
       const option_num = this.artSelected
       const content_file_path = document.querySelector('.selectedContent').src
@@ -294,5 +297,33 @@ export default {
   margin-top: 15px;
   padding:10px;
   box-shadow: 2px 2px 5px rgba(0,0,0,0.5);;
+}
+
+#loading {
+  position: fixed;
+  z-index: 99;
+  top: 50%;
+  left: 50%;
+}
+
+@keyframes spinner {
+  from {transform: rotate(0deg); }
+  to {transform: rotate(360deg);}
+}
+
+#loading .spinner {
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 64px;
+  height: 64px;
+  margin-top: -32px;
+  margin-left: -32px;
+  border-radius: 50%;
+  border: 8px solid transparent;
+  border-top-color: #0d6efd;
+  border-bottom-color: #0d6efd;
+  animation: spinner .8s ease infinite;
 }
 </style>

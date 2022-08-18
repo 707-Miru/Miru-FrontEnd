@@ -16,6 +16,7 @@ export const pictures = {
     myPage: 1,
     myPictures : [],
     totalPictureCnt : 1,
+    isLoading : false,
 
     transferPicture : {},
     select: '이미지',
@@ -42,7 +43,8 @@ export const pictures = {
     myPage: state => state.myPage,
     myPictures: state => state.myPictures,
     transferPicture: state => state.transferPicture,
-    totalPictureCnt: state => state.totalPictureCnt
+    totalPictureCnt: state => state.totalPictureCnt,
+    isLoading: state => state.isLoading
   },
 
   mutations: {
@@ -54,7 +56,8 @@ export const pictures = {
     SET_MY_PAGE: (state, myPage) => state.myPage = myPage,
     SET_TRANSFER_PICTURE : (state, transferPicture) => state.transferPicture = transferPicture,
     SET_SELECT : (state, select) => state.select = select,
-    SET_SORTKEY  :(state, sortKey) => state.sortKey = sortKey
+    SET_SORTKEY  :(state, sortKey) => state.sortKey = sortKey,
+    SET_IS_LOADING: (state, data) => state.isLoading = data,
   },
 
   actions: {
@@ -122,6 +125,7 @@ export const pictures = {
 
     transfer ({ getters, commit }, data) {
       console.log(data)
+      commit('SET_IS_LOADING', true)
       axios({
         url: drf.pictures.transfer(),
         method: 'post',
@@ -134,7 +138,8 @@ export const pictures = {
       })
       .catch(err => {
         console.log(err)
-      })         
+      })
+      commit('SET_IS_LOADING', false)    
     },
 
     uploadPicture ({ getters }, data) {
