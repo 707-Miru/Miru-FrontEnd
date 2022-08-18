@@ -21,5 +21,7 @@ public interface PictureDAO {
 
     Map<String, Object> getPictureDetail(String pictureIdx) throws Exception;
 
-    String getPicturePath(int idx) throws Exception;
+    String getPicturePath(int pictureIdx) throws Exception;
+
+    String[] getPicturePathList(String id) throws Exception;
 }
