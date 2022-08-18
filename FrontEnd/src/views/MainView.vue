@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
@@ -9,15 +10,29 @@
 
   </head> 
   <div class="main container-fluid p-0">
+=======
+  <div class="first-video" id="first-video-wrap">
+    <video class="w-100 h-100 small video-player" src="@/assets/videos/flowers.mp4" alt="" id="first-video" muted></video>
+  </div>
+
+  <div class="main container-fluid p-0 hide" id="main">
+>>>>>>> 33230bd25f6c971f12b0b587aceb8e4c863ee749
     <div class="item position-relative">
       <img class="w-100" src="@/assets/images/background.png" alt="">
-      <a type="button" class="" data-bs-toggle="modal" data-bs-target="#artModal" style="width:15%; position: absolute; top: 10.5%; left: 51.8%;">
+      <a type="button" class="" style="width:15%; position: absolute; top: 10.5%; left: 51.8%;">
         <img class="w-100" src="@/assets/images/art.png" alt="">
       </a>
-      <a type="button" class="" data-bs-toggle="modal" data-bs-target="#seasonModal" style="width:34%; position: absolute; top: 42.5%; left: 49%;">
-        <img class="w-100" src="@/assets/images/season.png" alt="">
+      
+      <a type="button" class="action action--hidden action--play"  style="width:34%; position: absolute; top: 41.5%; left: 49%;">
+        <div class="video-wrap">
+          <div class="video-inner">
+            <video class="w-100 h-100 small video-player" src="@/assets/videos/flowers.mp4" alt="" autoplay loop muted></video>
+          </div>
+        </div>
+        
       </a>
-      <a type="button" class="" data-bs-toggle="modal" data-bs-target="#weatherModal" style="width:10%; position: absolute; top: 44.8%; left: 33.2%;">
+     
+      <a type="button" class=""  style="width:10%; position: absolute; top: 44.8%; left: 33.2%;">
         <img class="w-100" src="@/assets/images/weather.png" alt="">
       </a>
     </div>
@@ -92,15 +107,20 @@
       </div>
     </div>
   </div>
-  <div class="modal fade" id="artModal" tabindex="-1" aria-labelledby="artLabel" aria-hidden="true">
-  <div class="modal-dialog modal-fullscreen">
-    <div class="modal-content container-fluid m-0 p-0">
-      <button type="button" class="btn-close position-absolute top-0 end-0 me-3 mt-3" data-bs-dismiss="modal" aria-label="Close"></button>
-      <video src="@/assets/videos/flowers.mp4" type="video/mp4" id="artVideo" class="h-100"></video>
-      <button type="button" class="btn btn-primary position-absolute bottom-0 end-0 me-3 mb-3" data-bs-dismiss="modal" id="artButton">
-        설명으로 가기
+
+ 
+  <!-- <div class="video-wrap">
+    <div class="video-inner">
+      <video class="video-player" src="@/assets/videos/flowers.mp4"  preload="auto">
+        <source src="@/assets/videos/flowers.mp4" type='video/mp4; codecs="vp8.0, vorbis"'>
+        <p>Sorry, but your browser does not support this video format.</p>
+      </video>
+      <button class="action action--close">
+        <i class="fa fa-close"></i>
+        <span class="action__label action__label--hidden">Close preview</span>
       </button>
     </div>
+<<<<<<< HEAD
   </div>
   </div>
   <div class="modal fade" id="seasonModal" tabindex="-1" aria-labelledby="seasonLabel" aria-hidden="true">
@@ -129,6 +149,13 @@
     </div>
   </div>
   </div>
+=======
+  </div> -->
+
+  
+
+
+>>>>>>> 33230bd25f6c971f12b0b587aceb8e4c863ee749
 </template>
 
 <script>
@@ -140,6 +167,9 @@ export default {
   components: {
   },
   setup() {
+    
+
+
     function myBottomScroll(y) {
       const artPage = document.querySelector('#artPage')
       const seasonPage = document.querySelector('#seasonPage')
@@ -173,12 +203,67 @@ export default {
       return yTo
     }
     onMounted(() => {
+<<<<<<< HEAD
       AOS.init()
+=======
+      const firstVideo = document.getElementById('first-video')
+      firstVideo.play()
+      const firstwrap = document.getElementById('first-video-wrap')
+      const main = document.getElementById('main')
+      firstVideo.addEventListener('ended', changePage)
+
+      function changePage () {
+        firstwrap.classList.add('frame')
+        setTimeout(() => {
+          firstwrap.classList.add('hide')
+          main.classList.remove('hide')
+        }, 1000);
+      }
+
+
+
+
+      var bodyEl = document.body,
+      videoWrap = document.querySelector('.video-wrap'),
+      videoEl = videoWrap.querySelector('video'),
+      playCtrl = document.querySelector('.action--play'),
+      closeCtrl = document.querySelector('.action--close');
+
+      function init() {
+        initEvents();
+      }
+
+      function initEvents() {
+        playCtrl.addEventListener('click', play);
+        closeCtrl.addEventListener('click', hide);
+        videoEl.addEventListener('canplaythrough', allowPlay);
+        videoEl.addEventListener('ended', hide);
+      }
+
+      function allowPlay() {
+        bodyEl.classList.add('video-loaded');
+      }
+
+      function play() {
+        videoEl.currentTime = 0;
+        videoWrap.classList.remove('video-wrap--hide');
+        videoWrap.classList.add('video-wrap--show');
+        setTimeout(function() {videoEl.play();}, 600);
+      }
+
+      function hide() {
+        videoWrap.classList.remove('video-wrap--show');
+        // videoWrap.classList.add('video-wrap--hide');
+        videoEl.pause();
+      }
+
+      init();
+
+>>>>>>> 33230bd25f6c971f12b0b587aceb8e4c863ee749
       const topArrow = document.querySelector('#topArrow')
       const bottomArrow = document.querySelector('#bottomArrow')
-      const artModalEl = document.querySelector('#artModal')
-      const art = document.querySelector('#artVideo')
-      const artButton = document.querySelector('#artButton')
+ 
+
       const artPage = document.querySelector('#artPage')
       const weatherPage = document.querySelector('#weatherPage')
       const artTop = Math.ceil(window.pageYOffset + artPage.getBoundingClientRect().top)
@@ -208,26 +293,21 @@ export default {
       topArrow.addEventListener('click',() => {
         window.scrollTo({ left: 0, top: myTopScroll(Math.ceil(window.pageYOffset)), behavior: "smooth" })
       })
-      artModalEl.addEventListener('shown.bs.modal',() => {
-        art.play()
-      })
-      artModalEl.addEventListener('hidden.bs.modal',() => {
-        art.currentTime = 0
-        art.pause()
-        artButton.style.display = 'none'
-      })
-      art.addEventListener('ended',() => {
-        artButton.style.display = 'inline'
-      })
-      artButton.addEventListener('click',() => {
-        window.scrollTo({ left: 0, top: Math.ceil(window.pageYOffset + artPage.getBoundingClientRect().top), behavior: "smooth" })
-      })
+  
+
     })
   },
 }
 </script>
 
 <style scoped>
+*,
+*:after,
+*:before {
+	
+	box-sizing: border-box;
+}
+
 .main {
   overflow: auto;
   scroll-snap-type: y mandatory;
@@ -235,9 +315,22 @@ export default {
 .item {
   scroll-snap-align: center;
 }
+
+.frame {
+  box-shadow: 2px 3px 5px 0px;
+}
+
 button {
   z-index: 1;
 }
+
+.modal-body {
+  position: relative;
+}
+.modal-body:after {
+  position: absolute;
+}
+
 #artButton {
   display: none;
   z-index: 1;
@@ -259,6 +352,7 @@ button {
   opacity: 1;
 
 }
+
 .animate-charcter
 {
    text-transform: uppercase;
@@ -347,4 +441,231 @@ h1 span:nth-child(5){ animation-delay:.1s; }
 h1 span:nth-child(6){ animation-delay:.1s; }
 h1 span:nth-child(7){ animation-delay:.1s; }
 
+
+
+/* 
+.video-wrap {
+	position: fixed;
+	z-index: 1000;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+	display: flex;
+	align-items: center;
+} */
+
+.video-wrap--show {
+	pointer-events: auto;
+}
+
+.video-inner {
+	position: relative;
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	opacity: 1;
+	/* background: white; */
+}
+
+.video-wrap--show .video-inner {
+	opacity: 1;
+}
+
+.video-player {
+	
+	top: 50%;
+	width: 100%;
+	
+}
+
+.content {
+	position: relative;
+}
+
+.hide {
+  display: none;
+}
+
+
+.video-loaded {
+	opacity: 0;
+	pointer-events: none;
+	
+	transition: opacity 0.3s;
+}
+
+.action {
+	position: relative;
+	overflow: hidden;
+	margin: 0;
+	color: #fff;
+	background: none;
+	flex: none;
+}
+
+.action:focus {
+	outline: none;
+}
+
+.action__label {
+	display: inline-block;
+	margin: 0 0 0 0.75em;
+}
+
+.action__label--hidden {
+	position: absolute;
+	top: 200%;
+}
+
+.action--play {
+	display: block;
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.3s 0.1s;
+}
+
+.video-loaded .action--play {
+	opacity: 1;
+	pointer-events: auto;
+}
+
+.action--close {
+	line-height: 1;
+	position: absolute;
+	z-index: 1000;
+	top: 30px;
+	right: 30px;
+	width: 60px;
+	height: 60px;
+	padding: 0;
+	opacity: 0;
+	transition: transform 0.3s, opacity 0.3s;
+	transform: scale3d(0.7,0.7,1);
+}
+
+.video-wrap--show .action--close {
+	opacity: 1;
+	transition-delay: 1.2s;
+	transform: scale3d(1,1,1);
+}
+
+@media screen and (min-width: 25em) {
+	.video-inner {
+		/* width: 30vw;
+		height: 30vw;
+		border: 10px solid #fff; */
+		/* transform: scale3d(1,1,1) ; */
+	}
+	.video-wrap--show .video-inner {
+		opacity: 0;
+		animation: showVideo-1 1.25s forwards;
+	}
+	.video-wrap--hide .video-inner {
+		animation: hideVideo 1.25s forwards;
+	}
+	.video-player {
+		left: 50%;
+		width: auto;
+		height: 100vh;
+		
+	}
+	/* .video-wrap--show .video-player,
+	.video-wrap--hide .video-player {
+		
+		transform: translate3d(-50%,-50%,0) scale3d(1,1,1);
+	} */
+}
+
+@media screen and (min-width: 25em) and (min-aspect-ratio: 1280/720) {
+	.video-inner {
+		width: 100%;
+		height: 100%;
+	}
+	.video-wrap--show .video-inner {
+		animation: showVideo-2 1.5s forwards;
+	}
+	.video-player {
+		width: 100vw;
+		height: auto;
+	}
+}
+
+
+@keyframes showVideo-1 {
+	0% {
+		width: 100%;
+		height: 100%;
+		opacity: 1;
+		transform: scale3d(1,1,1) ;
+	}
+	100% {
+		/* width: 100vw;
+		height: 100vh; */
+		opacity: 1;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    background: white;
+    
+	}
+}
+
+
+
+@keyframes showVideo-2 {
+	0% {
+   position: fixed;
+   transform: translate(-50%)
+	}
+  10%{
+    z-index: 1000;
+    
+    left:50%;
+    /* transform: translateX(-50%); */
+  }
+	100% {
+		/* width: 100vw;
+		height: 100vh; */
+		opacity: 1;
+		
+		position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    transform: scale3d(1,1,1);
+    display: flex;
+    align-items: center;
+    background: white;
+	}
+}
+
+
+@keyframes hideVideo {
+	0% {
+		width: 100vw;
+		height: 100vh;
+		opacity: 1;
+		
+		transform: scale3d(1,1,1) ;
+	}
+	100% {
+		width: 100vw;
+		height: 100vh;
+		opacity: 0;
+	
+		transform: scale3d(1,1,1) ;
+	}
+}
 </style>
