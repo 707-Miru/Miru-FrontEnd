@@ -54,7 +54,7 @@ public class PictureController {
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;
         try {
-            String transferPicturePath = TransformPainting.transform(map.get("optionNum"), map.get("styleFilePath"), map.get("contentFilePath"), map.get("id"));
+            String transferPicturePath = TransformPainting.transform(map.get("option_num"), map.get("style_file_path"), map.get("content_file_path"), map.get("id"));
             resultMap.put("transferPicturePath", transferPicturePath);
             resultMap.put("message", SUCCESS);
             status = HttpStatus.ACCEPTED;
