@@ -1,5 +1,4 @@
 <template>
-<<<<<<< HEAD
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
@@ -10,13 +9,7 @@
 
   </head> 
   <div class="main container-fluid p-0">
-=======
-  <div class="first-video" id="first-video-wrap">
-    <video class="w-100 h-100 small video-player" src="@/assets/videos/flowers.mp4" alt="" id="first-video" muted></video>
-  </div>
 
-  <div class="main container-fluid p-0 hide" id="main">
->>>>>>> 33230bd25f6c971f12b0b587aceb8e4c863ee749
     <div class="item position-relative">
       <img class="w-100" src="@/assets/images/background.png" alt="">
       <a type="button" class="" style="width:15%; position: absolute; top: 10.5%; left: 51.8%;">
@@ -109,53 +102,6 @@
   </div>
 
  
-  <!-- <div class="video-wrap">
-    <div class="video-inner">
-      <video class="video-player" src="@/assets/videos/flowers.mp4"  preload="auto">
-        <source src="@/assets/videos/flowers.mp4" type='video/mp4; codecs="vp8.0, vorbis"'>
-        <p>Sorry, but your browser does not support this video format.</p>
-      </video>
-      <button class="action action--close">
-        <i class="fa fa-close"></i>
-        <span class="action__label action__label--hidden">Close preview</span>
-      </button>
-    </div>
-<<<<<<< HEAD
-  </div>
-  </div>
-  <div class="modal fade" id="seasonModal" tabindex="-1" aria-labelledby="seasonLabel" aria-hidden="true">
-  <div class="modal-dialog modal-fullscreen">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="seasonLabel">다양한 테마로의 전환 기능</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <img src="@/assets/images/season.png" alt="">
-      </div>
-    </div>
-  </div>
-  </div>
-  <div class="modal fade" id="weatherModal" tabindex="-1" aria-labelledby="weatherLabel" aria-hidden="true">
-  <div class="modal-dialog modal-fullscreen">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="weatherLabel">날씨에 따른 사진 추천 기능</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <img src="@/assets/images/weather.png" alt="">
-      </div>
-    </div>
-  </div>
-  </div>
-=======
-  </div> -->
-
-  
-
-
->>>>>>> 33230bd25f6c971f12b0b587aceb8e4c863ee749
 </template>
 
 <script>
@@ -203,9 +149,8 @@ export default {
       return yTo
     }
     onMounted(() => {
-<<<<<<< HEAD
       AOS.init()
-=======
+
       const firstVideo = document.getElementById('first-video')
       firstVideo.play()
       const firstwrap = document.getElementById('first-video-wrap')
@@ -259,7 +204,6 @@ export default {
 
       init();
 
->>>>>>> 33230bd25f6c971f12b0b587aceb8e4c863ee749
       const topArrow = document.querySelector('#topArrow')
       const bottomArrow = document.querySelector('#bottomArrow')
  
@@ -442,230 +386,4 @@ h1 span:nth-child(6){ animation-delay:.1s; }
 h1 span:nth-child(7){ animation-delay:.1s; }
 
 
-
-/* 
-.video-wrap {
-	position: fixed;
-	z-index: 1000;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	pointer-events: none;
-	display: flex;
-	align-items: center;
-} */
-
-.video-wrap--show {
-	pointer-events: auto;
-}
-
-.video-inner {
-	position: relative;
-	overflow: hidden;
-	width: 100%;
-	height: 100%;
-	margin: 0;
-	opacity: 1;
-	/* background: white; */
-}
-
-.video-wrap--show .video-inner {
-	opacity: 1;
-}
-
-.video-player {
-	
-	top: 50%;
-	width: 100%;
-	
-}
-
-.content {
-	position: relative;
-}
-
-.hide {
-  display: none;
-}
-
-
-.video-loaded {
-	opacity: 0;
-	pointer-events: none;
-	
-	transition: opacity 0.3s;
-}
-
-.action {
-	position: relative;
-	overflow: hidden;
-	margin: 0;
-	color: #fff;
-	background: none;
-	flex: none;
-}
-
-.action:focus {
-	outline: none;
-}
-
-.action__label {
-	display: inline-block;
-	margin: 0 0 0 0.75em;
-}
-
-.action__label--hidden {
-	position: absolute;
-	top: 200%;
-}
-
-.action--play {
-	display: block;
-	opacity: 0;
-	pointer-events: none;
-	transition: opacity 0.3s 0.1s;
-}
-
-.video-loaded .action--play {
-	opacity: 1;
-	pointer-events: auto;
-}
-
-.action--close {
-	line-height: 1;
-	position: absolute;
-	z-index: 1000;
-	top: 30px;
-	right: 30px;
-	width: 60px;
-	height: 60px;
-	padding: 0;
-	opacity: 0;
-	transition: transform 0.3s, opacity 0.3s;
-	transform: scale3d(0.7,0.7,1);
-}
-
-.video-wrap--show .action--close {
-	opacity: 1;
-	transition-delay: 1.2s;
-	transform: scale3d(1,1,1);
-}
-
-@media screen and (min-width: 25em) {
-	.video-inner {
-		/* width: 30vw;
-		height: 30vw;
-		border: 10px solid #fff; */
-		/* transform: scale3d(1,1,1) ; */
-	}
-	.video-wrap--show .video-inner {
-		opacity: 0;
-		animation: showVideo-1 1.25s forwards;
-	}
-	.video-wrap--hide .video-inner {
-		animation: hideVideo 1.25s forwards;
-	}
-	.video-player {
-		left: 50%;
-		width: auto;
-		height: 100vh;
-		
-	}
-	/* .video-wrap--show .video-player,
-	.video-wrap--hide .video-player {
-		
-		transform: translate3d(-50%,-50%,0) scale3d(1,1,1);
-	} */
-}
-
-@media screen and (min-width: 25em) and (min-aspect-ratio: 1280/720) {
-	.video-inner {
-		width: 100%;
-		height: 100%;
-	}
-	.video-wrap--show .video-inner {
-		animation: showVideo-2 1.5s forwards;
-	}
-	.video-player {
-		width: 100vw;
-		height: auto;
-	}
-}
-
-
-@keyframes showVideo-1 {
-	0% {
-		width: 100%;
-		height: 100%;
-		opacity: 1;
-		transform: scale3d(1,1,1) ;
-	}
-	100% {
-		/* width: 100vw;
-		height: 100vh; */
-		opacity: 1;
-    position: fixed;
-    z-index: 1000;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    display: flex;
-    align-items: center;
-    background: white;
-    
-	}
-}
-
-
-
-@keyframes showVideo-2 {
-	0% {
-   position: fixed;
-   transform: translate(-50%)
-	}
-  10%{
-    z-index: 1000;
-    
-    left:50%;
-    /* transform: translateX(-50%); */
-  }
-	100% {
-		/* width: 100vw;
-		height: 100vh; */
-		opacity: 1;
-		
-		position: fixed;
-    z-index: 1000;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    transform: scale3d(1,1,1);
-    display: flex;
-    align-items: center;
-    background: white;
-	}
-}
-
-
-@keyframes hideVideo {
-	0% {
-		width: 100vw;
-		height: 100vh;
-		opacity: 1;
-		
-		transform: scale3d(1,1,1) ;
-	}
-	100% {
-		width: 100vw;
-		height: 100vh;
-		opacity: 0;
-	
-		transform: scale3d(1,1,1) ;
-	}
-}
 </style>
