@@ -181,7 +181,8 @@ export const pictures = {
       })
     },
 
-    userPosition ({ getters }, data) {
+    userPosition ({ getters, commit }, data) {
+      commit('RESET_PICTURES')
       axios({
         url: drf.pictures.weather(),
         method: 'post',
@@ -189,7 +190,7 @@ export const pictures = {
         data,
       })
       .then(res => {
-        console.log(res)
+        commit('FETCH_PICTURES', res.data.pictureList)
       })
       .catch(err => {
         console.log(err)
