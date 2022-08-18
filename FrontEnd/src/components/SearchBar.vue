@@ -31,6 +31,7 @@
 
     </b-input-group>
     </div>
+    <b-button class="mb-1 mt-1" variant="secondary" @click.prevent="userLocation()">날씨 그림 추천</b-button>
   </div>
 </template>
 
@@ -55,7 +56,7 @@ export default {
     },
 
     methods: {
-        ...mapActions(['onChangeSelect', 'onChangeKeyword']),
+        ...mapActions(['onChangeSelect', 'onChangeKeyword', 'userPosition']),
         changeSelect (event) {
           const target = event.target
           this.select = target.innerText
@@ -71,7 +72,19 @@ export default {
 				searchKeyword () {
           router.push({name:'SearchPictureView', params:{keyword:this.keyword.trim()}})
           
-        }
+        },
+
+        userLocation() {
+          navigator.geolocation.getCurrentPosition((pos) => {
+            const lat = pos.coords.latitude
+            const lon = pos.coords.longitude
+            const data = {
+              lat,
+              lon
+            }
+            this.userPosition(data)
+          })
+        },
     }
 
 }
