@@ -193,7 +193,7 @@ export default {
         }
         this.showPicture(data)
       } else {
-        const id = location.getItem('currentUser')
+        const id = localStorage.getItem('currentUser')
         const data = {
         showFlag,
         id,
@@ -208,7 +208,7 @@ export default {
       const option_num = this.artSelected
       const content_file_path = document.querySelector('.selectedContent').src
       const style = document.querySelector('.selectedStyle')
-      const id = location.getItem('currentUser')
+      const id = localStorage.getItem('currentUser')
       let style_file_path = null
       if (option_num === 0) {
         if (style) {
