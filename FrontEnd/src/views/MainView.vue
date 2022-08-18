@@ -9,7 +9,6 @@
 
   </head> 
   <div class="main container-fluid p-0">
-
     <div class="item position-relative">
       <img class="w-100" src="@/assets/images/background.png" alt="">
       <a type="button" class="" style="width:15%; position: absolute; top: 10.5%; left: 51.8%;">
@@ -46,12 +45,12 @@
     <div class="item container d-flex align-items-center" style="height: 100vh;" id="artPage">
       <div class="d-flex align-items-center">
         <div class="mx-5">
-          <img data-aos="zoom-in-right" data-aos-once="True" data-aos-offset="1000" data-aos-duration="800" src="@/assets/images/art.png" alt="">
+          <img data-aos="zoom-in-right" data-aos-once="True" data-aos-offset="1500" data-aos-duration="800" src="@/assets/images/art.png" alt="">
         </div>
         <div class="text-start">
           <h1 class="animate-charcter fw-bold">사용자 설정의 화풍 적용 기능</h1>
           <p class="fs-5">내가 찍은 사진을 내가 설정한 화풍의 작품으로 만들어 드립니다</p>
-          <blockquote data-aos="fade-up" data-aos-once="True" data-aos-offset="1000" style="color:blueviolet">나만의 앨범에서 (기능 선택)-(명화 변환)-(드래그앤드롭 기능)으로 추가해보세요!</blockquote>
+          <blockquote data-aos="fade-up" data-aos-once="True" data-aos-offset="1500" style="color:blueviolet">나만의 앨범에서 (기능 선택)-(명화 변환)-(드래그앤드롭 기능)으로 추가해보세요!</blockquote>
         </div>
       </div>
     </div>
@@ -62,19 +61,19 @@
         <div>
             <h1 class="fw-bold"><span>다</span><span>양</span><span>한</span><span>&ensp;</span><span>테</span><span>마</span>로의 전환 기능</h1>
           <p class="fs-5">내가 찍은 사진을 오늘의 모네가 다양한 테마로 바꾸어 드립니다</p>
-          <blockquote data-aos="fade-right" data-aos-once="True" data-aos-offset="1000" style="color:blueviolet">총 21가지의 저장된 테마를 만나보세요!</blockquote>
+          <blockquote data-aos="fade-right" data-aos-once="True" data-aos-offset="1500" style="color:blueviolet">총 21가지의 저장된 테마를 만나보세요!</blockquote>
             <div class="item container d-flex align-items-center justify-content-center">
-              <div data-aos="fade-up" data-aos-once="True" data-aos-offset="1000" style="position: relative;">
+              <div data-aos="fade-up" data-aos-once="True" data-aos-offset="1500" style="position: relative;">
                 <img src="@/assets/images/theme21/candy.jpg" alt="" style="height: 150px; margin:5px;">
-                <div data-aos="fade-up" data-aos-once="True" data-aos-offset="1000" style="position: absolute; top: -5px; left: 60px;"><img src="@/assets/images/theme21/strip.jpg" alt="" style="width: auto; height: 165px; margin:5px;"></div>
+                <div data-aos="fade-up" data-aos-once="True" data-aos-offset="1500" style="position: absolute; top: -5px; left: 60px;"><img src="@/assets/images/theme21/strip.jpg" alt="" style="width: auto; height: 165px; margin:5px;"></div>
               </div>
-              <img data-aos="fade-up" data-aos-once="True" data-aos-offset="1000" src="@/assets/images/theme21/the_scream.jpg" alt="" style="width: auto; height: 185px; margin:5px; z-index: 5;">
-              <img data-aos="fade-up" data-aos-once="True" data-aos-offset="1000" src="@/assets/images/theme21/udnie.jpg" alt="" style="width: auto; height: 200px; margin:5px; z-index: 6">
-              <img data-aos="fade-up" data-aos-once="True" data-aos-offset="1000" src="@/assets/images/theme21/mosaic.jpg" alt="" style="width: auto; height: 215px; margin:5px; z-index: 6">
-              <img data-aos="fade-up" data-aos-once="True" data-aos-offset="1000" src="@/assets/images/theme21/starry_night.jpg" alt="" style="width: auto; height: 185px; margin:5px; z-index: 5;">
-              <div data-aos="fade-up" data-aos-once="True" data-aos-offset="1000" class="" style="position: relative; left: 150px;">
+              <img data-aos="fade-up" data-aos-once="True" data-aos-offset="1500" src="@/assets/images/theme21/the_scream.jpg" alt="" style="width: auto; height: 185px; margin:5px; z-index: 5;">
+              <img data-aos="fade-up" data-aos-once="True" data-aos-offset="1500" src="@/assets/images/theme21/udnie.jpg" alt="" style="width: auto; height: 200px; margin:5px; z-index: 6">
+              <img data-aos="fade-up" data-aos-once="True" data-aos-offset="1500" src="@/assets/images/theme21/mosaic.jpg" alt="" style="width: auto; height: 215px; margin:5px; z-index: 6">
+              <img data-aos="fade-up" data-aos-once="True" data-aos-offset="1500" src="@/assets/images/theme21/starry_night.jpg" alt="" style="width: auto; height: 185px; margin:5px; z-index: 5;">
+              <div data-aos="fade-up" data-aos-once="True" data-aos-offset="1500" class="" style="position: relative; left: 150px;">
                 <img src="@/assets/images/theme21/feathers.jpg" alt="" style="height: 140px; margin:5px;">
-                <div data-aos="fade-up" data-aos-once="True" data-aos-offset="1000" style="position: absolute; bottom: -5px; right: 60px;"><img src="@/assets/images/theme21/composition_vii.jpg" alt="" style="width: auto; height: 155px; margin:5px;"></div>
+                <div data-aos="fade-up" data-aos-once="True" data-aos-offset="1500" style="position: absolute; bottom: -5px; right: 60px;"><img src="@/assets/images/theme21/composition_vii.jpg" alt="" style="width: auto; height: 155px; margin:5px;"></div>
               </div>
             </div>  
         </div>
@@ -83,7 +82,7 @@
     <div class="item container d-flex align-items-center justify-content-center" style="height: 100vh;" id="weatherPage">
       <div class="d-flex flex-row-reverse align-items-center">
         <div class="mx-5">
-          <img data-aos="zoom-in-left" data-aos-once="True" data-aos-offset="1000" data-aos-duration="800" src="@/assets/images/activity_sunny.jpg" style="width: auto; height: 400px;" alt="">
+          <img data-aos="zoom-in-left" data-aos-once="True" data-aos-offset="1400" data-aos-duration="800" src="@/assets/images/activity_sunny.jpg" style="width: auto; height: 400px;" alt="">
         </div>
         <div class="text-start">
           <h1 class="fw-bold">날씨 기반의 </h1>
@@ -95,13 +94,11 @@
           </div>
              <h1 class="fw-bold">기능</h1>
           <p class="fs-5"> 오늘의 날씨에 어울리는 사진을 추천해드립니다!</p>
-          <blockquote data-aos="fade-left" data-aos-once="True" data-aos-offset="1000" style="color:blueviolet">더 나은 추천을 위해 알고리즘이 꾸준히 개선되고 있어요!</blockquote>
+          <blockquote data-aos="fade-left" data-aos-once="True" data-aos-offset="1400" style="color:blueviolet">더 나은 추천을 위해 알고리즘이 꾸준히 개선되고 있어요!</blockquote>
         </div>
       </div>
     </div>
   </div>
-
- 
 </template>
 
 <script>
