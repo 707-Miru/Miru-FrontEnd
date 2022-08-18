@@ -43,7 +43,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['currentUserId']),
+    ...mapGetters(['currentUserId', 'authHeader']),
     filepath () {
       const path = this.picture.filepath.split('/').reverse()
       let realpath = ''
@@ -88,6 +88,7 @@ export default {
       axios({
         url: drf.pictures.like(),
         method: 'post',
+        headers: this.authHeader,
         data: {
           'id' : this.currentUserId,
           'pictureIdx' : id
@@ -102,6 +103,7 @@ export default {
       axios({
         url: drf.pictures.dislike(id),
         method: 'delete',
+        headers: this.authHeader,
         data: {
           'id' : this.currentUserId,
         }
