@@ -75,7 +75,7 @@ export default {
       } else if (this.check === 1) {
         flag = 1
       } else if (this.check === 2) {
-        flag = 2
+        flag = 0
       }
       return flag
     }
@@ -83,7 +83,7 @@ export default {
 
   methods: {
 
-    likePicture ( id) {
+    likePicture (id) {
       this.check = 1
       axios({
         url: drf.pictures.like(),
@@ -94,6 +94,7 @@ export default {
         }
       })
       .then( res => this.cnt = res.data.likeCnt)
+      .catch( err => console.error(err))
     },
 
     dislikePicture (id) {
@@ -106,6 +107,7 @@ export default {
         }
       })
       .then( res => this.cnt = res.data.likeCnt) 
+      .catch( err => console.error(err))
     }
   },
 }
