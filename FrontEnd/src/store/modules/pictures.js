@@ -148,7 +148,7 @@ export const pictures = {
     },
 
     uploadPicture ({ getters }, data) {
-      console.log(data.get('tag'))
+      console.log(data.get('tags'))
       axios({
         url: drf.pictures.uploadPicture(),
         method: 'post',
