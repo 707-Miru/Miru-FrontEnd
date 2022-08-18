@@ -120,7 +120,7 @@ public class FavoriteController {
     }
 
     @GetMapping("/picture/{id}")
-    public ResponseEntity<Map<String, Object>> getFavoritePictureInfo(@PathVariable String id, @RequestBody Map<String, String> map) {
+    public ResponseEntity<Map<String, Object>> getFavoritePictureInfo(@PathVariable String id, @RequestParam Map<String, String> map) {
         System.out.println("FavoriteInfo controller 시작");
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;
