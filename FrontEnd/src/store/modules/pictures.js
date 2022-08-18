@@ -122,7 +122,7 @@ export const pictures = {
         },
       })
       .then(res => {        
-        console.log(res)
+        console.log(res.data)
         commit('SET_MY_PICTURES', res.data)
       })
       .catch(err => {
