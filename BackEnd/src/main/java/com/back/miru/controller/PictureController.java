@@ -143,22 +143,27 @@ public class PictureController {
         HttpStatus status;
 
         try {
-            //        String root = "C:\\Users\\SSAFY\\Desktop\\";
-            String root = "/var/www/html/S07P12A707/BackEnd/src/main/resources/static/img/";
-            sb.append(root);
-            sb.append(id);
+            //            String root = "C:\\Users\\SSAFY\\Desktop\\";
+            String dbRoot = "/var/www/html/S07P12A707/BackEnd/src/main/resources/static/img/";
+            String root = "/var/www/html/crawling/img/";
+            sb.append(root).append(file.getOriginalFilename());
 
             // 폴더 생성
-            File convFile = new File(sb.toString());
-            System.out.println("convFile = " + convFile);
-            if (!convFile.exists()) convFile.mkdir();
+//            File convFile = new File(sb.toString());
+//            System.out.println("convFile = " + convFile);
+//            if (!convFile.exists()) convFile.mkdir();
 
             // 사진 저장
-            String filepath = convFile + "/" + file.getOriginalFilename();
+            String filepath = sb.toString();
             System.out.println("filepath = " + filepath);
             file.transferTo(new File(filepath));
 
-            map.put("filepath", filepath);
+            sb = new StringBuilder();
+            sb.append(dbRoot).append(file.getOriginalFilename());
+            dbRoot = sb.toString();
+            System.out.println("dbRoot = " + dbRoot);
+
+            map.put("filepath", dbRoot);
             map.put("tags", tags);
             map.put("publicFlag", publicFlag);
             map.put("isPicture", isPicture);
