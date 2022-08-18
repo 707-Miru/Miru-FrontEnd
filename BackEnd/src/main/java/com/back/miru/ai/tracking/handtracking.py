@@ -1,9 +1,8 @@
 import cv2
 import mediapipe
-import os
 
 def main():
-    cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 
     medhands = mediapipe.solutions.hands
     hands = medhands.Hands(max_num_hands=1, min_detection_confidence=0.7)
@@ -48,6 +47,7 @@ def main():
                             fingercount = fingerlist.count(1)
 
                         if(fingercount == 5):
+                            print("TEST")
                             return "MJ"
 
 if __name__ == "__main__":

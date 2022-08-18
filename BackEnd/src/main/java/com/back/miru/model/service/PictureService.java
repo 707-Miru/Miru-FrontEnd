@@ -18,4 +18,5 @@ public interface PictureService {
     Map<String, Object> getPictureDetail(String pictureIdx) throws Exception;
 
     void showPicture(Map<String, String> map) throws Exception;
+
 }
