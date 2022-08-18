@@ -1,9 +1,9 @@
 <template>
-  <div class="row">
+  <div id="columns">
     <my-picture-list-item v-for="myPicture in myPictures" 
     :key="myPicture.id" 
     :myPicture="myPicture"
-    draggable="true" class="col-12 col-sm-6 col-md-4 col-lg-2 mb-3 draggable"
+    draggable="true" class="draggable"
     >
     </my-picture-list-item>
   </div>
@@ -68,14 +68,19 @@ export default {
 </script>
 
 <style scoped>
-.draggable {
-  cursor: pointer;
+#columns {
+  margin: auto;
+  width: 90%;
+  column-count:3;
+  column-gap: 15px;
 }
-.draggable :hover {
-  transition: all 0.2s linear;
-  transform:scale(1.2);
-  -webkit-transform:scale(1.2);
-  -moz-transform:scale(1.2);
-  -o-transform:scale(1.2);
+#columns img{
+  display: inline-block;
+  border:1px solid rgba(0,0,0,0.2);
+  margin:0;
+  margin-top: 15px;
+  padding:10px;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.5);;
+  width: 100%;
 }
 </style>
