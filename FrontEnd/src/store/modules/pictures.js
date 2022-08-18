@@ -18,7 +18,7 @@ export const pictures = {
     totalPictureCnt : 1,
     isLoading : false,
 
-    transferPicture : {},
+    transferPicture : '',
     select: '이미지',
     sortKey: '업데이트 순'
     
@@ -133,8 +133,8 @@ export const pictures = {
         data,
       })
       .then(res => {        
-        console.log(res)
-        commit('SET_TRANSFER_PICTURE', res.data)
+        console.log(res.data)
+        commit('SET_TRANSFER_PICTURE', res.data.transferPicturePath)
       })
       .catch(err => {
         console.log(err)

@@ -1,6 +1,6 @@
 <template>
   <div id="columns">
-    <my-picture-list-item v-for="myPicture in p" 
+    <my-picture-list-item v-for="myPicture in myPictures" 
     :key="myPicture.id" 
     :myPicture="myPicture"
     >

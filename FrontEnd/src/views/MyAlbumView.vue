@@ -113,6 +113,12 @@
                 전체사진 반복
               </label>
             </div>
+            <div class="form-check" v-show="selectedConfig == 1">
+              <input class="form-check-input" type="radio" name="showFlag" id="showFlag3" value="3">
+              <label class="form-check-label" for="showFlag3">
+                명화 변환 출력
+              </label>
+            </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
@@ -165,10 +171,12 @@ export default {
         {value: 20, text: 'wave'},
         {value: 21, text: 'woman'},
       ],
+      url : 'https://i7a707.p.ssafy.io/api/img/',
     }
   },
   methods: {
     ...mapActions(['fetchMyPictures', 'uploadPicture', 'transfer', 'showPicture']),
+
     uploadData() {
       const formData = new FormData()
       const publicFlag = document.querySelector('input[name="publicFlag"]:checked').value
@@ -180,26 +188,46 @@ export default {
       formData.append('tags', this.userTags)
       this.uploadPicture(formData)
     },
+
     preview() {
       this.transfer(this.previewData)
+      const sourceImg = document.querySelector('.selectedContent')
+      sourceImg.style.display = 'none'
+      const previewAlbum = document.querySelector('.preview')
+      const previewImg = document.createElement('img')
+      previewImg.setAttribute('src', this.url + this.transferPicture)
+      previewImg.classList.add("w-100")
+      previewImg.classList.add("h-100")
+      previewAlbum.appendChild(previewImg)
     },
+
     selectConfig(data) {
       this.selectedConfig = data
     },
+
     showData() {
       const showFlag = document.querySelector('input[name="showFlag"]:checked').value
       if (showFlag == 1) {
         const pictureidx = document.querySelector('.selectedContent').getAttribute('alt')
+        const id = localStorage.getItem('currentUser')
         const data = {
         showFlag,
         pictureidx,
+        id
         }
         this.showPicture(data)
-      } else {
+      } else if (showFlag == 2) {
         const id = localStorage.getItem('currentUser')
         const data = {
         showFlag,
         id,
+        }
+        this.showPicture(data)
+      } else {
+        const preview = this.previewData
+        const data = {
+          showFlag,
+          ...preview,
         }
         this.showPicture(data)
       }
@@ -248,7 +276,7 @@ export default {
 
     preview.addEventListener("drop", e => {
       e.preventDefault()
-      if (preview.hasChildNodes()) {
+      while (preview.hasChildNodes()) {
         preview.removeChild(preview.firstChild)
       }
       const draggable = document.querySelector(".dragging")
