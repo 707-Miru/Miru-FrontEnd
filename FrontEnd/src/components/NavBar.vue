@@ -48,7 +48,7 @@
                     </li>
                     <li v-if="!!isLoggedIn" class="nav-item">
                         <a class="nav-link" href="/myalbum" style="color:#C9BBCF">
-                            <img src="@/assets/myalbum.svg" alt="" width="24" height="24" class="d-inline-block nav-margin">나의 앨범
+                            <img src="@/assets/myalbum.svg" alt="" width="24" height="24" class="d-inline-block nav-margin">나만의 앨범
                         </a>
                     </li>
                 </ul>
