@@ -1,11 +1,11 @@
 <template>
-<div>
+<div class="login">
   <b-form @submit="login(credentials)" @reset="onReset" class="background">
     <b-form-group 
         id="input-group-1"
         label="아이디:"
         label-for="input-1"
-        description="We'll never share your email with anyone else."
+        description=""
       >
         <b-form-input
           id="input-1"
@@ -91,7 +91,10 @@ export default {
   height: auto;
 }
 
-
+.login {
+  background-image: url("@/assets/images/user.png");
+  background-size: cover;
+}
 .background {
   margin: auto;
   background-image: url("@/assets/frame.png");
