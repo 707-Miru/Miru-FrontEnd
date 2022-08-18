@@ -46,7 +46,7 @@ public class HandTracking {
             while (lastNum == styleNum) styleNum = (int) (Math.random() * 21 + 1);
             TransformPainting.transform(String.valueOf(styleNum),
                     "",
-                    "",
+                    "src/main/java/com/back/miru/ai/transfer/c.jpg",
                     id);
             lastNum = styleNum;
         }
