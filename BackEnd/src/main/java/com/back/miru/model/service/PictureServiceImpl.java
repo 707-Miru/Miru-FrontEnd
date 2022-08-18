@@ -92,7 +92,7 @@ public class PictureServiceImpl implements PictureService {
             sb.setLength(sb.length() - 1);
             path = sb.toString();
         } else {
-            String transferPicturePath = TransformPainting.transform(map.get("optionNum"), map.get("styleFilePath"), map.get("contentFilePath"), map.get("id"));
+            String transferPicturePath = TransformPainting.transform(map.get("option_num"), map.get("style_file_path"), map.get("content_file_path"), map.get("id"));
             path = transferPicturePath.substring(transferPicturePath.indexOf("img"));
         }
 
