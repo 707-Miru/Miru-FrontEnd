@@ -3,7 +3,6 @@
     <my-picture-list-item v-for="myPicture in myPictures" 
     :key="myPicture.id" 
     :myPicture="myPicture"
-    draggable="true" class="draggable"
     >
     </my-picture-list-item>
   </div>
@@ -28,26 +27,27 @@ export default {
     return {
       p:[
         {
-          'url': require('@/assets/images/art.png'),
-          'id' : 1
+            "likeCnt": 1,
+            "filepath": "var/www/html/crawling/img/lucky-cat-cookies-on-display.jpg",
+            "pictureIdx": 477,
+            "updateTime": "2022-08-16T08:56:13.000+00:00",
+            "tag": "Cooking, Lunar New Year"
         },
         {
-          'url': require('@/assets/images/search.png'),
-          'id' : 2
+            "likeCnt": 1,
+            "filepath": "/var/www/html/crawling/img/siamese-cat-laying-in-white-bedding.jpg",
+            "pictureIdx": 476,
+            "updateTime": "2022-08-16T08:56:10.000+00:00",
+            "tag": "Cats, Home, Bedroom, Pets, Room, Pets & Animals"
         },
         {
-          'url': require('@/assets/images/season.png'),
-          'id' : 3
-        },
-        {
-          'url': require('@/assets/images/weather.png'),
-          'id' : 4
-        },
-        {
-          'url': require('@/assets/frame.png'),
-          'id' : 5
+            "likeCnt": 1,
+            "filepath": "/var/www/html/crawling/img/cat-eyes-photo.jpg",
+            "pictureIdx": 475,
+            "updateTime": "2022-08-16T08:56:06.000+00:00",
+            "tag": "Cats, Pets, Hair, Pets & Animals, White"
         }
-      ]
+    ],
     }
   },
   mounted() {

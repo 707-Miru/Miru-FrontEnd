@@ -187,7 +187,7 @@ export default {
     showData() {
       const showFlag = document.querySelector('input[name="showFlag"]:checked').value
       if (showFlag == 1) {
-        const pictureidx = document.querySelector('.selectedContent img').getAttribute('alt')
+        const pictureidx = document.querySelector('.selectedContent').getAttribute('alt')
         const data = {
         showFlag,
         pictureidx,
@@ -218,8 +218,8 @@ export default {
     ...mapGetters(['myPictures', 'transferPicture']),
     previewData() {
       const option_num = this.artSelected
-      const content_file_path = document.querySelector('.selectedContent img').src
-      const style = document.querySelector('.selectedStyle img')
+      const content_file_path = document.querySelector('.selectedContent').src
+      const style = document.querySelector('.selectedStyle')
       let style_file_path = null
       if (option_num === 0) {
         if (style) {

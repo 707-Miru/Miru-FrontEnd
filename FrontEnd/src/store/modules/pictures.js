@@ -176,7 +176,6 @@ export const pictures = {
     },
     
     showPicture ({ getters }, data) {
-      console.log(data)
       axios({
         url: drf.pictures.showPicture(),
         method: 'post',
