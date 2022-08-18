@@ -208,6 +208,7 @@ export default {
       const option_num = this.artSelected
       const content_file_path = document.querySelector('.selectedContent').src
       const style = document.querySelector('.selectedStyle')
+      const id = location.getItem('currentUser')
       let style_file_path = null
       if (option_num === 0) {
         if (style) {
@@ -220,6 +221,7 @@ export default {
           option_num,
           content_file_path,
           style_file_path,
+          id,
         }
         return body
       } else {
@@ -227,6 +229,7 @@ export default {
           option_num,
           content_file_path,
           style_file_path,
+          id,
         }
         return body
       }
