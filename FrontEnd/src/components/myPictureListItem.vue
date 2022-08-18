@@ -5,7 +5,7 @@
         <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
       </svg>
     </div>
-    <img class="w-100" :src="url + filepath" :alt="myPicture.pictureIdx">
+    <img class="w-100 draggable" :src="url + filepath" :alt="myPicture.pictureIdx" draggable="true">
   </div>
 </template>
 
@@ -43,7 +43,6 @@ export default {
       })
     })
   },
-
   methods: {
     ...mapActions(['deletePicture']),
     deleteData(id) {
@@ -70,7 +69,7 @@ export default {
 
 .delete {
   display: inline-block;
-  color: black;
+  color: #fff;
   border-radius: 2px;
   transition: .2s;
   position: absolute;
@@ -81,13 +80,12 @@ export default {
   opacity: 0;
   transition: .25s;
   font-size: 14px;
+  background: linear-gradient(0deg,rgba(0,0,0,.6) 0,transparent);
   text-align: right;
 }
 
-.myIteme:hover .delete {
+.myItem:hover .delete {
   opacity: 1;
-  top: 10px;
-  left: 22px;
-  right: 22px;
+  top: 15px;
 }
 </style>
