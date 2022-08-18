@@ -133,7 +133,7 @@ public class PictureController {
                                 @RequestParam("publicFlag") String publicFlag,
                                 @RequestParam("isPicture") String isPicture,
                                 @RequestParam("id") String id,
-//                                @RequestParam("tags") String tags,
+                                @RequestParam("tags") String tags,
                                 HttpServletRequest request) throws Exception {
         StringBuilder sb = new StringBuilder();
         Map<String, String> map = new HashMap<>();
@@ -141,7 +141,7 @@ public class PictureController {
         System.out.println("registPicture 시작");
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;
-        String tags = "";
+
         try {
             //        String root = "C:\\Users\\SSAFY\\Desktop\\";
             String root = "/var/www/html/S07P12A707/BackEnd/src/main/resources/static/img/";
