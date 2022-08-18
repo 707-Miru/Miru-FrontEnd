@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="signup">
     <b-form @submit="signup(credentials)" @reset="onReset" class="background">
       <b-form-group 
           id="input-group-1"
@@ -152,7 +152,10 @@ export default {
   font-size: 5px;
 }
 
-
+.signup {
+  background-image: url("@/assets/images/user.png");
+  background-size: cover;
+}
 
 .idcheck {
   height: 40px;

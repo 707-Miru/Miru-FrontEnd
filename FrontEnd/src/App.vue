@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <nav-bar class="nav"></nav-bar>
+    <nav-bar class="nav" v-if="checked"></nav-bar>
     <router-view/>
 
   <footer class="text-center text-white">
@@ -25,6 +25,12 @@ import NavBar from '@/components/NavBar.vue'
 export default {
   name : 'App',
 
+  data () {
+    return {
+      'checked': true
+    }
+  },
+
   components: { NavBar },
 
   methods: {
@@ -35,6 +41,14 @@ export default {
       console.log(store.getters.currentUserId)
       this.fetchCurrentUser(store.getters.currentUserId)
    }
+
+    if (document.location.pathname === '/login') {
+      this.checked = false
+    }
+
+    if (document.location.pathname === '/signup') {
+      this.checked = false
+    }
   }
 }
 </script>
