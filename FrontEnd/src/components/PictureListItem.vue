@@ -33,8 +33,7 @@ export default {
     return {
       url : 'https://i7a707.p.ssafy.io/api/img/',
       check : 0,
-      cnt: 0
-      
+      cnt = 0
     }
   },
 
@@ -60,6 +59,7 @@ export default {
     },
 
     likeCnt () {
+      
       if (this.check === 0){
         return this.picture.likeCnt
       }
@@ -94,7 +94,10 @@ export default {
           'pictureIdx' : id
         }
       })
-      .then( res => this.cnt = res.data.likeCnt)
+      .then( res => {
+        console.log(res)
+        this.cnt = res.data.likeCnt
+        })
       .catch( err => console.error(err))
     },
 
@@ -108,7 +111,10 @@ export default {
           'id' : this.currentUserId,
         }
       })
-      .then( res => this.cnt = res.data.likeCnt) 
+      .then( res => {
+        console.log(res)
+        this.cnt = res.data.likeCnt
+        }) 
       .catch( err => console.error(err))
     }
   },
