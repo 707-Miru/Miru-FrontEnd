@@ -30,5 +30,6 @@ export default {
     deletePicture: (id) => HOST + `picture/delete/${id}`,
     like: () => HOST + 'favorite/picture/',
     showPicture: () => HOST + 'picture/show',
+    weather: () => HOST + 'picture/weather',
   },
 }
