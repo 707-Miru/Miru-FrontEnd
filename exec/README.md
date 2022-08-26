@@ -208,9 +208,9 @@ mysql -u root -p
 
 #### 	IV - III. 스타일학습
 
-![사진의 스타일을 학습해 학습한 스타일을 적용](README.assets/4.3 스타일학습1.png)
-![](README.assets/4.3 스타일학습2.png)
-![](README.assets/4.3 스타일학습3.png)
+![스타일 학습 및 변환 예시1](README.assets/4.3 스타일학습1.png)
+![스타일 학습 및 변환 예시2](README.assets/4.3 스타일학습2.png)
+![스타일 학습 및 변환 예시3](README.assets/4.3 스타일학습3.png)
 
 <br>
 
