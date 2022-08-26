@@ -2,7 +2,7 @@
 
 
 
-![오늘의 모네](README.assets/오늘의 모네.png){: width="20%"}
+![오늘의 모네](README.assets/오늘의 모네.png =250*)
 
 
 
