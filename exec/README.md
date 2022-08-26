@@ -150,33 +150,31 @@ mysql -u root -p
 ## 시연 시나리오
 ### I. MainView
 
-#### I - I. 디자인
+#### 	I - I. 디자인
 
 ![1.1 MainView - 디자인](README.assets/1.1 MainView - 디자인.gif)
 
-#### I - II. 로고와 홈 버튼
+#### 	I - II. 로고와 홈 버튼
 
-![1.2 MainView - 로고와 홈 버튼()](README.assets/1.2 MainView - 로고와 홈 버튼().gif)
+![1.2 MainView - 로고와 홈 버튼](README.assets/1.2 MainView - 로고와 홈 버튼.gif)
 
-#### I - III. 로그아웃, 회원가입, 로그인
+#### 	I - III. 로그아웃, 회원가입, 로그인
 
 #### ![1.3 MainView - 로그아웃, 회원가입, 로그인](README.assets/1.3 MainView - 로그아웃, 회원가입, 로그인.gif)
 
-#### I - IV. 비밀번호 재설정 (미완성)
+#### 	I - IV. 비밀번호 재설정 (미완성)
 
-![1.4 비밀번호 재설정 미구현()](README.assets/1.4 비밀번호 재설정 미구현().gif)
-
-
+![1.4 비밀번호 재설정 미구현](README.assets/1.4 비밀번호 재설정 미구현.gif)
 
 
 
 ### II. 사진게시판
 
-#### II - I. 사진게시판 버튼별 기능
+#### 	II - I. 사진게시판 버튼별 기능
 
 ![2.2 사진게시판 버튼 기능](README.assets/2.2 사진게시판 버튼 기능.gif)
 
-#### II - II. 사진게시판 인피니티 스크롤 기능
+#### 	II - II. 사진게시판 인피니티 스크롤 기능
 
 ![2.3 사진게시판 인피니티 스크롤](README.assets/2.3 사진게시판 인피니티 스크롤.gif)
 
@@ -184,7 +182,7 @@ mysql -u root -p
 
 ### III. 나만의 앨범
 
-#### III - I. 나만의 앨범 버튼별 기능 (미완성)
+#### 	III - I. 나만의 앨범 버튼별 기능 (미완성)
 
 ![3.1 나만의 앨범 버튼 기능](README.assets/3.1 나만의 앨범 버튼 기능.gif)
 
@@ -192,11 +190,11 @@ mysql -u root -p
 
 ### IV. 핵심 기능
 
-#### I - I. 핸드트래킹 (2배속)
+#### 	I - I. 핸드트래킹 (2배속)
 
 ![핸드트래킹 두배속 II](README.assets/핸드트래킹 두배속 II.gif)
 
-#### I - II. 핸드트래킹 라즈베리파이 연결 (2배속)
+#### 	I - II. 핸드트래킹 라즈베리파이 연결 (2배속)
 
 ![핸드트래킹 두배속](README.assets/핸드트래킹 두배속.gif)
 
