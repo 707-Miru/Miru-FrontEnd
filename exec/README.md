@@ -1,8 +1,8 @@
-# 오늘의 모네
-
-
-
-![오늘의 모네](README.assets/오늘의 모네.png =250*)
+<p align="center" style="width: 40%">
+  <br>
+  <img src="README.assets/오늘의 모네.png">
+  <br>
+</p>
 
 
 
