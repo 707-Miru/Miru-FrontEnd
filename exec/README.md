@@ -125,13 +125,10 @@ docker exec -it [컨테이너명] bash
 mysql -u root -p
 ```
 
-### FrontEnd
-
-| JavaScript | TypeScript | React | Node |
-| :-----: | :-----: | :-----: | :-----: |
-|   version    |   version    | version | version |
+<br>
 
 ## 구현 기능
+
 - 회원 관리
 
 ### 역할 분담
