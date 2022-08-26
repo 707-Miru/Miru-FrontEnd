@@ -1,6 +1,6 @@
 <p align="center" style="width: 40%">
   <br>
-  <img src="README.assets/오늘의 모네.png">
+  <img src="https://user-images.githubusercontent.com/97646070/186857980-51b874f0-d3e1-4ff7-838c-438066840602.png">
   <br>
 </p>
 
